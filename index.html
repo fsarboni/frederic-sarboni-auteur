@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="page-title">Frédéric Sarboni Sanchez - Bienvenu dans mon univers littéraire</title>
+    <title id="page-title">Frédéric Sarboni Sanchez</title>
     <meta name="description" id="page-description" content="Découvrez l'univers littéraire de Frédéric Sarboni Sanchez">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -168,8 +168,7 @@
         <div class="loading" id="loading">Chargement...</div>
         
         <section id="accueil" class="hero" style="display: none;">
-            <h1 id="hero-title">Frédéric Sarboni Sanchez</h1>
-            <p id="hero-subtitle">Bienvenu dans mon univers littéraire</p>
+            <h1 id="hero-title">Bienvenu dans mon espace littéraire</h1>
         </section>
 
         <section id="a-propos" class="section" style="display: none;">
@@ -218,7 +217,6 @@
                 
                 // Mettre à jour le logo et le titre
                 document.getElementById('site-logo').textContent = data.auteur.nom;
-                document.getElementById('hero-title').textContent = data.auteur.nom;
                 document.getElementById('footer-name').textContent = data.auteur.nom;
                 
                 // Mettre à jour la section À propos
