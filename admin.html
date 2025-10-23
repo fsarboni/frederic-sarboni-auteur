@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administration - Frédéric Sarboni Sanchez</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        header h1 { margin-bottom: 0.5rem; }
+        header p { opacity: 0.9; font-size: 0.95rem; }
+        
+        .tabs {
+            display: flex;
+            background: #f8f9fa;
+            border-bottom: 2px solid #dee2e6;
+            overflow-x: auto;
+        }
+        
+        .tab {
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-size: 1rem;
+            color: #495057;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+            white-space: nowrap;
+        }
+        
+        .tab:hover { background: rgba(0,0,0,0.05); }
+        .tab.active {
+            color: #667eea;
+            border-bottom-color: #667eea;
+            font-weight: 600;
+        }
+        
+        .tab-content {
+            display: none;
+            padding: 2rem;
+        }
+        
+        .tab-content.active { display: block; }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #495057;
+        }
+        
+        input[type="text"],
+        input[type="email"],
+        input[type="url"],
+        textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: border-color 0.3s ease;
+        }
+        
+        input:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-success {
+            background: #28a745;
+            color: white;
+        }
+        
+        .btn-danger {
+            background: #dc3545;
+            color: white;
+        }
+        
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+        
+        .book-item,
+        .news-item-edit {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .book-item h3,
+        .news-item-edit h3 {
+            color: #495057;
+            margin-bottom: 1rem;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .alert {
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            display: none;
+        }
+        
+        .alert.show { display: block; }
+        
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .alert-info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        
+        .alert-warning {
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeeba;
+        }
+        
+        .instructions {
+            background: #e7f3ff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            border-left: 4px solid #0066cc;
+        }
+        
+        .instructions h3 {
+            color: #0066cc;
+            margin-bottom: 0.5rem;
+        }
+        
+        .instructions p {
+            color: #495057;
+            line-height: 1.6;
+        }
+        
+        @media (max-width: 768px) {
+            .container { border-radius: 0; }
+            .tab-content { padding: 1rem; }
+            .button-group { flex-direction: column; }
+            .btn { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🖊️ Administration du site</h1>
+            <p>Modifiez facilement le contenu de votre site</p>
+        </header>
+
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('auteur')">👤 Auteur</button>
+            <button class="tab" onclick="showTab('livres')">📚 Livres</button>
+            <button class="tab" onclick="showTab('actualites')">📰 Actualités</button>
+            <button class="tab" onclick="showTab('contact')">📧 Contact</button>
+            <button class="tab" onclick="showTab('export')">💾 Sauvegarder</button>
+        </div>
+
+        <div id="alert" class="alert"></div>
+
+        <!-- TAB AUTEUR -->
+        <div id="tab-auteur" class="tab-content active">
+            <div class="instructions">
+                <h3>Informations de l'auteur</h3>
+                <p>Modifiez votre biographie et vos informations personnelles.</p>
+            </div>
+            
+            <div class="form-group">
+                <label>Nom complet</label>
+                <input type="text" id="auteur-nom" placeholder="Frédéric Sarboni Sanchez">
+            </div>
+            
+            <div class="form-group">
+                <label>Chemin de la photo (ex: images/frederic-sarboni.jpg)</label>
+                <input type="text" id="auteur-photo" placeholder="images/frederic-sarboni.jpg">
+            </div>
+            
+            <div class="form-group">
+                <label>Biographie</label>
+                <textarea id="auteur-bio" placeholder="Votre biographie..."></textarea>
+            </div>
+        </div>
+
+        <!-- TAB LIVRES -->
+        <div id="tab-livres" class="tab-content">
+            <div class="instructions">
+                <h3>Gestion des livres</h3>
+                <p>Ajoutez, modifiez ou supprimez vos livres. Les livres sont affichés dans l'ordre de la liste.</p>
+            </div>
+            
+            <div id="livres-container"></div>
+            
+            <div class="button-group">
+                <button class="btn btn-primary" onclick="addBook()">➕ Ajouter un livre</button>
+            </div>
+        </div>
+
+        <!-- TAB ACTUALITES -->
+        <div id="tab-actualites" class="tab-content">
+            <div class="instructions">
+                <h3>Gestion des actualités</h3>
+                <p>Partagez vos dernières nouvelles avec vos lecteurs.</p>
+            </div>
+            
+            <div id="actualites-container"></div>
+            
+            <div class="button-group">
+                <button class="btn btn-primary" onclick="addNews()">➕ Ajouter une actualité</button>
+            </div>
+        </div>
+
+        <!-- TAB CONTACT -->
+        <div id="tab-contact" class="tab-content">
+            <div class="instructions">
+                <h3>Informations de contact</h3>
+                <p>Modifiez vos coordonnées de contact.</p>
+            </div>
+            
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" id="contact-email" placeholder="votre.email@exemple.com">
+            </div>
+            
+            <div class="form-group">
+                <label>URL Facebook</label>
+                <input type="url" id="contact-facebook" placeholder="https://www.facebook.com/...">
+            </div>
+            
+            <div class="form-group">
+                <label>Texte pour les rencontres</label>
+                <input type="text" id="contact-rencontres" placeholder="Disponible pour dédicaces...">
+            </div>
+        </div>
+
+        <!-- TAB EXPORT -->
+        <div id="tab-export" class="tab-content">
+            <div class="instructions">
+                <h3>💾 Sauvegarder vos modifications</h3>
+                <p><strong>Important :</strong> Cette page vous permet de modifier les données, mais pour les appliquer à votre site, vous devez :</p>
+                <ol style="margin-left: 1.5rem; margin-top: 1rem; line-height: 1.8;">
+                    <li>Cliquer sur le bouton "Télécharger data.json" ci-dessous</li>
+                    <li>Remplacer l'ancien fichier data.json sur votre serveur par le nouveau</li>
+                    <li>Rafraîchir votre site pour voir les changements</li>
+                </ol>
+            </div>
+            
+            <div class="button-group">
+                <button class="btn btn-success" onclick="downloadJSON()">💾 Télécharger data.json</button>
+                <button class="btn btn-secondary" onclick="copyJSON()">📋 Copier le JSON</button>
+            </div>
+            
+            <div class="form-group" style="margin-top: 2rem;">
+                <label>Aperçu du fichier JSON</label>
+                <textarea id="json-preview" readonly style="font-family: 'Courier New', monospace; font-size: 0.9rem;"></textarea>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let data = {
+            site: { title: "", description: "" },
+            auteur: { nom: "", photo: "", bio: "" },
+            livres: [],
+            actualites: [],
+            contact: { email: "", facebook: "", rencontres: "" }
+        };
+
+        // Charger les données depuis data.json
+        async function loadData() {
+            try {
+                const response = await fetch('data.json');
+                data = await response.json();
+                updateForm();
+                showAlert('Données chargées avec succès !', 'success');
+            } catch (error) {
+                showAlert('Erreur lors du chargement. Démarrage avec des données vides.', 'warning');
+            }
+        }
+
+        // Mettre à jour le formulaire avec les données
+        function updateForm() {
+            // Auteur
+            document.getElementById('auteur-nom').value = data.auteur.nom || '';
+            document.getElementById('auteur-photo').value = data.auteur.photo || '';
+            document.getElementById('auteur-bio').value = data.auteur.bio || '';
+            
+            // Contact
+            document.getElementById('contact-email').value = data.contact.email || '';
+            document.getElementById('contact-facebook').value = data.contact.facebook || '';
+            document.getElementById('contact-rencontres').value = data.contact.rencontres || '';
+            
+            // Livres et actualités
+            renderBooks();
+            renderNews();
+            updateJSONPreview();
+        }
+
+        // Afficher un onglet
+        function showTab(tabName) {
+            // Sauvegarder les données avant de changer d'onglet
+            saveFormData();
+            
+            // Changer l'onglet actif
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            
+            event.target.classList.add('active');
+            document.getElementById('tab-' + tabName).classList.add('active');
+            
+            // Mettre à jour l'aperçu JSON si on est sur l'onglet export
+            if (tabName === 'export') {
+                updateJSONPreview();
+            }
+        }
+
+        // Sauvegarder les données du formulaire dans l'objet data
+        function saveFormData() {
+            data.auteur.nom = document.getElementById('auteur-nom').value;
+            data.auteur.photo = document.getElementById('auteur-photo').value;
+            data.auteur.bio = document.getElementById('auteur-bio').value;
+            
+            data.contact.email = document.getElementById('contact-email').value;
+            data.contact.facebook = document.getElementById('contact-facebook').value;
+            data.contact.rencontres = document.getElementById('contact-rencontres').value;
+            
+            data.site.title = data.auteur.nom + " - Auteur";
+            data.site.description = "Découvrez l'univers littéraire de " + data.auteur.nom;
+        }
+
+        // Afficher les livres
+        function renderBooks() {
+            const container = document.getElementById('livres-container');
+            container.innerHTML = data.livres.map((livre, index) => `
+                <div class="book-item">
+                    <h3>Livre ${index + 1}</h3>
+                    <div class="form-group">
+                        <label>Titre</label>
+                        <input type="text" value="${livre.titre}" onchange="updateBook(${index}, 'titre', this.value)">
+                    </div>
+                    <div class="form-group">
+                        <label>Année</label>
+                        <input type="text" value="${livre.annee}" onchange="updateBook(${index}, 'annee', this.value)">
+                    </div>
+                    <div class="form-group">
+                        <label>Image (ex: images/livre.jpg)</label>
+                        <input type="text" value="${livre.image}" onchange="updateBook(${index}, 'image', this.value)">
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea onchange="updateBook(${index}, 'description', this.value)">${livre.description}</textarea>
+                    </div>
+                    <div class="button-group">
+                        <button class="btn btn-danger" onclick="deleteBook(${index})">🗑️ Supprimer ce livre</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Afficher les actualités
+        function renderNews() {
+            const container = document.getElementById('actualites-container');
+            container.innerHTML = data.actualites.map((actu, index) => `
+                <div class="news-item-edit">
+                    <h3>Actualité ${index + 1}</h3>
+                    <div class="form-group">
+                        <label>Titre</label>
+                        <input type="text" value="${actu.titre}" onchange="updateNews(${index}, 'titre', this.value)">
+                    </div>
+                    <div class="form-group">
+                        <label>Date</label>
+                        <input type="text" value="${actu.date}" onchange="updateNews(${index}, 'date', this.value)">
+                    </div>
+                    <div class="form-group">
+                        <label>Contenu</label>
+                        <textarea onchange="updateNews(${index}, 'contenu', this.value)">${actu.contenu}</textarea>
+                    </div>
+                    <div class="button-group">
+                        <button class="btn btn-danger" onclick="deleteNews(${index})">🗑️ Supprimer cette actualité</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Ajouter un livre
+        function addBook() {
+            data.livres.push({
+                id: Date.now(),
+                titre: "Nouveau livre",
+                annee: new Date().getFullYear().toString(),
+                image: "images/nouveau-livre.jpg",
+                description: "Description du livre..."
+            });
+            renderBooks();
+            showAlert('Livre ajouté ! N\'oubliez pas de sauvegarder.', 'info');
+        }
+
+        // Mettre à jour un livre
+        function updateBook(index, field, value) {
+            data.livres[index][field] = value;
+        }
+
+        // Supprimer un livre
+        function deleteBook(index) {
+            if (confirm('Êtes-vous sûr de vouloir supprimer ce livre ?')) {
+                data.livres.splice(index, 1);
+                renderBooks();
+                showAlert('Livre supprimé ! N\'oubliez pas de sauvegarder.', 'info');
+            }
+        }
+
+        // Ajouter une actualité
+        function addNews() {
+            data.actualites.push({
+                id: Date.now(),
+                titre: "Nouvelle actualité",
+                date: new Date().toLocaleDateString('fr-FR', { month: 'long', year: 'numeric' }),
+                contenu: "Contenu de l'actualité..."
+            });
+            renderNews();
+            showAlert('Actualité ajoutée ! N\'oubliez pas de sauvegarder.', 'info');
+        }
+
+        // Mettre à jour une actualité
+        function updateNews(index, field, value) {
+            data.actualites[index][field] = value;
+        }
+
+        // Supprimer une actualité
+        function deleteNews(index) {
+            if (confirm('Êtes-vous sûr de vouloir supprimer cette actualité ?')) {
+                data.actualites.splice(index, 1);
+                renderNews();
+                showAlert('Actualité supprimée ! N\'oubliez pas de sauvegarder.', 'info');
+            }
+        }
+
+        // Mettre à jour l'aperçu JSON
+        function updateJSONPreview() {
+            saveFormData();
+            document.getElementById('json-preview').value = JSON.stringify(data, null, 2);
+        }
+
+        // Télécharger le fichier JSON
+        function downloadJSON() {
+            saveFormData();
+            const jsonString = JSON.stringify(data, null, 2);
+            const blob = new Blob([jsonString], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'data.json';
+            a.click();
+            URL.revokeObjectURL(url);
+            showAlert('Fichier data.json téléchargé ! Remplacez l\'ancien sur votre serveur.', 'success');
+        }
+
+        // Copier le JSON
+        function copyJSON() {
+            saveFormData();
+            const jsonString = JSON.stringify(data, null, 2);
+            navigator.clipboard.writeText(jsonString).then(() => {
+                showAlert('JSON copié dans le presse-papiers !', 'success');
+            });
+        }
+
+        // Afficher une alerte
+        function showAlert(message, type) {
+            const alert = document.getElementById('alert');
+            alert.className = 'alert alert-' + type + ' show';
+            alert.textContent = message;
+            setTimeout(() => {
+                alert.classList.remove('show');
+            }, 5000);
+        }
+
+        // Charger les données au démarrage
+        loadData();
+    </script>
+</body>
+</html>

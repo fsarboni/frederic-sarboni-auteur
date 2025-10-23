@@ -1,0 +1,103 @@
+{
+  "site": {
+    "title": "Frédéric Sarboni Sanchez - Auteur",
+    "description": "Découvrez l'univers littéraire de Frédéric Sarboni Sanchez : Nouvelles de Brest, Paroles d'Oranais, et récits de l'imaginaire."
+  },
+  "auteur": {
+    "nom": "Frédéric Sarboni Sanchez",
+    "photo": "images/frederic-sarboni.jpg",
+    "bio": "Né à Oran en 1961, Frédéric Sarboni Sanchez a vécu ses premières années en Algérie avant de s'installer en France avec sa famille. Marqué par cette double culture méditerranéenne et bretonne, il puise dans ses racines et dans sa ville d'adoption, Brest, l'essentiel de son inspiration littéraire.\n\nÉcrivain passionné par l'art de la nouvelle, il explore des univers variés : des récits policiers ancrés dans le Brest contemporain, des témoignages bouleversants sur la mémoire des Oranais, ou encore des voyages dans les territoires de l'imaginaire.\n\nDepuis 2020, il a publié une dizaine de recueils, naviguant entre fiction et mémoire, entre réalisme et fantastique, toujours guidé par le souci de raconter des histoires fortes et d'honorer les voix du passé."
+  },
+  "livres": [
+    {
+      "id": 1,
+      "titre": "Nouvelles de Brest Tome 1",
+      "annee": "2020",
+      "image": "images/nouvellesdebrestt1.jpg",
+      "description": "Ce premier recueil inaugure une série dédiée à Brest, ville portuaire aux mille visages. À travers seize nouvelles, Frédéric Sarboni Sanchez dévoile l'âme de cette cité bretonne : ses quartiers populaires, ses marins, ses venelles secrètes, mais aussi ses drames et ses mystères.\n\nChaque récit est une plongée dans un univers à part : ici, une rencontre inattendue dans un bar du port, là, un secret de famille enfoui depuis des décennies, ailleurs encore, une tension policière qui monte crescendo. Les personnages, ancrés dans leur époque et leur territoire, portent en eux l'empreinte d'une ville qui ne laisse personne indifférent.\n\nCe tome 1 pose les bases d'une exploration littéraire profonde et sensible, où Brest devient bien plus qu'un simple décor : un personnage central, vibrant et complexe."
+    },
+    {
+      "id": 2,
+      "titre": "Nouvelles de Brest Tome 2",
+      "annee": "2021",
+      "image": "images/nouvellesdebrestt2.jpg",
+      "description": "Le deuxième tome poursuit cette exploration de Brest avec une richesse narrative encore accrue. Les nouvelles y gagnent en amplitude, multipliant les tons : du polar urbain aux récits intimistes, du suspense haletant aux émotions douces-amères.\n\nBrest se révèle ici dans toute sa diversité : les docks bruissant de rumeurs, les collines de Recouvrance où le passé semble encore palpable, les plages ventées où se jouent des rencontres décisives. Les personnages, qu'ils soient marins, étudiants, artistes ou simples habitants, incarnent la vie d'une ville toujours en mouvement.\n\nCe tome 2 confirme la capacité de l'auteur à faire résonner Brest dans toute sa profondeur, entre traditions et modernité, ombres et lumières."
+    },
+    {
+      "id": 3,
+      "titre": "Nouvelles de Brest Tome 3",
+      "annee": "2022",
+      "image": "images/nouvellesdebrestt3.jpg",
+      "description": "Avec ce troisième tome, la série atteint une maturité narrative remarquable. Les nouvelles se font plus amples, plus fouillées, explorant des thématiques profondes : l'identité, la mémoire collective, les secrets enfouis, les destins croisés.\n\nBrest continue d'y occuper une place centrale, non plus seulement comme cadre géographique mais comme véritable matrice d'histoires et d'émotions. Les ruelles de Siam, les fortifications de Vauban, les horizons marins deviennent autant de lieux où s'écrivent des vies, se nouent des intrigues, se révèlent des vérités longtemps tues.\n\nCe tome 3 clôt magnifiquement une trilogie consacrée à une ville fascinante, démontrant que Brest, loin d'être épuisée comme source d'inspiration, offre encore et toujours de nouvelles histoires à raconter."
+    },
+    {
+      "id": 4,
+      "titre": "Brest Noir",
+      "annee": "2023",
+      "image": "images/brest noir.png",
+      "description": "Après les trois tomes des Nouvelles de Brest, ce recueil marque un tournant vers une tonalité résolument plus sombre. Brest Noir plonge dans les bas-fonds de la ville, ses zones d'ombre, ses secrets les mieux gardés. Le polar et le roman noir deviennent ici les modes d'expression privilégiés.\n\nEntre affaires criminelles, vengeances et enquêtes qui dépassent ceux qui les mènent, chaque nouvelle explore les noirceurs humaines : trahisons, drames, pièges qui se referment sur les coupables… ou sur leurs poursuivants. Des titres comme Mort sur le Styx ou Du Sang dans les Livres donnent le ton.\n\nDans ces récits courts et incisifs, la tension monte vite, l'atmosphère s'installe immédiatement, et les chutes frappent fort.\nUne plongée vertigineuse dans un Brest noir et fascinant, où chaque histoire éclaire l'ombre à sa manière."
+    },
+    {
+      "id": 5,
+      "titre": "Brest, Rouge Sang sur Encre Noire",
+      "annee": "2024",
+      "image": "images/brest rouge sang.png",
+      "description": "Après les trois tomes des Nouvelles de Brest et l'atmosphère sombre de Brest Noir, ce nouveau recueil plonge encore plus profondément dans les ténèbres de la cité du Ponant. Brest y devient un personnage à part entière : une ville marquée par ses cicatrices, où le sel et le vent se mêlent aux drames humains.\n\nEntre crimes, trahisons et passions dévorantes, chaque nouvelle est une descente dans un univers où le rouge du sang et le noir de l'encre composent une toile d'ombres et de mystères.\n\nDans ce recueil, l'art de la nouvelle révèle toute sa force : des récits courts, denses, qui happent le lecteur dès la première ligne et le marquent durablement par des chutes percutantes.\nUn voyage au cœur du noir le plus intense, où chaque histoire explore les ombres profondes de l'âme humaine."
+    },
+    {
+      "id": 6,
+      "titre": "Échos de Brest",
+      "annee": "2025",
+      "image": "images/échos de brest.png",
+      "description": "Après les trois premiers tomes des Nouvelles de Brest, les atmosphères sombres de Brest Noir et Brest, Rouge Sang sur Encre Noire, ce nouveau recueil marque un retour à une approche plus éclectique.\n\nDans ces pages, Brest devient une toile de fond pour des récits qui résonnent avec une grande variété de tons : mystères, souvenirs de famille, éclats de fantastique, instants d'humour ou de tendresse. Chaque nouvelle est un fragment de vie, un instantané où se croisent la beauté, la mélancolie et parfois l'étonnement.\n\nFidèle à l'art de la nouvelle, ces textes courts et intenses offrent des impressions fugaces qui marquent durablement.\nUn recueil polyphonique où se reflètent les multiples échos de l'âme humaine, entre intime et universel."
+    },
+    {
+      "id": 7,
+      "titre": "Paroles d'Oranais Tome 1",
+      "annee": "2022",
+      "image": "images/parolesdoranaist1.jpg",
+      "description": "Avec ce premier volume, il ne s'agit plus de fiction mais d'un véritable travail de mémoire. Paroles d'Oranais – Tome 1 rassemble récits, souvenirs et témoignages de celles et ceux qui ont vécu l'Algérie d'avant 1962, jusqu'au grand exode vers la France.\n\nÀ travers cette mosaïque de voix, surgit une époque à la fois lumineuse et douloureuse : les quartiers populaires, les fêtes, la lumière d'Oran, mais aussi les déchirements, les séparations et l'arrachement. Chaque témoignage révèle la richesse d'un monde disparu, tout en éclairant notre présent.\n\nUn livre d'émotions et de transmission, qui donne chair à une mémoire collective et rappelle l'urgence de préserver ces histoires pour les générations à venir."
+    },
+    {
+      "id": 8,
+      "titre": "Paroles d'Oranais Tome 2",
+      "annee": "2023",
+      "image": "images/parolesdoranaist2.jpg",
+      "description": "Ce deuxième volume poursuit l'élan du premier en donnant voix à celles et ceux qui ont connu l'Oran d'avant 1962 et l'exode vers la France. Plus qu'un simple prolongement, Paroles d'Oranais – Tome 2 approfondit et élargit la mémoire collective à travers de nouveaux récits et de nouvelles sensibilités.\n\nOn y retrouve la lumière, les saveurs et les fêtes d'une terre méditerranéenne vibrante, mais aussi les drames, les départs précipités et les difficultés de l'exil. Chaque témoignage ajoute une pierre à une fresque humaine où l'intime et l'Histoire se rencontrent.\n\nUn livre d'émotion et de transmission, pour que ces voix multiples ne s'éteignent pas et continuent d'éclairer le présent et l'avenir."
+    },
+    {
+      "id": 9,
+      "titre": "Nouvelles d'Oran",
+      "annee": "2025",
+      "image": "images/Nouvelles d oran.jpg",
+      "description": "Avec Nouvelles d'Oran, la fiction renaît, mais une fiction nourrie de mémoire. Inspirées de fragments de récits et de témoignages issus des recueils Paroles d'Oranais, ces histoires transforment la mémoire en nouvelles, en inventant personnages et situations sans jamais trahir l'esprit des souvenirs.\n\nOn y retrouve Oran et l'Oranie d'avant 1962 : ses quartiers, ses saveurs, sa lumière, mais aussi ses drames et ses tensions. Entre réel et imaginaire, ces récits font résonner une mémoire collective tout en ouvrant des chemins nouveaux grâce à la fiction.\n\nUn pont entre témoignage et invention, entre mémoire et imaginaire, pour que les voix d'Oran continuent de vivre et de se transmettre."
+    },
+    {
+      "id": 10,
+      "titre": "Le Chant de l'Ile Wrac'h et autres nouvelles",
+      "annee": "2024",
+      "image": "images/lechantdelileWrach.jpg",
+      "description": "Ce recueil inaugure une collection entièrement dédiée aux mondes de l'imaginaire : contes, légendes, fantasy, steampunk… autant de portes ouvertes sur des univers où le réel et le merveilleux se croisent sans cesse.\n\nChaque nouvelle est une traversée : des brumes d'Avalon aux confins des galaxies, des ruelles d'un Londres victorien réinventé aux profondeurs marines. Derrière ces univers fabuleux, ce sont toujours des personnages humains que l'on rencontre, porteurs de doutes, d'émotions et de quêtes qui nous touchent.\n\nLe Chant de l'Île Wrac'h et autres nouvelles célèbre la force de l'imaginaire : non pas comme une fuite, mais comme un miroir et une source d'émerveillement.\nUne invitation au rêve éveillé, pour franchir les seuils de mondes multiples et retrouver, au détour des pages, des émotions universelles."
+    },
+    {
+      "id": 11,
+      "titre": "Les Doigts de Cuivre et autres nouvelles",
+      "annee": "2025",
+      "image": "images/Les Doigts de Cuivre.jpg",
+      "description": "Deuxième volume de la collection consacrée à l'imaginaire, Les Doigts de Cuivre et autres nouvelles nous entraîne dans des mondes où le réel se transforme en extraordinaire. Du steampunk humaniste aux contes revisités, des cités mécaniques aux royaumes secrets, chaque histoire bâtit une passerelle singulière vers l'ailleurs.\n\nCes nouvelles donnent vie à des personnages fragiles et combatifs, aux prises avec leurs doutes, leurs quêtes ou leurs révoltes. L'imaginaire y devient à la fois refuge et moteur, explorant les forces de l'amitié, de la mémoire, de l'invention ou de la résistance face à l'adversité.\n\nUn recueil qui célèbre la puissance des récits brefs : denses, libres et intenses, capables de faire surgir un monde en quelques pages et de laisser au lecteur l'éclat d'une émotion inoubliable."
+    }
+  ],
+  "actualites": [
+    {
+      "id": 1,
+      "titre": "Lancement de mon nouveau site",
+      "date": "Octobre 2025",
+      "contenu": "Je suis heureux de vous accueillir sur mon nouveau site d'auteur ! Vous y retrouverez toute mon actualité littéraire : la parution de mes recueils de témoignages de mes compatriotes oranais, les nouvelles dédiées à Brest et à ses habitants, ainsi que les publications de ma collection consacrée à l'imaginaire. Trois univers, trois sources d'inspiration, un même fil conducteur : la mémoire, la fiction et le rêve, au service des émotions et du partage."
+    }
+  ],
+  "contact": {
+    "email": "frederic.sarboni@gmail.com",
+    "facebook": "https://www.facebook.com/frederic.sarboni",
+    "rencontres": "Disponible pour dédicaces et rencontres en librairie"
+  }
+}
