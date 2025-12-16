@@ -126,6 +126,16 @@
         .news-item h3 { color: #2c3e50; margin-bottom: 0.5rem; }
         .news-item .date { color: #7f8c8d; font-size: 0.9rem; margin-bottom: 0.5rem; font-weight: bold; }
         
+        .nouvelles-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .nouvelle-card { background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .nouvelle-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.15); }
+        .nouvelle-card h3 { color: #2c3e50; margin-bottom: 0.5rem; font-size: 1.3rem; }
+        .nouvelle-card .sous-titre { color: #7f8c8d; font-size: 0.95rem; margin-bottom: 1rem; font-style: italic; }
+        .nouvelle-card .description { text-align: justify; line-height: 1.6; margin-bottom: 1.5rem; color: #555; }
+        .btn-download { display: inline-block; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 0.75rem 1.5rem; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; box-shadow: 0 4px 10px rgba(102, 126, 234, 0.3); }
+        .btn-download:hover { transform: translateY(-2px); box-shadow: 0 6px 15px rgba(102, 126, 234, 0.4); }
+        .btn-download::before { content: "📥 "; }
+        
         .contact-section { background: #3498db; color: white; text-align: center; }
         .contact-section h2 { color: white; border-bottom: 2px solid rgba(255,255,255,0.3); }
         .contact-info { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 2rem; }
@@ -159,6 +169,7 @@
                 <li><a href="#a-propos">À propos</a></li>
                 <li><a href="#livres">Mes Livres</a></li>
                 <li><a href="#actualites">Actualités</a></li>
+                <li><a href="#nouvelles">Nouvelles gratuites</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
@@ -189,6 +200,12 @@
         <section id="actualites" class="section" style="display: none;">
             <h2>Actualités</h2>
             <div id="news-container"></div>
+        </section>
+
+        <section id="nouvelles" class="section" style="display: none;">
+            <h2>📖 Nouvelles en accès libre</h2>
+            <p style="margin-bottom: 2rem; text-align: center; font-size: 1.1rem;">Découvrez gratuitement quelques-unes de mes nouvelles</p>
+            <div class="nouvelles-grid" id="nouvelles-container"></div>
         </section>
 
         <section id="contact" class="section contact-section" style="display: none;">
@@ -245,6 +262,19 @@
                         <p>${actu.contenu}</p>
                     </div>
                 `).join('');
+                
+                // Afficher les nouvelles gratuites
+                const nouvellesContainer = document.getElementById('nouvelles-container');
+                if (data.nouvelles_gratuites && data.nouvelles_gratuites.length > 0) {
+                    nouvellesContainer.innerHTML = data.nouvelles_gratuites.map(nouvelle => `
+                        <div class="nouvelle-card">
+                            <h3>${nouvelle.titre}</h3>
+                            <div class="sous-titre">${nouvelle.sous_titre}</div>
+                            <div class="description">${nouvelle.description}</div>
+                            <a href="${nouvelle.fichier}" download class="btn-download">Télécharger gratuitement</a>
+                        </div>
+                    `).join('');
+                }
                 
                 // Afficher les contacts
                 const contactContainer = document.getElementById('contact-container');
