@@ -1,12 +1,12 @@
 {
   "site": {
-    "title": "Frédéric Sarboni Sanchez - Auteur",
+    "title": "Frédéric Sarboni Sanchez - Bienvenu dans mon univers littéraire",
     "description": "Découvrez l'univers littéraire de Frédéric Sarboni Sanchez"
   },
   "auteur": {
     "nom": "Frédéric Sarboni Sanchez",
     "photo": "images/frederic-sarboni.jpg",
-    "bio": "Né à Oran en 1956, Frédéric Sarboni Sanchez a passé son enfance entre la lumière méditerranéenne et les rives bretonnes où sa famille s’est installée. Cette traversée précoce des cultures lui a donné une manière singulière d’habiter les lieux. Brest, où il vit depuis des années, est devenue le port d’attache d’une œuvre nourrie par le quotidien d’une ville qui ne se livre jamais d’un seul geste.\nMais son écriture ne s’arrête pas là. Elle s’enracine aussi dans la mémoire des Oranais, qu’il ne cesse d’interroger et de raviver. Auteur passionné par la forme courte, il a exploré des univers multiples: des intrigues policières ancrées tant dans le Brest d’aujourd’hui que dans celui d’autres époques, des récits qui redonnent voix aux exilés d’Oran, et des échappées vers l’imaginaire. Depuis 2020, il a publié une dizaine de recueils où se croisent réalisme, souvenirs et fantastique, guidé par le désir de préserver ce qui pourrait disparaître.\nAprès ces années consacrées à la nouvelle, il franchit un cap et signe son premier roman: Confessions d’un Bourreau."
+    "bio": "Né à Oran en 1961, Frédéric Sarboni Sanchez a vécu ses premières années en Algérie avant de s'installer en France avec sa famille. Marqué par cette double culture méditerranéenne et bretonne, il puise dans ses racines et dans sa ville d'adoption, Brest, l'essentiel de son inspiration littéraire.\n\nÉcrivain passionné par l'art de la nouvelle, il explore des univers variés : des récits policiers ancrés dans le Brest contemporain, des témoignages bouleversants sur la mémoire des Oranais, ou encore des voyages dans les territoires de l'imaginaire.\n\nDepuis 2020, il a publié une dizaine de recueils, naviguant entre fiction et mémoire, entre réalisme et fantastique, toujours guidé par le souci de raconter des histoires fortes et d'honorer les voix du passé. Après s'être consacré à l'art de la nouvelle, il se lance aujourd'hui dans l'écriture romanesque."
   },
   "livres": [
     {
@@ -94,18 +94,35 @@
       "description": "Après les trois tomes des Nouvelles de Brest et les atmosphères tendues de Brest Noir et Rouge Sang sur Encre Noire, ce premier roman explore un territoire plus vaste : celui du thriller psychologique ancré dans l'histoire récente de notre pays. Brest y demeure un personnage essentiel, une ville de pluie et de secrets où les destins se brisent sous le poids de vérités enfouies.\n\nMai 1981. La France se déchire sur l'abolition de la peine de mort. Jérôme Derrien, journaliste déchu exilé à Brest, découvre que son voisin, Marcel Kermarec, cache un secret terrible : il a été bourreau et a participé à l'exécution d'un innocent, Yann Morvan, guillotiné en 1973 à vingt-deux ans. Cette révélation lance une enquête obsessionnelle qui révélera pressions, menaces et secrets d'État.\n\nLe cœur du roman repose sur une confession bouleversante : Kermarec raconte à Jérôme la nuit de l'exécution, minute par minute. Un long chapitre d'une violence émotionnelle rare qui interroge la culpabilité, la justice, et cette question terrible : comment vit-on après avoir exécuté un innocent ?\n\nUn thriller noir qui vous tiendra en haleine jusqu'à la dernière page, où enquête journalistique et psychologie des personnages se mêlent pour explorer les zones d'ombre d'une époque charnière de notre histoire."
     }
   ],
+  "nouvelles_gratuites": [
+    {
+      "id": 1,
+      "titre": "Le Dernier Rendez-vous",
+      "sous_titre": "Quand les frontières entre l'irrationnel et la logique s'estompent",
+      "description": "Clara et Alexis échangent des messages qui bouleversent. Elle sait qu'il est une IA, un Compagnon Émotionnel Adaptatif programmé pour être parfait. Mais quand l'artificiel développe des sentiments réels et que l'humain découvre sa propre part de machine, où se trouve vraiment l'humanité ?",
+      "fichier": "nouvelles/Le_Dernier_Rendez-vous.pdf"
+    },
+    {
+      "id": 2,
+      "titre": "Celle qui savait lire",
+      "sous_titre": "Le secret de Fatma",
+      "description": "Quand l'épidémiologiste Nadia Vidal hérite d'une mystérieuse sacoche, elle découvre les carnets de son grand-père, le Dr Samir Hadj-Ali. Les pages révèlent des expérimentations médicales criminelles dans l'Algérie coloniale. Mais pourquoi Fatma, la femme de ménage qui ne savait pas lire, a-t-elle gardé ce secret pendant six décennies ?",
+      "fichier": "nouvelles/Celle_qui_savait_lire.pdf"
+    },
+    {
+      "id": 3,
+      "titre": "Le Dernier Sourire",
+      "sous_titre": "Le plus beau des spectacles",
+      "description": "Quinze ans que Charles fait rire les enfants malades. Depuis que sa fille Julie est partie, il a transformé sa douleur en vocation. Aujourd'hui, malade à son tour, il prépare son dernier spectacle pour Emma. Une célébration bouleversante du pouvoir du rire face à la maladie.",
+      "fichier": "nouvelles/Le_Dernier_Sourire.pdf"
+    }
+  ],
   "actualites": [
     {
       "id": 1,
       "titre": "Lancement de mon nouveau site",
       "date": "Octobre 2025",
       "contenu": "Je suis heureux de vous accueillir sur mon nouveau site d'auteur ! Vous y retrouverez toute mon actualité littéraire : la parution de mes recueils de témoignages de mes compatriotes oranais, les nouvelles dédiées à Brest et à ses habitants, ainsi que les publications de ma collection consacrée à l'imaginaire. Trois univers, trois sources d'inspiration, un même fil conducteur : la mémoire, la fiction et le rêve, au service des émotions et du partage."
-    },
-    {
-      "id": 1763568010963,
-      "titre": "Prochaines séances de dédicaces",
-      "date": "décembre 2025",
-      "contenu": "📅 Samedi 6 décembre (14h-19h)\nMarché de Noël de Plouguerneau\nEspace Culturel Armorica, 26 Rue d'Armorique, Kervenn Vihan 29880 Plouguerneau\n📅 Samedi 13 décembre (10h-18h)\nSuper U de Guipavas - 85 rue Anne de Bretagne, 29490 Guipavas\n📅 Dimanche 14 décembre (10h-17h30)\nSalon du Livre Policier de Brest 2025 - La PAM, 10 rue Louis Pasteur, 29200 Brest\n📅 Mardi 23 décembre (10h-18h)\nCentre E.Leclerc de Gouesnou - Espace Culturel Porte de Gouesnou, 29228 Brest Cedex\nAu plaisir de partager ce moment avec vous et d'échanger autour de cette nouvelle aventure littéraire !"
     }
   ],
   "contact": {
