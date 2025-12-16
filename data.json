@@ -120,9 +120,9 @@
   "actualites": [
     {
       "id": 1,
-      "titre": "Lancement de mon nouveau site",
-      "date": "Octobre 2025",
-      "contenu": "Je suis heureux de vous accueillir sur mon nouveau site d'auteur ! Vous y retrouverez toute mon actualité littéraire : la parution de mes recueils de témoignages de mes compatriotes oranais, les nouvelles dédiées à Brest et à ses habitants, ainsi que les publications de ma collection consacrée à l'imaginaire. Trois univers, trois sources d'inspiration, un même fil conducteur : la mémoire, la fiction et le rêve, au service des émotions et du partage."
+      "titre": "Mise à jour de mon site",
+      "date": "Décembre 2025",
+      "contenu": "Je suis heureux de vous accueillir sur la nouvelle version de mon site d’auteur. Vous y trouverez la présentation complète de mes ouvrages — principalement des recueils de nouvelles, ainsi que mon roman Confessions d’un bourreau.\n\nNouveauté de cette mise à jour : certaines de mes nouvelles sont désormais proposées en téléchargement libre et gratuit. Elles offrent au lecteur l’occasion de découvrir mon univers, mon style d’écriture et l’exigence littéraire qui traverse l’ensemble de mon travail."
     }
   ],
   "contact": {
