@@ -266,12 +266,12 @@
                 // Afficher les nouvelles gratuites
                 const nouvellesContainer = document.getElementById('nouvelles-container');
                 if (data.nouvelles_gratuites && data.nouvelles_gratuites.length > 0) {
-                    nouvellesContainer.innerHTML = data.nouvelles_gratuites.map(nouvelle => `
+                    nouvellesContainer.innerHTML = data.nouvelles_gratuites.map((nouvelle, index) => `
                         <div class="nouvelle-card">
                             <h3>${nouvelle.titre}</h3>
                             <div class="sous-titre">${nouvelle.sous_titre}</div>
                             <div class="description">${nouvelle.description}</div>
-                            <a href="${nouvelle.fichier}" download class="btn-download">Télécharger gratuitement</a>
+                            <a href="${nouvelle.fichier}" download class="btn-download" onclick="trackDownload('${nouvelle.titre}', '${nouvelle.fichier}')">Télécharger gratuitement</a>
                         </div>
                     `).join('');
                 }
@@ -309,6 +309,17 @@
                     <p style="font-size: 0.9rem;">Assurez-vous que le fichier data.json est présent.</p>
                 `;
                 console.error('Erreur:', error);
+            }
+        }
+
+        // Fonction pour tracker les téléchargements dans GoatCounter
+        function trackDownload(titre, fichier) {
+            if (window.goatcounter) {
+                window.goatcounter.count({
+                    path: '/download/' + fichier.split('/').pop(),
+                    title: 'Téléchargement: ' + titre,
+                    event: true
+                });
             }
         }
 
