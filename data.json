@@ -115,6 +115,34 @@
       "sous_titre": "Le plus beau des spectacles",
       "description": "Quinze ans que Charles fait rire les enfants malades. Depuis que sa fille Julie est partie, il a transformé sa douleur en vocation. Aujourd'hui, malade à son tour, il prépare son dernier spectacle pour Emma. Une célébration bouleversante du pouvoir du rire face à la maladie.",
       "fichier": "nouvelles/Le_Dernier_Sourire.pdf"
+    },
+    {
+      "id": 4,
+      "titre": "Le Choix du Programmeur",
+      "sous_titre": "Le virus de la vérité",
+      "description": "Minuit à l'hôpital Saint-Vincent. Marc découvre une attaque informatique massive signée par Thibault, son collègue disparu six mois plus tôt. En suivant les indices cachés dans le code, il met au jour un terrible secret : une intelligence artificielle qui trie les patients selon leur rentabilité financière. Le virus n'est pas une rançon, mais une arme de vérité pour exposer un système qui sacrifie des vies sur l'autel du profit.",
+      "fichier": "nouvelles/Le_Choix_du_Programmeur.pdf"
+    },
+    {
+      "id": 5,
+      "titre": "À la Carte",
+      "sous_titre": "Le doux parfum des dimanches",
+      "description": "Restaurant trois étoiles Michelin, contrat à six millions, partenaire britannique à convaincre. Thomas a tout prévu pour cette soirée cruciale. Mais une simple erreur de service va tout bouleverser : un poulet rôti, ordinaire, déposé par mégarde sur leur table. Ce plat banal va réveiller des souvenirs enfouis et rappeler à deux hommes d'affaires surmenés ce qui compte vraiment dans la vie.",
+      "fichier": "nouvelles/A_la_Carte.pdf"
+    },
+    {
+      "id": 6,
+      "titre": "Le Gardien des Songes",
+      "sous_titre": "Règlement 342, alinéa B : Ne jamais se montrer",
+      "description": "Depuis trois cent quarante-deux ans, je protège les enfants de leurs cauchemars, invisible sous leur lit. C'est la première règle : ne jamais se montrer. Mais cette nuit, un Tisseur de Cauchemars menace Timothée, mon protégé depuis trois ans. Pour le sauver, je vais devoir briser mon sceau, renoncer à trois siècles de service irréprochable, et me montrer. Parfois, être un monstre signifie devenir un héros.",
+      "fichier": "nouvelles/Le_Gardien_des_Songes.pdf"
+    },
+    {
+      "id": 7,
+      "titre": "",
+      "sous_titre": "",
+      "description": "",
+      "fichier": "nouvelles/"
     }
   ],
   "actualites": [
