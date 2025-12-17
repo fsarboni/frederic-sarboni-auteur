@@ -139,10 +139,10 @@
     },
     {
       "id": 7,
-      "titre": "",
-      "sous_titre": "",
-      "description": "",
-      "fichier": "nouvelles/"
+      "titre": "Les Sentiers de Rosée",
+      "sous_titre": "Cartographie de l'âme",
+      "description": "Un matin d'été à Brest, Margot découvre dans son jardin de Recouvrance des chemins tracés par la rosée — les mêmes qu'elle avait gribouillés la veille sur son carnet d'insomniaque. Ancienne cartographe, veuve depuis peu, elle décide de suivre ces tracés éphémères. Ils la mènent vers trois rencontres impossibles : l'enfant qu'elle était à sept ans, Paul son premier amour mort au maquis en 1944, et le tableau qu'elle avait abandonné à dix-huit ans. Au fil de cette journée suspendue entre les époques, Margot retrouve ce qu'elle croyait avoir perdu — et transmet à sa petite-fille Lisa le don de lire les cartes secrètes que la nature dessine pour ceux qui savent regarder.",
+      "fichier": "nouvelles/Les_Sentiers_de_Rosee.pdf"
     }
   ],
   "actualites": [
