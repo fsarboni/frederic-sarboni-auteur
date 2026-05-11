@@ -133,6 +133,18 @@
   ],
   "actualites": [
     {
+      "id": 3,
+      "titre": "Chantiers en cours",
+      "date": "Mai 2026",
+      "contenu": "Les travaux avancent sur plusieurs fronts : un nouveau roman policier dans la série bretonne, et de nouveaux contes pour enrichir l'univers de Malo. L'écriture ne s'arrête jamais longtemps."
+    },
+    {
+      "id": 2,
+      "titre": "Deux nouvelles publications en avril 2026",
+      "date": "Mai 2026",
+      "contenu": "Deux nouveaux ouvrages ont rejoint ma bibliothèque en ce printemps 2026. Breakdown Monday, thriller technologique publié aux éditions Nombre7, explore la frontière entre conviction et terrorisme à travers l'histoire de quatre individus qui éteignent Internet le temps d'un lundi. Et Les Contes de Malo, troisième volume de ma collection de l'imaginaire, ouvre les portes d'un univers fantastique ancré dans la mythologie bretonne, autour d'un enfant gardien des noms oubliés."
+    },
+    {
       "id": 1,
       "titre": "Lancement de mon nouveau site",
       "date": "Octobre 2025",
