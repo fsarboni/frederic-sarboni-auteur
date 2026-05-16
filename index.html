@@ -30,11 +30,7 @@
         
         nav { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
         
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #2c3e50;
-        }
+        .logo { font-size: 1.5rem; font-weight: bold; color: #2c3e50; }
         
         .nav-links { display: flex; list-style: none; gap: 1.5rem; flex-wrap: wrap; }
         .nav-links a { text-decoration: none; color: #34495e; font-weight: 500; transition: color 0.3s ease; }
@@ -70,11 +66,7 @@
             padding-bottom: 0.5rem;
         }
         
-        .about-content-wrapper {
-            display: flex;
-            gap: 2rem;
-            align-items: flex-start;
-        }
+        .about-content-wrapper { display: flex; gap: 2rem; align-items: flex-start; }
         
         .author-photo {
             flex-shrink: 0;
@@ -86,9 +78,7 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
         
-        .about-text {
-            flex: 1;
-        }
+        .about-text { flex: 1; }
         
         .books-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 1.5rem; }
         
@@ -112,9 +102,7 @@
             border: 2px solid #ddd;
         }
         
-        .book-content {
-            flex: 1;
-        }
+        .book-content { flex: 1; }
         
         .book-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.15); }
         .book-card h3 { color: #2c3e50; margin-bottom: 0.5rem; font-size: 1.3rem; }
@@ -125,16 +113,104 @@
         .news-item:last-child { border-bottom: none; margin-bottom: 0; }
         .news-item h3 { color: #2c3e50; margin-bottom: 0.5rem; }
         .news-item .date { color: #7f8c8d; font-size: 0.9rem; margin-bottom: 0.5rem; font-weight: bold; }
-        
+
+        /* ── SECTION NOUVELLES ─────────────────────────────────── */
+        .nouvelles-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .nouvelles-header p {
+            font-size: 1.05rem;
+            color: #555;
+        }
+        .stats-link {
+            font-size: 0.85rem;
+            color: #7f8c8d;
+            text-decoration: none;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            padding: 4px 14px;
+            transition: all 0.2s;
+        }
+        .stats-link:hover { background: #f0f0f0; color: #333; }
+
+        /* Barre de recherche nouvelles */
+        .nouvelles-search {
+            margin-bottom: 1.5rem;
+        }
+        .nouvelles-search input {
+            width: 100%;
+            max-width: 380px;
+            padding: 8px 16px;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            font-size: 0.95rem;
+            font-family: inherit;
+            color: #333;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .nouvelles-search input:focus { border-color: #3498db; }
+
         .nouvelles-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
-        .nouvelle-card { background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+
+        .nouvelle-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
         .nouvelle-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.15); }
-        .nouvelle-card h3 { color: #2c3e50; margin-bottom: 0.5rem; font-size: 1.3rem; }
-        .nouvelle-card .sous-titre { color: #7f8c8d; font-size: 0.95rem; margin-bottom: 1rem; font-style: italic; }
-        .nouvelle-card .description { text-align: justify; line-height: 1.6; margin-bottom: 1.5rem; color: #555; }
-        .btn-download { display: inline-block; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 0.75rem 1.5rem; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; box-shadow: 0 4px 10px rgba(102, 126, 234, 0.3); }
+        .nouvelle-card h3 { color: #2c3e50; margin-bottom: 0.4rem; font-size: 1.2rem; }
+        .nouvelle-card .sous-titre { color: #7f8c8d; font-size: 0.9rem; margin-bottom: 1rem; font-style: italic; }
+        .nouvelle-card .description { text-align: justify; line-height: 1.6; margin-bottom: 1.5rem; color: #555; flex: 1; }
+
+        /* Bouton téléchargement avec compteur */
+        .btn-download-wrap { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+
+        .btn-download {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 0.7rem 1.4rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(102, 126, 234, 0.3);
+            cursor: pointer;
+            border: none;
+            font-family: inherit;
+        }
         .btn-download:hover { transform: translateY(-2px); box-shadow: 0 6px 15px rgba(102, 126, 234, 0.4); }
-        .btn-download::before { content: "📥 "; }
+
+        /* Petit badge compteur */
+        .dl-count {
+            font-size: 0.78rem;
+            color: #aaa;
+            white-space: nowrap;
+        }
+        .dl-count span { font-weight: bold; color: #764ba2; }
+
+        /* Message "pas de résultat" */
+        .no-result {
+            grid-column: 1 / -1;
+            text-align: center;
+            color: #aaa;
+            padding: 2rem;
+            font-style: italic;
+        }
+        /* ── FIN SECTION NOUVELLES ─────────────────────────────── */
         
         .contact-section { background: #3498db; color: white; text-align: center; }
         .contact-section h2 { color: white; border-bottom: 2px solid rgba(255,255,255,0.3); }
@@ -204,7 +280,13 @@
 
         <section id="nouvelles" class="section" style="display: none;">
             <h2>📖 Nouvelles en accès libre</h2>
-            <p style="margin-bottom: 2rem; text-align: center; font-size: 1.1rem;">Découvrez gratuitement quelques-unes de mes nouvelles</p>
+            <div class="nouvelles-header">
+                <p>Découvrez gratuitement quelques-unes de mes nouvelles</p>
+                <a href="https://fsarboni.goatcounter.com" target="_blank" rel="noopener" class="stats-link">📊 Voir les statistiques</a>
+            </div>
+            <div class="nouvelles-search">
+                <input type="text" id="recherche-nouvelles" placeholder="🔍 Rechercher une nouvelle…" oninput="filtrerNouvellesUI()">
+            </div>
             <div class="nouvelles-grid" id="nouvelles-container"></div>
         </section>
 
@@ -222,112 +304,185 @@
     </footer>
 
     <script>
-        // Charger les données depuis data.json
-        async function loadData() {
-            try {
-                const response = await fetch('data.json');
-                const data = await response.json();
-                
-                // Mettre à jour les métadonnées
-                document.getElementById('page-title').textContent = data.site.title;
-                document.getElementById('page-description').content = data.site.description;
-                
-                // Mettre à jour le logo et le titre
-                document.getElementById('site-logo').textContent = data.auteur.nom;
-                document.getElementById('footer-name').textContent = data.auteur.nom;
-                
-                // Mettre à jour la section À propos
-                document.getElementById('author-photo').src = data.auteur.photo;
-                document.getElementById('author-bio').textContent = data.auteur.bio;
-                
-                // Afficher les livres
-                const booksContainer = document.getElementById('books-container');
-                booksContainer.innerHTML = data.livres.map(livre => `
-                    <div class="book-card">
-                        <img src="${livre.image}" alt="${livre.titre}" class="book-image">
-                        <div class="book-content">
-                            <h3>${livre.titre}</h3>
-                            <div class="date">${livre.annee}</div>
-                            <p>${livre.description}</p>
-                        </div>
-                    </div>
-                `).join('');
-                
-                // Afficher les actualités
-                const newsContainer = document.getElementById('news-container');
-                newsContainer.innerHTML = data.actualites.map(actu => `
-                    <div class="news-item">
-                        <h3>${actu.titre}</h3>
-                        <div class="date">${actu.date}</div>
-                        <p>${actu.contenu}</p>
-                    </div>
-                `).join('');
-                
-                // Afficher les nouvelles gratuites
-                const nouvellesContainer = document.getElementById('nouvelles-container');
-                if (data.nouvelles_gratuites && data.nouvelles_gratuites.length > 0) {
-                    nouvellesContainer.innerHTML = data.nouvelles_gratuites.map((nouvelle, index) => `
-                        <div class="nouvelle-card">
-                            <h3>${nouvelle.titre}</h3>
-                            <div class="sous-titre">${nouvelle.sous_titre}</div>
-                            <div class="description">${nouvelle.description}</div>
-                            <a href="${nouvelle.fichier}" download class="btn-download" onclick="trackDownload('${nouvelle.titre}', '${nouvelle.fichier}')">Télécharger gratuitement</a>
-                        </div>
-                    `).join('');
-                }
-                
-                // Afficher les contacts
-                const contactContainer = document.getElementById('contact-container');
-                contactContainer.innerHTML = `
-                    <div class="contact-item">
-                        <h4>Email</h4>
-                        <p><a href="mailto:${data.contact.email}">${data.contact.email}</a></p>
-                    </div>
-                    <div class="contact-item">
-                        <h4>Facebook</h4>
-                        <p><a href="${data.contact.facebook}" target="_blank" rel="noopener">facebook.com/frederic.sarboni</a></p>
-                    </div>
-                    <div class="contact-item">
-                        <h4>Rencontres</h4>
-                        <p>${data.contact.rencontres}</p>
-                    </div>
-                    <div class="contact-item">
-                        <h4>Commander mes ouvrages</h4>
-                        <p><a href="mailto:${data.contact.email}?subject=Commande d'ouvrages">Me contacter pour commander</a></p>
-                    </div>
-                `;
-                
-                // Masquer le chargement et afficher les sections
-                document.getElementById('loading').style.display = 'none';
-                document.querySelectorAll('.hero, .section').forEach(section => {
-                    section.style.display = 'block';
-                });
-                
-            } catch (error) {
-                document.getElementById('loading').innerHTML = `
-                    <p style="color: #e74c3c;">Erreur lors du chargement des données.</p>
-                    <p style="font-size: 0.9rem;">Assurez-vous que le fichier data.json est présent.</p>
-                `;
-                console.error('Erreur:', error);
-            }
-        }
+    // ── COMPTEUR LOCAL (localStorage) ────────────────────────────────────
+    // Clé : nom du fichier PDF. Valeur : nombre de clics sur ce visiteur.
+    // Complète GoatCounter qui agrège tous les visiteurs.
+    const STORAGE_KEY = 'fss_dl_counts';
 
-        // Fonction pour tracker les téléchargements dans GoatCounter
-        function trackDownload(titre, fichier) {
-            if (window.goatcounter) {
-                window.goatcounter.count({
-                    path: '/download/' + fichier.split('/').pop(),
-                    title: 'Téléchargement: ' + titre,
-                    event: true
-                });
-            }
-        }
+    function getLocalCounts() {
+        try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); }
+        catch(e) { return {}; }
+    }
 
-        // Charger les données au démarrage
-        loadData();
+    function incrementLocalCount(fichier) {
+        const counts = getLocalCounts();
+        const key = fichier.split('/').pop();
+        counts[key] = (counts[key] || 0) + 1;
+        try { localStorage.setItem(STORAGE_KEY, JSON.stringify(counts)); } catch(e) {}
+        return counts[key];
+    }
+
+    function getLocalCount(fichier) {
+        const counts = getLocalCounts();
+        return counts[fichier.split('/').pop()] || 0;
+    }
+
+    // ── DONNÉES NOUVELLES (pour le filtre) ───────────────────────────────
+    let toutesLesNouvelles = [];
+
+    // ── CHARGEMENT PRINCIPAL ─────────────────────────────────────────────
+    async function loadData() {
+        try {
+            const response = await fetch('data.json');
+            const data = await response.json();
+            
+            document.getElementById('page-title').textContent = data.site.title;
+            document.getElementById('page-description').content = data.site.description;
+            document.getElementById('site-logo').textContent = data.auteur.nom;
+            document.getElementById('footer-name').textContent = data.auteur.nom;
+            document.getElementById('author-photo').src = data.auteur.photo;
+            document.getElementById('author-bio').textContent = data.auteur.bio;
+            
+            // Livres
+            const booksContainer = document.getElementById('books-container');
+            booksContainer.innerHTML = data.livres.map(livre => `
+                <div class="book-card">
+                    <img src="${livre.image}" alt="${livre.titre}" class="book-image">
+                    <div class="book-content">
+                        <h3>${livre.titre}</h3>
+                        <div class="date">${livre.annee}</div>
+                        <p>${livre.description}</p>
+                    </div>
+                </div>
+            `).join('');
+            
+            // Actualités
+            const newsContainer = document.getElementById('news-container');
+            newsContainer.innerHTML = data.actualites.map(actu => `
+                <div class="news-item">
+                    <h3>${actu.titre}</h3>
+                    <div class="date">${actu.date}</div>
+                    <p>${actu.contenu}</p>
+                </div>
+            `).join('');
+            
+            // Nouvelles gratuites
+            if (data.nouvelles_gratuites && data.nouvelles_gratuites.length > 0) {
+                toutesLesNouvelles = data.nouvelles_gratuites;
+                afficherNouvelles(toutesLesNouvelles);
+            }
+            
+            // Contact
+            const contactContainer = document.getElementById('contact-container');
+            contactContainer.innerHTML = `
+                <div class="contact-item">
+                    <h4>Email</h4>
+                    <p><a href="mailto:${data.contact.email}">${data.contact.email}</a></p>
+                </div>
+                <div class="contact-item">
+                    <h4>Facebook</h4>
+                    <p><a href="${data.contact.facebook}" target="_blank" rel="noopener">facebook.com/frederic.sarboni</a></p>
+                </div>
+                <div class="contact-item">
+                    <h4>Rencontres</h4>
+                    <p>${data.contact.rencontres}</p>
+                </div>
+                <div class="contact-item">
+                    <h4>Commander mes ouvrages</h4>
+                    <p><a href="mailto:${data.contact.email}?subject=Commande d'ouvrages">Me contacter pour commander</a></p>
+                </div>
+            `;
+            
+            document.getElementById('loading').style.display = 'none';
+            document.querySelectorAll('.hero, .section').forEach(s => s.style.display = 'block');
+            
+        } catch (error) {
+            document.getElementById('loading').innerHTML = `
+                <p style="color: #e74c3c;">Erreur lors du chargement des données.</p>
+                <p style="font-size: 0.9rem;">Assurez-vous que le fichier data.json est présent.</p>
+            `;
+            console.error('Erreur:', error);
+        }
+    }
+
+    // ── AFFICHAGE DES CARTES NOUVELLES ───────────────────────────────────
+    function afficherNouvelles(liste) {
+        const container = document.getElementById('nouvelles-container');
+        if (liste.length === 0) {
+            container.innerHTML = '<div class="no-result">Aucune nouvelle ne correspond à votre recherche.</div>';
+            return;
+        }
+        container.innerHTML = liste.map(n => {
+            const localCount = getLocalCount(n.fichier);
+            const countLabel = localCount > 0
+                ? `<span class="dl-count">Téléchargé <span>${localCount}</span> fois sur cet appareil</span>`
+                : '';
+            return `
+            <div class="nouvelle-card">
+                <h3>${n.titre}</h3>
+                <div class="sous-titre">${n.sous_titre || ''}</div>
+                <div class="description">${n.description}</div>
+                <div class="btn-download-wrap">
+                    <button class="btn-download" onclick="telecharger('${n.titre}', '${n.fichier}', this)">
+                        📥 Télécharger gratuitement
+                    </button>
+                    ${countLabel}
+                </div>
+            </div>`;
+        }).join('');
+    }
+
+    // ── FILTRE RECHERCHE ─────────────────────────────────────────────────
+    function filtrerNouvellesUI() {
+        const q = document.getElementById('recherche-nouvelles').value.toLowerCase().trim();
+        if (!q) { afficherNouvelles(toutesLesNouvelles); return; }
+        const filtered = toutesLesNouvelles.filter(n =>
+            n.titre.toLowerCase().includes(q) ||
+            (n.sous_titre || '').toLowerCase().includes(q) ||
+            n.description.toLowerCase().includes(q)
+        );
+        afficherNouvelles(filtered);
+    }
+
+    // ── TÉLÉCHARGEMENT + TRACKING ────────────────────────────────────────
+    function telecharger(titre, fichier, btn) {
+        // 1. Déclenchement du téléchargement réel
+        const a = document.createElement('a');
+        a.href = fichier;
+        a.download = fichier.split('/').pop();
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+
+        // 2. Compteur local (cet appareil)
+        const count = incrementLocalCount(fichier);
+
+        // 3. Mise à jour visuelle immédiate du badge
+        const wrap = btn.closest('.btn-download-wrap');
+        let badge = wrap.querySelector('.dl-count');
+        if (!badge) {
+            badge = document.createElement('span');
+            badge.className = 'dl-count';
+            wrap.appendChild(badge);
+        }
+        badge.innerHTML = `Téléchargé <span>${count}</span> fois sur cet appareil`;
+
+        // 4. Envoi à GoatCounter (statistiques globales)
+        const nomFichier = fichier.split('/').pop();
+        if (window.goatcounter && window.goatcounter.count) {
+            window.goatcounter.count({
+                path: '/telechargement/' + nomFichier,
+                title: 'Téléchargement : ' + titre,
+                event: true
+            });
+        }
+    }
+
+    // Lancement
+    loadData();
     </script>
 
-    <!-- GoatCounter - Compteur de visites -->
+    <!-- GoatCounter - Compteur de visites et téléchargements -->
     <script data-goatcounter="https://fsarboni.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
