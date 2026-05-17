@@ -114,8 +114,7 @@
         .btn-download-wrap { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
         .btn-download { display: inline-flex; align-items: center; gap: 6px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 0.65rem 1.3rem; border-radius: 25px; text-decoration: none; font-weight: 600; font-size: 0.88rem; transition: all 0.3s; box-shadow: 0 4px 10px rgba(102,126,234,0.3); cursor: pointer; border: none; font-family: inherit; }
         .btn-download:hover { transform: translateY(-2px); box-shadow: 0 6px 15px rgba(102,126,234,0.4); }
-        .dl-count { font-size: 0.75rem; color: #aaa; }
-        .dl-count span { font-weight: bold; color: #764ba2; }
+        .dl-count { font-size: 0.78rem; color: #764ba2; font-weight: 600; }
         .no-result { grid-column: 1/-1; text-align: center; color: #aaa; padding: 2rem; font-style: italic; }
 
         /* ── CONTACT ──────────────────────────────────────────── */
@@ -225,17 +224,10 @@ const GENRES_CONFIG = [
 let toutesLesNouvelles = [];
 let genreActif = "Tous";
 
-// ── COMPTEUR LOCAL ────────────────────────────────────────────────────────
-const STORAGE_KEY = 'fss_dl_counts';
-function getLocalCounts() { try { return JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}'); } catch(e){ return {}; } }
-function incrementLocalCount(fichier) {
-    const counts = getLocalCounts();
-    const key = fichier.split('/').pop();
-    counts[key] = (counts[key]||0) + 1;
-    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(counts)); } catch(e){}
-    return counts[key];
-}
-function getLocalCount(fichier) { return getLocalCounts()[fichier.split('/').pop()] || 0; }
+// ── SUIVI TÉLÉCHARGEMENTS (session uniquement) ────────────────────────────
+const dlSession = new Set();
+function marquerTelecharge(fichier) { dlSession.add(fichier.split('/').pop()); }
+function dejaTelecharge(fichier) { return dlSession.has(fichier.split('/').pop()); }
 
 // ── CHARGEMENT ────────────────────────────────────────────────────────────
 async function loadData() {
@@ -353,28 +345,26 @@ function afficherNouvelles(liste) {
         return;
     }
     container.innerHTML = liste.map(n => {
-        const count = getLocalCount(n.fichier);
-        const countLabel = count > 0
-            ? `<span class="dl-count">Téléchargé <span>${count}</span> fois sur cet appareil</span>`
-            : '';
+        const deja = dejaTelecharge(n.fichier);
+        const badgeDl = deja ? `<span class="dl-count">✓ Déjà téléchargée</span>` : '';
         return `
-        <div class="nouvelle-card">
+        <div class="nouvelle-card" id="card-${n.id}">
             ${badgePourGenre(n.genre)}
             <h3>${n.titre}</h3>
             <div class="sous-titre">${n.sous_titre||''}</div>
             <div class="description">${n.description}</div>
             <div class="btn-download-wrap">
-                <button class="btn-download" onclick="telecharger('${n.titre.replace(/'/g,"\\'")}','${n.fichier}',this)">
+                <button class="btn-download" onclick="telecharger('${n.titre.replace(/'/g,"\\'")}','${n.fichier}',${n.id})">
                     📥 Télécharger gratuitement
                 </button>
-                ${countLabel}
+                ${badgeDl}
             </div>
         </div>`;
     }).join('');
 }
 
 // ── TÉLÉCHARGEMENT + TRACKING ─────────────────────────────────────────────
-function telecharger(titre, fichier, btn) {
+function telecharger(titre, fichier, id) {
     const a = document.createElement('a');
     a.href = fichier;
     a.download = fichier.split('/').pop();
@@ -382,12 +372,20 @@ function telecharger(titre, fichier, btn) {
     a.click();
     document.body.removeChild(a);
 
-    const count = incrementLocalCount(fichier);
+    marquerTelecharge(fichier);
 
-    const wrap = btn.closest('.btn-download-wrap');
-    let badge = wrap.querySelector('.dl-count');
-    if (!badge) { badge = document.createElement('span'); badge.className = 'dl-count'; wrap.appendChild(badge); }
-    badge.innerHTML = `Téléchargé <span>${count}</span> fois sur cet appareil`;
+    // Mettre à jour le badge dans la carte
+    const card = document.getElementById('card-' + id);
+    if (card) {
+        const wrap = card.querySelector('.btn-download-wrap');
+        let badge = wrap.querySelector('.dl-count');
+        if (!badge) {
+            badge = document.createElement('span');
+            badge.className = 'dl-count';
+            wrap.appendChild(badge);
+        }
+        badge.textContent = '✓ Déjà téléchargée';
+    }
 
     const nomFichier = fichier.split('/').pop();
     if (window.goatcounter && window.goatcounter.count) {
