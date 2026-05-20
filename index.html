@@ -164,6 +164,19 @@
         <h1 id="hero-title">Bienvenu dans mon espace littéraire</h1>
     </section>
 
+    <a href="#nouvelles" id="bandeau-nouvelles" style="display:none; align-items: center; justify-content: space-between; background: #2c3e50; border-radius: 12px; padding: 1.1rem 1.75rem; text-decoration: none; margin-bottom: 2rem;">
+        <div style="display: flex; align-items: center; gap: 14px;">
+            <div>
+                <p style="margin: 0; font-size: 15px; font-weight: 600; color: #ffffff;">Nouvelles gratuites à télécharger</p>
+                <p style="margin: 0; font-size: 13px; color: #b0c4d8;">Polar · Fantastique · Drame · Humour · et plus</p>
+            </div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.12); border-radius: 20px; padding: 6px 14px; flex-shrink: 0;">
+            <span style="font-size: 13px; font-weight: 500; color: #ffffff;">Accéder</span>
+            <span style="font-size: 16px; color: #ffffff;">→</span>
+        </div>
+    </a>
+
     <section id="a-propos" class="section" style="display:none;">
         <h2>À propos</h2>
         <div class="about-content-wrapper">
@@ -288,6 +301,8 @@ async function loadData() {
 
         document.getElementById('loading').style.display = 'none';
         document.querySelectorAll('.hero, .section').forEach(s => s.style.display = 'block');
+        const bandeau = document.getElementById('bandeau-nouvelles');
+        bandeau.style.display = 'flex';
 
     } catch(error) {
         document.getElementById('loading').innerHTML = `
