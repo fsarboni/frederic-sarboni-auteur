@@ -114,7 +114,8 @@
         .btn-download-wrap { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
         .btn-download { display: inline-flex; align-items: center; gap: 6px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 0.65rem 1.3rem; border-radius: 25px; text-decoration: none; font-weight: 600; font-size: 0.88rem; transition: all 0.3s; box-shadow: 0 4px 10px rgba(102,126,234,0.3); cursor: pointer; border: none; font-family: inherit; }
         .btn-download:hover { transform: translateY(-2px); box-shadow: 0 6px 15px rgba(102,126,234,0.4); }
-        .dl-count { font-size: 0.78rem; color: #764ba2; font-weight: 600; }
+        .dl-count { font-size: 0.75rem; color: #aaa; }
+        .dl-count span { font-weight: bold; color: #764ba2; }
         .no-result { grid-column: 1/-1; text-align: center; color: #aaa; padding: 2rem; font-style: italic; }
 
         /* ── CONTACT ──────────────────────────────────────────── */
@@ -160,6 +161,19 @@
     <section id="accueil" class="hero" style="display:none;">
         <h1 id="hero-title">Bienvenu dans mon espace littéraire</h1>
     </section>
+
+    <a href="#nouvelles" id="bandeau-nouvelles" style="display:none; align-items: center; justify-content: space-between; background: #2c3e50; border-radius: 12px; padding: 1.1rem 1.75rem; text-decoration: none; margin-bottom: 2rem;">
+        <div style="display: flex; align-items: center; gap: 14px;">
+            <div>
+                <p style="margin: 0; font-size: 15px; font-weight: 600; color: #ffffff;">Nouvelles gratuites à télécharger</p>
+                <p style="margin: 0; font-size: 13px; color: #b0c4d8;">Polar · Fantastique · Drame · Humour · et plus</p>
+            </div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.12); border-radius: 20px; padding: 6px 14px; flex-shrink: 0;">
+            <span style="font-size: 13px; font-weight: 500; color: #ffffff;">Accéder</span>
+            <span style="font-size: 16px; color: #ffffff;">→</span>
+        </div>
+    </a>
 
     <section id="a-propos" class="section" style="display:none;">
         <h2>À propos</h2>
@@ -224,10 +238,17 @@ const GENRES_CONFIG = [
 let toutesLesNouvelles = [];
 let genreActif = "Tous";
 
-// ── SUIVI TÉLÉCHARGEMENTS (session uniquement) ────────────────────────────
-const dlSession = new Set();
-function marquerTelecharge(fichier) { dlSession.add(fichier.split('/').pop()); }
-function dejaTelecharge(fichier) { return dlSession.has(fichier.split('/').pop()); }
+// ── COMPTEUR LOCAL ────────────────────────────────────────────────────────
+const STORAGE_KEY = 'fss_dl_counts';
+function getLocalCounts() { try { return JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}'); } catch(e){ return {}; } }
+function incrementLocalCount(fichier) {
+    const counts = getLocalCounts();
+    const key = fichier.split('/').pop();
+    counts[key] = (counts[key]||0) + 1;
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(counts)); } catch(e){}
+    return counts[key];
+}
+function getLocalCount(fichier) { return getLocalCounts()[fichier.split('/').pop()] || 0; }
 
 // ── CHARGEMENT ────────────────────────────────────────────────────────────
 async function loadData() {
@@ -277,6 +298,8 @@ async function loadData() {
 
         document.getElementById('loading').style.display = 'none';
         document.querySelectorAll('.hero, .section').forEach(s => s.style.display = 'block');
+        const bandeau = document.getElementById('bandeau-nouvelles');
+        bandeau.style.display = 'flex';
 
     } catch(error) {
         document.getElementById('loading').innerHTML = `
@@ -345,26 +368,28 @@ function afficherNouvelles(liste) {
         return;
     }
     container.innerHTML = liste.map(n => {
-        const deja = dejaTelecharge(n.fichier);
-        const badgeDl = deja ? `<span class="dl-count">✓ Déjà téléchargée</span>` : '';
+        const count = getLocalCount(n.fichier);
+        const countLabel = count > 0
+            ? `<span class="dl-count">Téléchargé <span>${count}</span> fois sur cet appareil</span>`
+            : '';
         return `
-        <div class="nouvelle-card" id="card-${n.id}">
+        <div class="nouvelle-card">
             ${badgePourGenre(n.genre)}
             <h3>${n.titre}</h3>
             <div class="sous-titre">${n.sous_titre||''}</div>
             <div class="description">${n.description}</div>
             <div class="btn-download-wrap">
-                <button class="btn-download" onclick="telecharger('${n.titre.replace(/'/g,"\\'")}','${n.fichier}',${n.id})">
+                <button class="btn-download" onclick="telecharger('${n.titre.replace(/'/g,"\\'")}','${n.fichier}',this)">
                     📥 Télécharger gratuitement
                 </button>
-                ${badgeDl}
+                ${countLabel}
             </div>
         </div>`;
     }).join('');
 }
 
 // ── TÉLÉCHARGEMENT + TRACKING ─────────────────────────────────────────────
-function telecharger(titre, fichier, id) {
+function telecharger(titre, fichier, btn) {
     const a = document.createElement('a');
     a.href = fichier;
     a.download = fichier.split('/').pop();
@@ -372,20 +397,12 @@ function telecharger(titre, fichier, id) {
     a.click();
     document.body.removeChild(a);
 
-    marquerTelecharge(fichier);
+    const count = incrementLocalCount(fichier);
 
-    // Mettre à jour le badge dans la carte
-    const card = document.getElementById('card-' + id);
-    if (card) {
-        const wrap = card.querySelector('.btn-download-wrap');
-        let badge = wrap.querySelector('.dl-count');
-        if (!badge) {
-            badge = document.createElement('span');
-            badge.className = 'dl-count';
-            wrap.appendChild(badge);
-        }
-        badge.textContent = '✓ Déjà téléchargée';
-    }
+    const wrap = btn.closest('.btn-download-wrap');
+    let badge = wrap.querySelector('.dl-count');
+    if (!badge) { badge = document.createElement('span'); badge.className = 'dl-count'; wrap.appendChild(badge); }
+    badge.innerHTML = `Téléchargé <span>${count}</span> fois sur cet appareil`;
 
     const nomFichier = fichier.split('/').pop();
     if (window.goatcounter && window.goatcounter.count) {
