@@ -3,342 +3,458 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Frédéric Sarboni Sanchez - Auteur</title>
+    <title id="page-title">Frédéric Sarboni Sanchez</title>
+    <meta name="description" id="page-description" content="Découvrez l'univers littéraire de Frédéric Sarboni Sanchez">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-        }
-        
-        .hero {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 6rem 2rem;
-            text-align: center;
-        }
-        
-        .hero h1 { font-size: 2.5rem; margin-bottom: 1rem; }
-        .hero p { font-size: 1.1rem; margin-bottom: 1.5rem; }
-        
-        .nav-links { list-style: none; margin-bottom: 2rem; }
-        .nav-links li { display: inline; margin: 0 1rem; }
-        .nav-links a { color: white; text-decoration: none; font-weight: 500; }
-        
-        .section {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 3rem 2rem;
-            display: none;
-        }
-        
-        .section.active { display: block; }
-        
-        .section h2 { color: #667eea; margin-bottom: 2rem; font-size: 2rem; }
-        
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            align-items: center;
-        }
-        
-        .about-photo { max-width: 300px; border-radius: 10px; }
-        .about-text { text-align: justify; line-height: 1.8; }
-        
-        .books-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-        
-        .book-card {
-            background: #f8f9fa;
-            padding: 1.5rem;
-            border-radius: 10px;
-            transition: transform 0.3s;
-        }
-        
-        .book-card:hover { transform: translateY(-5px); }
-        .book-card img { width: 100%; border-radius: 5px; margin-bottom: 1rem; }
-        .book-card h3 { color: #667eea; margin-bottom: 0.5rem; }
-        .book-card .year { color: #999; font-size: 0.9rem; }
-        
-        .nouvelles-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-        
-        .nouvelle-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-        }
-        
-        .nouvelle-card:hover { transform: translateY(-5px); }
-        .nouvelle-card h3 { color: #2c3e50; margin-bottom: 0.5rem; }
-        .nouvelle-card .sous-titre { color: #7f8c8d; font-size: 0.95rem; margin-bottom: 1rem; font-style: italic; }
-        .nouvelle-card .description { text-align: justify; line-height: 1.6; margin-bottom: 1.5rem; color: #555; }
-        
-        .btn-download {
-            display: inline-block;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 10px rgba(102, 126, 234, 0.3);
-        }
-        
-        .btn-download:hover { transform: translateY(-2px); box-shadow: 0 6px 15px rgba(102, 126, 234, 0.4); }
-        .btn-download::before { content: "📥 "; }
-        
+        body { font-family: 'Georgia', serif; line-height: 1.6; color: #333; background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); min-height: 100vh; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        header { background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); padding: 1rem 0; box-shadow: 0 2px 20px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100; }
+        nav { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
+        .logo { font-size: 1.5rem; font-weight: bold; color: #2c3e50; }
+        .nav-links { display: flex; list-style: none; gap: 1.5rem; flex-wrap: wrap; }
+        .nav-links a { text-decoration: none; color: #34495e; font-weight: 500; transition: color 0.3s; }
+        .nav-links a:hover { color: #3498db; }
+        main { padding: 2rem 0; }
+        .hero { background: white; border-radius: 15px; padding: 3rem; margin-bottom: 2rem; box-shadow: 0 10px 30px rgba(0,0,0,0.1); text-align: center; }
+        .hero h1 { font-size: 2.5rem; color: #2c3e50; margin-bottom: 1rem; }
+        .section { background: white; border-radius: 15px; padding: 2rem; margin-bottom: 2rem; box-shadow: 0 5px 15px rgba(0,0,0,0.08); }
+        .section h2 { color: #2c3e50; margin-bottom: 1.5rem; font-size: 1.8rem; border-bottom: 2px solid #3498db; padding-bottom: 0.5rem; }
+        .about-content-wrapper { display: flex; gap: 2rem; align-items: flex-start; }
+        .author-photo { flex-shrink: 0; width: 200px; height: 200px; border-radius: 50%; object-fit: cover; border: 4px solid #3498db; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+        .about-text { flex: 1; }
+        .books-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 1.5rem; }
+        .book-card { background: #f8f9fa; border-radius: 10px; padding: 1.5rem; border-left: 4px solid #3498db; transition: transform 0.3s; display: flex; flex-direction: column; }
+        .book-image { width: 100%; max-width: 200px; height: 250px; object-fit: cover; border-radius: 8px; margin: 0 auto 1rem auto; border: 2px solid #ddd; }
+        .book-content { flex: 1; }
+        .book-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.15); }
+        .book-card h3 { color: #2c3e50; margin-bottom: 0.5rem; font-size: 1.3rem; }
+        .book-card .date { color: #7f8c8d; font-size: 0.9rem; margin-bottom: 1rem; font-weight: bold; }
+        .book-card p { text-align: justify; line-height: 1.6; white-space: pre-line; }
         .news-item { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 1rem; }
-        .news-item:last-child { border-bottom: none; }
+        .news-item:last-child { border-bottom: none; margin-bottom: 0; }
         .news-item h3 { color: #2c3e50; margin-bottom: 0.5rem; }
         .news-item .date { color: #7f8c8d; font-size: 0.9rem; margin-bottom: 0.5rem; font-weight: bold; }
-        
-        .contact-section { text-align: center; }
-        .contact-info { margin: 2rem 0; font-size: 1.1rem; }
-        .contact-info a { color: #667eea; text-decoration: none; }
-        
-        .tab-buttons {
+
+        /* ── BADGES GENRE ─────────────────────────────────────── */
+        .genre-badge {
+            display: inline-block;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            padding: 3px 10px;
+            border-radius: 12px;
+            margin-bottom: 0.6rem;
+        }
+        .genre-Polar               { background: #1a1a2e; color: #e8d5b7; }
+        .genre-Fantastique         { background: #4a0e8f; color: #e8d5ff; }
+        .genre-Romance-SF          { background: #c2185b; color: #fff; }
+        .genre-Drame               { background: #1565c0; color: #e3f2fd; }
+        .genre-Memoire             { background: #e65100; color: #fff3e0; }
+        .genre-Humour              { background: #2e7d32; color: #f1f8e9; }
+        .genre-Aventure            { background: #00695c; color: #e0f2f1; }
+        .genre-Contemplatif        { background: #546e7a; color: #eceff1; }
+        .genre-Cosy-Mystery        { background: #7a9e7e; color: #f0f4f0; }
+
+        /* ── FILTRES GENRE ────────────────────────────────────── */
+        .filtres-wrapper {
             display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-bottom: 2rem;
             flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 1.5rem;
+            align-items: center;
         }
-        
-        .tab-btn {
-            padding: 0.75rem 1.5rem;
-            background: #f0f0f0;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
+        .filtres-wrapper span {
+            font-size: 0.85rem;
+            color: #888;
+            margin-right: 4px;
+        }
+        .filtre-btn {
+            font-size: 0.8rem;
             font-weight: 600;
-            transition: all 0.3s;
+            padding: 5px 14px;
+            border-radius: 20px;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
         }
-        
-        .tab-btn.active {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+        .filtre-btn.actif { border-color: currentColor; opacity: 1; }
+        .filtre-btn:not(.actif) { opacity: 0.55; }
+        .filtre-btn:hover { opacity: 1; }
+
+        .filtre-tous      { background: #f0f0f0; color: #333; }
+        .filtre-Polar     { background: #1a1a2e; color: #e8d5b7; }
+        .filtre-Fantastique { background: #4a0e8f; color: #e8d5ff; }
+        .filtre-Romance-SF { background: #c2185b; color: #fff; }
+        .filtre-Drame     { background: #1565c0; color: #e3f2fd; }
+        .filtre-Memoire   { background: #e65100; color: #fff3e0; }
+        .filtre-Humour    { background: #2e7d32; color: #f1f8e9; }
+        .filtre-Aventure  { background: #00695c; color: #e0f2f1; }
+        .filtre-Contemplatif { background: #546e7a; color: #eceff1; }
+        .filtre-Cosy-Mystery { background: #7a9e7e; color: #f0f4f0; }
+
+        /* ── RECHERCHE ────────────────────────────────────────── */
+        .nouvelles-search { margin-bottom: 1.5rem; }
+        .nouvelles-search input {
+            width: 100%; max-width: 380px;
+            padding: 8px 16px;
+            border: 1px solid #ddd; border-radius: 25px;
+            font-size: 0.95rem; font-family: inherit; color: #333;
+            outline: none; transition: border-color 0.2s;
         }
-        
-        #loading { text-align: center; padding: 2rem; }
-        
+        .nouvelles-search input:focus { border-color: #3498db; }
+
+        /* ── GRILLE NOUVELLES ─────────────────────────────────── */
+        .nouvelles-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .nouvelle-card { background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); transition: transform 0.3s, box-shadow 0.3s; display: flex; flex-direction: column; }
+        .nouvelle-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.15); }
+        .nouvelle-card h3 { color: #2c3e50; margin-bottom: 0.4rem; font-size: 1.15rem; }
+        .nouvelle-card .sous-titre { color: #7f8c8d; font-size: 0.88rem; margin-bottom: 1rem; font-style: italic; }
+        .nouvelle-card .description { text-align: justify; line-height: 1.6; margin-bottom: 1.5rem; color: #555; flex: 1; font-size: 0.93rem; }
+        .btn-download-wrap { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+        .btn-download { display: inline-flex; align-items: center; gap: 6px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 0.65rem 1.3rem; border-radius: 25px; text-decoration: none; font-weight: 600; font-size: 0.88rem; transition: all 0.3s; box-shadow: 0 4px 10px rgba(102,126,234,0.3); cursor: pointer; border: none; font-family: inherit; }
+        .btn-download:hover { transform: translateY(-2px); box-shadow: 0 6px 15px rgba(102,126,234,0.4); }
+        .dl-count { font-size: 0.75rem; color: #aaa; }
+        .dl-count span { font-weight: bold; color: #764ba2; }
+        .no-result { grid-column: 1/-1; text-align: center; color: #aaa; padding: 2rem; font-style: italic; }
+
+        /* ── CONTACT ──────────────────────────────────────────── */
+        .contact-section { background: #3498db; color: white; text-align: center; }
+        .contact-section h2 { color: white; border-bottom: 2px solid rgba(255,255,255,0.3); }
+        .contact-info { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 2rem; }
+        .contact-item { background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 10px; }
+        .contact-item h4 { margin-bottom: 0.5rem; font-size: 1.1rem; }
+        .contact-item a { color: white; text-decoration: none; }
+        .contact-item a:hover { text-decoration: underline; }
+        footer { background: #2c3e50; color: white; text-align: center; padding: 2rem 0; margin-top: 3rem; }
+        .loading { text-align: center; padding: 3rem; color: #7f8c8d; font-size: 1.2rem; }
+
         @media (max-width: 768px) {
-            .hero h1 { font-size: 1.8rem; }
-            .about-content { grid-template-columns: 1fr; }
-            .nav-links li { display: block; margin: 0.5rem 0; }
+            .nav-links { gap: 1rem; }
+            .logo { font-size: 1.2rem; }
+            .hero h1 { font-size: 2rem; }
+            .about-content-wrapper { flex-direction: column; align-items: center; }
+            .author-photo { width: 150px; height: 150px; }
+            .books-grid { grid-template-columns: 1fr; }
+            .section { padding: 1.5rem; }
         }
     </style>
 </head>
 <body>
-    <div class="hero">
-        <h1>🖊️ Frédéric Sarboni Sanchez</h1>
-        <p>Auteur - Écrivain - Conteur</p>
+<header>
+    <nav class="container">
+        <div class="logo" id="site-logo">Frédéric Sarboni Sanchez</div>
         <ul class="nav-links">
-            <li><a href="#" onclick="showTab('accueil'); return false;">Accueil</a></li>
-            <li><a href="#" onclick="showTab('a-propos'); return false;">À propos</a></li>
-            <li><a href="#" onclick="showTab('livres'); return false;">Mes Livres</a></li>
-            <li><a href="#" onclick="showTab('actualites'); return false;">Actualités</a></li>
-            <li><a href="#" onclick="showTab('nouvelles'); return false;">Nouvelles gratuites</a></li>
-            <li><a href="#" onclick="showTab('contact'); return false;">Contact</a></li>
+            <li><a href="#accueil">Accueil</a></li>
+            <li><a href="#a-propos">À propos</a></li>
+            <li><a href="#livres">Mes Livres</a></li>
+            <li><a href="#actualites">Actualités</a></li>
+            <li><a href="#nouvelles">Nouvelles gratuites</a></li>
+            <li><a href="#contact">Contact</a></li>
         </ul>
-    </div>
+    </nav>
+</header>
 
-    <div id="loading">
-        <p>Chargement en cours...</p>
-    </div>
+<main class="container">
+    <div class="loading" id="loading">Chargement...</div>
 
-    <!-- ACCUEIL -->
-    <section id="accueil" class="section" style="display: none;">
-        <h2>Bienvenue</h2>
-        <p>Découvrez l'univers littéraire de Frédéric Sarboni Sanchez - romancier, nouvelliste, conteur d'histoires qui font rêver, réfléchir et vibrer.</p>
+    <section id="accueil" class="hero" style="display:none;">
+        <h1 id="hero-title">Bienvenu dans mon espace littéraire</h1>
     </section>
 
-    <!-- À PROPOS -->
-    <section id="a-propos" class="section" style="display: none;">
-        <h2>À propos de moi</h2>
-        <div id="auteur-container"></div>
+    <a href="#nouvelles" id="bandeau-nouvelles" style="display:none; align-items: center; justify-content: space-between; background: #2c3e50; border-radius: 12px; padding: 1.1rem 1.75rem; text-decoration: none; margin-bottom: 2rem;">
+        <div style="display: flex; align-items: center; gap: 14px;">
+            <div>
+                <p style="margin: 0; font-size: 15px; font-weight: 600; color: #ffffff;">Nouvelles gratuites à télécharger</p>
+                <p style="margin: 0; font-size: 13px; color: #b0c4d8;">Polar · Fantastique · Drame · Humour · et plus</p>
+            </div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.12); border-radius: 20px; padding: 6px 14px; flex-shrink: 0;">
+            <span style="font-size: 13px; font-weight: 500; color: #ffffff;">Accéder</span>
+            <span style="font-size: 16px; color: #ffffff;">→</span>
+        </div>
+    </a>
+
+    <section id="a-propos" class="section" style="display:none;">
+        <h2>À propos</h2>
+        <div class="about-content-wrapper">
+            <img id="author-photo" src="" alt="Frédéric Sarboni Sanchez" class="author-photo">
+            <div class="about-text"><p id="author-bio"></p></div>
+        </div>
     </section>
 
-    <!-- LIVRES -->
-    <section id="livres" class="section" style="display: none;">
+    <section id="livres" class="section" style="display:none;">
         <h2>Mes Livres</h2>
         <div class="books-grid" id="books-container"></div>
     </section>
 
-    <!-- ACTUALITÉS -->
-    <section id="actualites" class="section" style="display: none;">
+    <section id="actualites" class="section" style="display:none;">
         <h2>Actualités</h2>
         <div id="news-container"></div>
     </section>
 
-    <!-- NOUVELLES GRATUITES -->
-    <section id="nouvelles" class="section" style="display: none;">
+    <section id="nouvelles" class="section" style="display:none;">
         <h2>📖 Nouvelles en accès libre</h2>
-        <p style="margin-bottom: 2rem; text-align: center; font-size: 1.1rem;">Découvrez gratuitement quelques-unes de mes nouvelles</p>
+        <p style="margin-bottom:1.2rem;color:#555;">Choisissez votre genre et téléchargez gratuitement.</p>
+
+        <div class="filtres-wrapper" id="filtres-container">
+            <span>Filtrer :</span>
+        </div>
+
+        <div class="nouvelles-search">
+            <input type="text" id="recherche-nouvelles" placeholder="🔍 Rechercher par titre ou mot-clé…" oninput="appliquerFiltres()">
+        </div>
+
         <div class="nouvelles-grid" id="nouvelles-container"></div>
     </section>
 
-    <!-- CONTACT -->
-    <section id="contact" class="section contact-section" style="display: none;">
+    <section id="contact" class="section contact-section" style="display:none;">
         <h2>Contact</h2>
-        <div id="contact-container"></div>
+        <p style="margin-bottom:2rem;">N'hésitez pas à me contacter pour toute question, collaboration ou simplement pour échanger autour de la littérature.</p>
+        <div class="contact-info" id="contact-container"></div>
     </section>
+</main>
 
-    <script>
-        let data = {};
+<footer>
+    <div class="container">
+        <p>&copy; 2025 - <span id="footer-name">Frédéric Sarboni Sanchez</span>. Tous droits réservés.</p>
+    </div>
+</footer>
 
-        async function loadData() {
-            try {
-                const response = await fetch('data.json');
-                data = await response.json();
-                
-                // Afficher l'auteur
-                const auteurContainer = document.getElementById('auteur-container');
-                auteurContainer.innerHTML = `
-                    <div class="about-content">
-                        <img src="${data.auteur.photo}" alt="${data.auteur.nom}" class="about-photo">
-                        <div class="about-text">
-                            <h3>${data.auteur.nom}</h3>
-                            <p>${data.auteur.bio}</p>
-                        </div>
-                    </div>
-                `;
-                
-                // Afficher les livres
-                const booksContainer = document.getElementById('books-container');
-                booksContainer.innerHTML = data.livres.map(livre => `
-                    <div class="book-card">
-                        <img src="${livre.image}" alt="${livre.titre}">
-                        <h3>${livre.titre}</h3>
-                        <div class="year">${livre.annee}</div>
-                        <p>${livre.description}</p>
-                    </div>
-                `).join('');
-                
-                // Afficher les actualités
-                const newsContainer = document.getElementById('news-container');
-                newsContainer.innerHTML = data.actualites.map(actu => `
-                    <div class="news-item">
-                        <h3>${actu.titre}</h3>
-                        <div class="date">${actu.date}</div>
-                        <p>${actu.contenu}</p>
-                    </div>
-                `).join('');
-                
-                // Afficher les nouvelles gratuites
-                const nouvellesContainer = document.getElementById('nouvelles-container');
-                if (data.nouvelles_gratuites && data.nouvelles_gratuites.length > 0) {
-                    nouvellesContainer.innerHTML = data.nouvelles_gratuites.map((nouvelle, index) => `
-                        <div class="nouvelle-card">
-                            <h3>${nouvelle.titre}</h3>
-                            <div class="sous-titre">${nouvelle.sous_titre}</div>
-                            <div class="description">${nouvelle.description}</div>
-                            <a href="${nouvelle.fichier}" download class="btn-download" onclick="trackDownload('${nouvelle.titre}', '${nouvelle.fichier}')">Télécharger gratuitement</a>
-                        </div>
-                    `).join('');
-                }
-                
-                // Afficher les contacts
-                const contactContainer = document.getElementById('contact-container');
-                contactContainer.innerHTML = `
-                    <div class="contact-info">
-                        <p>📧 <a href="mailto:${data.contact.email}">${data.contact.email}</a></p>
-                        <p>📱 <a href="${data.contact.facebook}" target="_blank">Suivez-moi sur Facebook</a></p>
-                        <p>${data.contact.rencontres}</p>
-                    </div>
-                `;
-                
-                // Masquer le chargement et afficher les sections
-                document.getElementById('loading').style.display = 'none';
-                document.getElementById('accueil').style.display = 'block';
-                
-            } catch (error) {
-                document.getElementById('loading').innerHTML = `
-                    <p style="color: #e74c3c;">Erreur lors du chargement des données.</p>
-                    <p style="font-size: 0.9rem;">Assurez-vous que le fichier data.json est présent.</p>
-                `;
-                console.error('Erreur:', error);
-            }
+<script>
+// ── CONFIG GENRES ────────────────────────────────────────────────────────
+const GENRES_CONFIG = [
+    { label: "Polar",               key: "Polar",               css: "filtre-Polar",        badge: "genre-Polar",       emoji: "🔍" },
+    { label: "Fantastique",         key: "Fantastique",         css: "filtre-Fantastique",  badge: "genre-Fantastique", emoji: "🌊" },
+    { label: "Romance SF",          key: "Romance SF",          css: "filtre-Romance-SF",   badge: "genre-Romance-SF",  emoji: "💌" },
+    { label: "Drame",               key: "Drame",               css: "filtre-Drame",        badge: "genre-Drame",       emoji: "💙" },
+    { label: "Mémoire / Transmission", key: "Mémoire / Transmission", css: "filtre-Memoire", badge: "genre-Memoire",  emoji: "🌍" },
+    { label: "Humour",              key: "Humour",              css: "filtre-Humour",       badge: "genre-Humour",      emoji: "😄" },
+    { label: "Aventure",            key: "Aventure",            css: "filtre-Aventure",     badge: "genre-Aventure",    emoji: "⚔️" },
+    { label: "Contemplatif",        key: "Contemplatif",        css: "filtre-Contemplatif", badge: "genre-Contemplatif",emoji: "☁️" },
+    { label: "Cosy Mystery",        key: "Cosy Mystery",        css: "filtre-Cosy-Mystery", badge: "genre-Cosy-Mystery", emoji: "🍵" }
+];
+
+// ── ÉTAT ─────────────────────────────────────────────────────────────────
+let toutesLesNouvelles = [];
+let genreActif = "Tous";
+
+// ── COMPTEUR LOCAL ────────────────────────────────────────────────────────
+const STORAGE_KEY = 'fss_dl_counts';
+function getLocalCounts() { try { return JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}'); } catch(e){ return {}; } }
+function incrementLocalCount(fichier) {
+    const counts = getLocalCounts();
+    const key = fichier.split('/').pop();
+    counts[key] = (counts[key]||0) + 1;
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(counts)); } catch(e){}
+    return counts[key];
+}
+function getLocalCount(fichier) { return getLocalCounts()[fichier.split('/').pop()] || 0; }
+
+// ── CHARGEMENT ────────────────────────────────────────────────────────────
+async function loadData() {
+    try {
+        const response = await fetch('data.json');
+        const data = await response.json();
+
+        document.getElementById('page-title').textContent = data.site.title;
+        document.getElementById('page-description').content = data.site.description;
+        document.getElementById('site-logo').textContent = data.auteur.nom;
+        document.getElementById('footer-name').textContent = data.auteur.nom;
+        document.getElementById('author-photo').src = data.auteur.photo;
+        document.getElementById('author-bio').textContent = data.auteur.bio;
+
+        // Livres
+        document.getElementById('books-container').innerHTML = data.livres.map(l => `
+            <div class="book-card">
+                <img src="${l.image}" alt="${l.titre}" class="book-image">
+                <div class="book-content">
+                    <h3>${l.titre}</h3>
+                    <div class="date">${l.annee}</div>
+                    <p>${l.description}</p>
+                </div>
+            </div>`).join('');
+
+        // Actualités
+        document.getElementById('news-container').innerHTML = data.actualites.map(a => `
+            <div class="news-item">
+                <h3>${a.titre}</h3>
+                <div class="date">${a.date}</div>
+                <p>${a.contenu}</p>
+            </div>`).join('');
+
+        // Nouvelles
+        if (data.nouvelles_gratuites && data.nouvelles_gratuites.length > 0) {
+            toutesLesNouvelles = data.nouvelles_gratuites;
+            construireFiltres();
+            afficherNouvelles(toutesLesNouvelles);
         }
 
-        // Fonction pour tracker les téléchargements
-        function trackDownload(titre, fichier) {
-            // GoatCounter
-            if (window.goatcounter) {
-                window.goatcounter.count({
-                    path: '/download/' + fichier.split('/').pop(),
-                    title: 'Téléchargement: ' + titre,
-                    event: true
-                });
-            }
-            
-            // Enregistrement local
-            enregistrerTelechargement(titre, fichier);
-        }
+        // Contact
+        document.getElementById('contact-container').innerHTML = `
+            <div class="contact-item"><h4>Email</h4><p><a href="mailto:${data.contact.email}">${data.contact.email}</a></p></div>
+            <div class="contact-item"><h4>Facebook</h4><p><a href="${data.contact.facebook}" target="_blank" rel="noopener">facebook.com/frederic.sarboni</a></p></div>
+            <div class="contact-item"><h4>Rencontres</h4><p>${data.contact.rencontres}</p></div>
+            <div class="contact-item"><h4>Commander mes ouvrages</h4><p><a href="mailto:${data.contact.email}?subject=Commande d'ouvrages">Me contacter pour commander</a></p></div>`;
 
-        function enregistrerTelechargement(titre, fichier) {
-            // Récupère la date et heure
-            const maintenant = new Date();
-            const date = maintenant.toISOString().split('T')[0];
-            const heure = maintenant.toTimeString().split(' ')[0];
-            
-            // Détecte le navigateur
-            const navigateur = navigator.userAgent.includes('Chrome') ? 'Chrome' : 
-                              navigator.userAgent.includes('Firefox') ? 'Firefox' : 
-                              navigator.userAgent.includes('Safari') ? 'Safari' : 
-                              navigator.userAgent.includes('Edge') ? 'Edge' : 'Autre';
-            
-            // Pays (on met France par défaut, peut être amélioré avec une API)
-            const pays = 'Non spécifié';
-            
-            // Crée l'objet à enregistrer
-            const telechargement = {
-                id: Date.now(),
-                nouvelle: fichier.split('/').pop(),
-                titre: titre,
-                date: date,
-                heure: heure,
-                navigateur: navigateur,
-                pays: pays
-            };
-            
-            // Log en console (pour vérification)
-            console.log('Téléchargement enregistré:', telechargement);
-            
-            // Essaie d'envoyer à votre serveur (optionnel)
-            // Si vous avez un backend, c'est ici qu'on l'enverrait
-        }
+        document.getElementById('loading').style.display = 'none';
+        document.querySelectorAll('.hero, .section').forEach(s => s.style.display = 'block');
+        const bandeau = document.getElementById('bandeau-nouvelles');
+        bandeau.style.display = 'flex';
 
-        function showTab(tabName) {
-            // Masquer toutes les sections
-            const sections = document.querySelectorAll('.section');
-            sections.forEach(section => section.style.display = 'none');
-            
-            // Afficher la section choisie
-            const tab = document.getElementById(tabName);
-            if (tab) {
-                tab.style.display = 'block';
-                window.scrollTo(0, 0);
-            }
-        }
+    } catch(error) {
+        document.getElementById('loading').innerHTML = `
+            <p style="color:#e74c3c;">Erreur lors du chargement des données.</p>
+            <p style="font-size:0.9rem;">Assurez-vous que le fichier data.json est présent.</p>`;
+    }
+}
 
-        // Charger les données au démarrage
-        loadData();
-    </script>
+// ── FILTRES ───────────────────────────────────────────────────────────────
+function construireFiltres() {
+    const container = document.getElementById('filtres-container');
 
-    <!-- GoatCounter - Compteur de visites -->
-    <script data-goatcounter="https://fsarboni.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+    // Bouton "Tous"
+    const btnTous = document.createElement('button');
+    btnTous.className = 'filtre-btn filtre-tous actif';
+    btnTous.textContent = 'Tous (' + toutesLesNouvelles.length + ')';
+    btnTous.dataset.genre = 'Tous';
+    btnTous.onclick = () => setGenre('Tous');
+    container.appendChild(btnTous);
+
+    // Boutons par genre (seulement ceux présents dans les données)
+    GENRES_CONFIG.forEach(gc => {
+        const count = toutesLesNouvelles.filter(n => n.genre === gc.key).length;
+        if (count === 0) return;
+        const btn = document.createElement('button');
+        btn.className = 'filtre-btn ' + gc.css;
+        btn.textContent = gc.emoji + ' ' + gc.label + ' (' + count + ')';
+        btn.dataset.genre = gc.key;
+        btn.onclick = () => setGenre(gc.key);
+        container.appendChild(btn);
+    });
+}
+
+function setGenre(genre) {
+    genreActif = genre;
+    // Mettre à jour état visuel des boutons
+    document.querySelectorAll('.filtre-btn').forEach(btn => {
+        btn.classList.toggle('actif', btn.dataset.genre === genre);
+    });
+    appliquerFiltres();
+}
+
+function appliquerFiltres() {
+    const q = document.getElementById('recherche-nouvelles').value.toLowerCase().trim();
+    let liste = toutesLesNouvelles;
+    if (genreActif !== 'Tous') liste = liste.filter(n => n.genre === genreActif);
+    if (q) liste = liste.filter(n =>
+        n.titre.toLowerCase().includes(q) ||
+        (n.sous_titre||'').toLowerCase().includes(q) ||
+        n.description.toLowerCase().includes(q)
+    );
+    afficherNouvelles(liste);
+}
+
+// ── AFFICHAGE CARTES ──────────────────────────────────────────────────────
+function badgePourGenre(genre) {
+    const gc = GENRES_CONFIG.find(g => g.key === genre);
+    if (!gc) return '';
+    return `<span class="genre-badge ${gc.badge}">${gc.emoji} ${genre}</span>`;
+}
+
+function afficherNouvelles(liste) {
+    const container = document.getElementById('nouvelles-container');
+    if (liste.length === 0) {
+        container.innerHTML = '<div class="no-result">Aucune nouvelle ne correspond à votre sélection.</div>';
+        return;
+    }
+    container.innerHTML = liste.map(n => {
+        const count = getLocalCount(n.fichier);
+        const countLabel = count > 0
+            ? `<span class="dl-count">Téléchargé <span>${count}</span> fois sur cet appareil</span>`
+            : '';
+        return `
+        <div class="nouvelle-card">
+            ${badgePourGenre(n.genre)}
+            <h3>${n.titre}</h3>
+            <div class="sous-titre">${n.sous_titre||''}</div>
+            <div class="description">${n.description}</div>
+            <div class="btn-download-wrap">
+                <button class="btn-download" onclick="telecharger('${n.titre.replace(/'/g,"\\'")}','${n.fichier}',this)">
+                    📥 Télécharger gratuitement
+                </button>
+                ${countLabel}
+            </div>
+        </div>`;
+    }).join('');
+}
+
+// ── TÉLÉCHARGEMENT + TRACKING ─────────────────────────────────────────────
+function telecharger(titre, fichier, btn) {
+    const a = document.createElement('a');
+    a.href = fichier;
+    a.download = fichier.split('/').pop();
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+
+    const count = incrementLocalCount(fichier);
+
+    const wrap = btn.closest('.btn-download-wrap');
+    let badge = wrap.querySelector('.dl-count');
+    if (!badge) { badge = document.createElement('span'); badge.className = 'dl-count'; wrap.appendChild(badge); }
+    badge.innerHTML = `Téléchargé <span>${count}</span> fois sur cet appareil`;
+
+    const nomFichier = fichier.split('/').pop();
+    
+    // GoatCounter - Suivi des visites
+    if (window.goatcounter && window.goatcounter.count) {
+        window.goatcounter.count({
+            path: '/download/' + nomFichier,
+            title: 'Téléchargement : ' + titre,
+            event: true
+        });
+    }
+    
+    // Enregistrement local dans analytics
+    enregistrerTelechargement(titre, fichier);
+}
+
+function enregistrerTelechargement(titre, fichier) {
+    // Récupère la date et heure
+    const maintenant = new Date();
+    const date = maintenant.toISOString().split('T')[0];
+    const heure = maintenant.toTimeString().split(' ')[0];
+    
+    // Détecte le navigateur
+    const navigateur = navigator.userAgent.includes('Chrome') ? 'Chrome' : 
+                      navigator.userAgent.includes('Firefox') ? 'Firefox' : 
+                      navigator.userAgent.includes('Safari') ? 'Safari' : 
+                      navigator.userAgent.includes('Edge') ? 'Edge' : 'Autre';
+    
+    // Pays (on met Non spécifié par défaut)
+    const pays = 'Non spécifié';
+    
+    // Crée l'objet à enregistrer
+    const telechargement = {
+        id: Date.now(),
+        nouvelle: fichier.split('/').pop(),
+        titre: titre,
+        date: date,
+        heure: heure,
+        navigateur: navigateur,
+        pays: pays
+    };
+    
+    // Log en console (pour vérification)
+    console.log('Téléchargement enregistré:', telechargement);
+}
+
+loadData();
+</script>
+
+<script data-goatcounter="https://fsarboni.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
