@@ -396,6 +396,38 @@
       "genre": "Cosy Mystery",
       "description": "Chaque mardi matin, un livre sans code-barres réapparaît sur le chariot des retours de la médiathèque des Capucins. Joséphine Coat, bibliothécaire depuis trente-deux ans, remarque que les pages cornées portent toujours la date du lendemain — et le portrait intime de quelqu'un qui va mourir seul.",
       "fichier": "nouvelles/Le_Cahier_des_Absents.pdf"
+    },
+    {
+      "id": 37,
+      "titre": "Les Pigeons Mécaniques",
+      "sous_titre": "L’Horlogère de Londres",
+      "genre": "Steampunk",
+      "description": "Dans le Londres victorien, Victoria Blackwood surveille la ville grâce à ses pigeons de laiton aux yeux de verre. Quand ses créatures disparaissent une à une, remplacées par des modèles plus perfectionnés que les siens, elle remonte la piste — et trouve au bout quelqu'un qui connaît ses secrets mieux qu'elle ne le croyait possible.",
+      "fichier": "nouvelles/Les_Pigeons_Mecaniques.pdf"
+    },
+    {
+      "id": 38,
+      "titre": "Le Retour des Goélands",
+      "sous_titre": "Ce qu’on n’attend plus",
+      "genre": "Romance",
+      "description": "Depuis la disparition de son mari en mer, Marianne tient sa librairie brestoise comme on tient une promesse — sans trop savoir à qui. Chaque vendredi, un homme revient acheter un livre qu'il a déjà lu. Le troisième vendredi, elle lui demande pourquoi. ",
+      "fichier": "nouvelles/Le_Retour_des_Goelands.pdf"
+    },
+    {
+      "id": 39,
+      "titre": "La Nuit du Grand Phare",
+      "sous_titre": "Ce que la mer garde pour elle",
+      "genre": "Aventure",
+      "description": "À deux heures du matin, la vieille radio d'Yves Kerambrun, ancien gardien du Créac'h retraité à Ouessant, capte un SOS sur une fréquence morte depuis 1943. Un homme, une voie d'eau, un mousse de seize ans au large de la pointe de Pern. Kerambrun répond et note tout — parce que c'est ce qu'il a toujours fait.",
+      "fichier": "nouvelles/La_Nuit_du_Grand_Phare.pdf"
+    },
+    {
+      "id": 40,
+      "titre": "",
+      "sous_titre": "",
+      "genre": "Imaginaire",
+      "description": "",
+      "fichier": "nouvelles/"
     }
   ],
   "actualites": [
