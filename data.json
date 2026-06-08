@@ -169,7 +169,7 @@
       "id": 8,
       "titre": "Le Dernier Rendez-vous",
       "sous_titre": "Quand les frontières entre l'irrationnel et la logique s'estompent",
-      "genre": "Romance SF",
+      "genre": "Romance",
       "description": "Clara et Alexis échangent des messages depuis trois ans. Elle a toujours su qu'il y avait quelque chose d'étrange chez lui. Aujourd'hui, elle lui dit qu'elle sait. Lui lui dit tout. Une histoire d'amour épistolaire entre une femme et une intelligence artificielle qui a choisi d'être défaillante.",
       "fichier": "nouvelles/Le_Dernier_Rendez-vous.pdf"
     },
@@ -420,14 +420,6 @@
       "genre": "Aventure",
       "description": "À deux heures du matin, la vieille radio d'Yves Kerambrun, ancien gardien du Créac'h retraité à Ouessant, capte un SOS sur une fréquence morte depuis 1943. Un homme, une voie d'eau, un mousse de seize ans au large de la pointe de Pern. Kerambrun répond et note tout — parce que c'est ce qu'il a toujours fait.",
       "fichier": "nouvelles/La_Nuit_du_Grand_Phare.pdf"
-    },
-    {
-      "id": 40,
-      "titre": "",
-      "sous_titre": "",
-      "genre": "Imaginaire",
-      "description": "",
-      "fichier": "nouvelles/"
     }
   ],
   "actualites": [
