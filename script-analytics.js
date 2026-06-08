@@ -9,9 +9,9 @@ const https = require('https');
 const fs = require('fs');
 const path = require('path');
 
-const OUTPUT_FILE = path.join(__dirname, '..', 'analytics', 'stats.json');
-const DATA_FILE = path.join(__dirname, '..', 'data.json');
-const HISTORY_FILE = path.join(__dirname, '..', 'analytics', 'history.json');
+const OUTPUT_FILE = path.join(__dirname, 'analytics', 'stats.json');
+const DATA_FILE = path.join(__dirname, 'data.json');
+const HISTORY_FILE = path.join(__dirname, 'analytics', 'history.json');
 
 // Charger dynamiquement toutes les nouvelles depuis data.json
 let NOUVELLES = {};
