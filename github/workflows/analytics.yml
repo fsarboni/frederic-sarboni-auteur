@@ -1,1 +1,40 @@
 
+yaml
+name: 📊 Mise à jour des statistiques GoatCounter
+
+on:
+  schedule:
+    - cron: '0 8 * * *'
+  
+  workflow_dispatch:
+
+jobs:
+  analytics:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: 📥 Cloner le repository
+        uses: actions/checkout@v3
+      
+      - name: 📦 Installer Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      
+      - name: 🔍 Récupérer les statistiques
+        run: |
+          cd .github/workflows
+          node ../../script-analytics.js
+      
+      - name: 📤 Commit et push les changements
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          
+          if [ -n "$(git status --porcelain)" ]; then
+            git add analytics/stats.json
+            git commit -m "📊 Mise à jour automatique des statistiques $(date '+%Y-%m-%d %H:%M:%S')"
+            git push
+          else
+            echo "✅ Pas de changements à commiter"
+          fi
