@@ -10,9 +10,9 @@ const fs = require('fs');
 const path = require('path');
 
 // CHEMINS CORRECTS (à la racine)
-const DATA_FILE = path.join(__dirname, 'data.json');
-const OUTPUT_FILE = path.join(__dirname, 'analytics', 'stats.json');
-const HISTORY_FILE = path.join(__dirname, 'analytics', 'history.json');
+const DATA_FILE = path.join(process.cwd(), 'data.json');
+const OUTPUT_FILE = path.join(process.cwd(), 'analytics', 'stats.json');
+const HISTORY_FILE = path.join(process.cwd(), 'analytics', 'history.json');
 
 let NOUVELLES = {};
 
