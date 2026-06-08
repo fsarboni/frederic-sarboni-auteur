@@ -1,1 +1,13 @@
 
+{
+  "name": "analytics-goatcounter",
+  "version": "1.0.0",
+  "description": "Script d'extraction automatique des statistiques GoatCounter",
+  "main": "script-analytics.js",
+  "scripts": {
+    "analytics": "node script-analytics.js"
+  },
+  "keywords": ["analytics", "goatcounter", "automation"],
+  "author": "",
+  "license": "MIT"
+}
