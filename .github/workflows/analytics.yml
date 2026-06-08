@@ -1,23 +1,20 @@
 name: Analytics Update
-
 on:
   schedule:
     - cron: '0 8 * * *'
   workflow_dispatch:
-
 jobs:
   update:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: '18'
-      - run: echo "PWD=$(pwd)" && ls -la
+          node-version: '20'
       - run: node script-analytics.js
+      - run: |
           git config user.email "action@github.com"
           git config user.name "GitHub Action"
           git add analytics/ 2>/dev/null || true
           git commit -m "Update analytics" || true
           git push || true
-
