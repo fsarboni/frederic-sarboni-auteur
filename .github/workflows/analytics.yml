@@ -13,8 +13,8 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '18'
+      - run: echo "PWD=$(pwd)" && ls -la
       - run: node script-analytics.js
-      - run: |
           git config user.email "action@github.com"
           git config user.name "GitHub Action"
           git add analytics/ 2>/dev/null || true
