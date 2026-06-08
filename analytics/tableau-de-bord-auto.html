@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📊 Tableau de Bord Analytique - Auto</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        header {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        header h1 {
+            color: #667eea;
+            margin-bottom: 0.5rem;
+            font-size: 2.5rem;
+        }
+        
+        header p {
+            color: #666;
+            font-size: 1.05rem;
+        }
+        
+        .status {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            color: #2e7d32;
+        }
+        
+        .status.loading {
+            background: #fff3cd;
+            border-left-color: #ff9800;
+            color: #856404;
+        }
+        
+        .stats-overview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-left: 5px solid #667eea;
+            transition: transform 0.3s;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .stat-card.accent1 { border-left-color: #667eea; }
+        .stat-card.accent2 { border-left-color: #764ba2; }
+        .stat-card.accent3 { border-left-color: #f093fb; }
+        .stat-card.accent4 { border-left-color: #4facfe; }
+        
+        .stat-card h3 {
+            color: #666;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 0.3rem;
+        }
+        
+        .stat-label {
+            color: #999;
+            font-size: 0.85rem;
+        }
+        
+        .ranking-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .ranking-section h2 {
+            color: #667eea;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+        
+        .ranking-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem;
+            border-bottom: 1px solid #eee;
+            transition: background 0.3s;
+        }
+        
+        .ranking-item:hover {
+            background: #f8f9fa;
+        }
+        
+        .ranking-item:last-child {
+            border-bottom: none;
+        }
+        
+        .ranking-position {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #667eea;
+            width: 50px;
+            text-align: center;
+        }
+        
+        .ranking-title {
+            flex: 1;
+            color: #2c3e50;
+            font-weight: 500;
+            font-size: 1.05rem;
+        }
+        
+        .ranking-count {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        
+        .chart-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .chart-section h2 {
+            color: #667eea;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+        
+        .chart-container {
+            position: relative;
+            height: 400px;
+        }
+        
+        .insights {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+        }
+        
+        .insights h3 {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        .insights p {
+            line-height: 1.6;
+            opacity: 0.95;
+        }
+        
+        .last-update {
+            font-size: 0.85rem;
+            color: #999;
+            text-align: center;
+            margin-top: 1rem;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            color: #666;
+        }
+        
+        @media (max-width: 768px) {
+            header h1 { font-size: 1.8rem; }
+            .stat-number { font-size: 1.8rem; }
+            .chart-container { height: 300px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📊 Tableau de Bord Analytique</h1>
+            <p>Vos statistiques se mettent à jour automatiquement chaque jour</p>
+        </header>
+
+        <div id="status" class="status loading">
+            <p>⏳ Chargement des données...</p>
+        </div>
+
+        <div id="main-content">
+            <div class="loading">
+                <p>⏳ Initialisation...</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function loadAnalytics() {
+            try {
+                console.log('📥 Récupération des données...');
+                
+                // Charger les statistiques depuis stats.json
+                const response = await fetch('../analytics/stats.json?t=' + Date.now());
+                
+                if (!response.ok) {
+                    throw new Error('Données non disponibles (première exécution ?)');
+                }
+                
+                const data = await response.json();
+                displayDashboard(data);
+                updateStatus('✅ Données mises à jour: ' + new Date(data.dernièreMiseAJour).toLocaleString('fr-FR'), 'success');
+                
+            } catch (error) {
+                console.error('Erreur:', error);
+                showPlaceholder();
+                updateStatus('⚠️ Données en cours de chargement (première exécution)...', 'info');
+            }
+        }
+
+        function updateStatus(message, type = 'info') {
+            const status = document.getElementById('status');
+            status.textContent = message;
+            status.className = 'status';
+            if (type === 'success') {
+                status.style.background = '#e8f5e9';
+                status.style.borderLeftColor = '#4caf50';
+                status.style.color = '#2e7d32';
+            } else if (type === 'info') {
+                status.style.background = '#fff3cd';
+                status.style.borderLeftColor = '#ff9800';
+                status.style.color = '#856404';
+            }
+        }
+
+        function displayDashboard(data) {
+            const total = data.total || 0;
+            const classement = data.classement || [];
+            const meilleur = classement.length > 0 ? classement[0] : null;
+
+            const html = `
+                <div class="stats-overview">
+                    <div class="stat-card accent1">
+                        <h3>📥 Total Téléchargements</h3>
+                        <div class="stat-number">${total}</div>
+                        <div class="stat-label">depuis le début</div>
+                    </div>
+                    
+                    <div class="stat-card accent2">
+                        <h3>📚 Nouvelles</h3>
+                        <div class="stat-number">6</div>
+                        <div class="stat-label">disponibles</div>
+                    </div>
+                    
+                    <div class="stat-card accent3">
+                        <h3>🏆 Meilleure</h3>
+                        <div class="stat-number">${meilleur ? meilleur.telecharges : 0}</div>
+                        <div class="stat-label">${meilleur ? meilleur.titre : 'N/A'}</div>
+                    </div>
+                    
+                    <div class="stat-card accent4">
+                        <h3>🔄 Mise à jour</h3>
+                        <div class="stat-number">Auto</div>
+                        <div class="stat-label">chaque jour 8h</div>
+                    </div>
+                </div>
+
+                <div class="ranking-section">
+                    <h2>🏆 Classement des Nouvelles</h2>
+                    ${classement.map((item, index) => `
+                        <div class="ranking-item">
+                            <div class="ranking-position">${index + 1}</div>
+                            <div class="ranking-title">${item.titre}</div>
+                            <div class="ranking-count">${item.telecharges} ⬇️</div>
+                        </div>
+                    `).join('')}
+                    <div class="last-update">
+                        Mise à jour: ${new Date(data.dernièreMiseAJour).toLocaleDateString('fr-FR', {
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric',
+                            hour: '2-digit',
+                            minute: '2-digit'
+                        })}
+                    </div>
+                </div>
+
+                <div class="insights">
+                    <h3>✨ Fonctionnement Automatisé</h3>
+                    <p>
+                        Ce tableau de bord se met à jour <strong>automatiquement chaque jour à 8h du matin</strong> 
+                        sans aucune intervention manuelle ! 🚀<br><br>
+                        
+                        Les données proviennent directement de votre compte GoatCounter. Vous pouvez mesurer 
+                        l'impact de vos campagnes Facebook en comparant les chiffres jour après jour.
+                    </p>
+                </div>
+            `;
+            
+            document.getElementById('main-content').innerHTML = html;
+        }
+
+        function showPlaceholder() {
+            const html = `
+                <div class="insights" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                    <h3>⏳ Installation en cours...</h3>
+                    <p>
+                        Le tableau de bord se configure pour la première fois. Cela peut prendre quelques minutes.<br><br>
+                        <strong>À faire :</strong><br>
+                        ✓ Le script s'exécutera automatiquement chaque jour<br>
+                        ✓ Les données GoatCounter seront récupérées<br>
+                        ✓ Ce tableau de bord se remplira automatiquement
+                    </p>
+                </div>
+
+                <div class="ranking-section">
+                    <h2>🏆 Vos Nouvelles</h2>
+                    <p style="color: #999; text-align: center; padding: 2rem;">
+                        Les statistiques apparaîtront dès que le système aura récupéré vos données GoatCounter...<br>
+                        <small>Cela peut prendre 5-10 minutes après installation</small>
+                    </p>
+                </div>
+            `;
+            
+            document.getElementById('main-content').innerHTML = html;
+        }
+
+        // Charger au démarrage
+        loadAnalytics();
+        
+        // Recharger toutes les heures
+        setInterval(loadAnalytics, 3600000);
+    </script>
+</body>
+</html>
