@@ -155,25 +155,6 @@
             font-size: 1.1rem;
         }
         
-        .chart-section {
-            background: white;
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            margin-bottom: 2rem;
-        }
-        
-        .chart-section h2 {
-            color: #667eea;
-            margin-bottom: 1.5rem;
-            font-size: 1.5rem;
-        }
-        
-        .chart-container {
-            position: relative;
-            height: 400px;
-        }
-        
         .insights {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
@@ -208,7 +189,6 @@
         @media (max-width: 768px) {
             header h1 { font-size: 1.8rem; }
             .stat-number { font-size: 1.8rem; }
-            .chart-container { height: 300px; }
         }
     </style>
 </head>
@@ -272,6 +252,7 @@
             const total = data.total || 0;
             const classement = data.classement || [];
             const meilleur = classement.length > 0 ? classement[0] : null;
+            const nombreNouvelles = classement.length;
 
             const html = `
                 <div class="stats-overview">
@@ -283,7 +264,7 @@
                     
                     <div class="stat-card accent2">
                         <h3>📚 Nouvelles</h3>
-                        <div class="stat-number">6</div>
+                        <div class="stat-number">${nombreNouvelles}</div>
                         <div class="stat-label">disponibles</div>
                     </div>
                     
