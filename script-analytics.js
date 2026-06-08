@@ -3,24 +3,40 @@
 /**
  * Script d'extraction des statistiques GoatCounter
  * S'exécute automatiquement chaque jour via GitHub Actions
+ * 
+ * Récupère DYNAMIQUEMENT toutes les nouvelles depuis data.json
  */
 
 const https = require('https');
 const fs = require('fs');
 const path = require('path');
 
-const SITE = 'fsarboni';
 const OUTPUT_FILE = path.join(__dirname, '..', 'analytics', 'stats.json');
+const DATA_FILE = path.join(__dirname, '..', 'data.json');
 
-// Données des nouvelles
-const NOUVELLES = {
-  'Le_Dernier_Rendez-vous.pdf': 'Le Dernier Rendez-vous',
-  'Celle_qui_savait_lire.pdf': 'Celle qui savait lire',
-  'Le_Dernier_Sourire.pdf': 'Le Dernier Sourire',
-  'Le_Choix_du_Programmeur.pdf': 'Le Choix du Programmeur',
-  'Le_Gardien_des_Songes.pdf': 'Le Gardien des Songes',
-  'A_la_carte.pdf': 'À la carte'
-};
+// Charger dynamiquement toutes les nouvelles depuis data.json
+let NOUVELLES = {};
+
+function loadNouvelles() {
+  try {
+    if (fs.existsSync(DATA_FILE)) {
+      const data = JSON.parse(fs.readFileSync(DATA_FILE, 'utf8'));
+      if (data.nouvelles_gratuites && Array.isArray(data.nouvelles_gratuites)) {
+        data.nouvelles_gratuites.forEach(nouvelle => {
+          if (nouvelle.fichier) {
+            const fichier = nouvelle.fichier.split('/').pop();
+            NOUVELLES[fichier] = nouvelle.titre;
+          }
+        });
+        console.log(`✅ ${Object.keys(NOUVELLES).length} nouvelles chargées depuis data.json`);
+        return true;
+      }
+    }
+  } catch (error) {
+    console.warn('⚠️ Impossible de charger data.json:', error.message);
+  }
+  return false;
+}
 
 console.log('📊 Récupération des statistiques GoatCounter...');
 
@@ -60,10 +76,6 @@ function parseGoatCounterHTML(html) {
   const stats = {};
   const now = new Date();
 
-  // Expression régulière pour trouver les entrées /download/
-  const regex = /\/download\/([a-zA-Z0-9_-]+\.pdf)[\s\S]*?(\d+)\s+(?:views|events|hits)/gi;
-  let match;
-
   // Initialiser toutes les nouvelles avec 0
   Object.keys(NOUVELLES).forEach(fichier => {
     stats[NOUVELLES[fichier]] = {
@@ -73,17 +85,30 @@ function parseGoatCounterHTML(html) {
     };
   });
 
-  // Parser les données trouvées
-  while ((match = regex.exec(html)) !== null) {
-    const fichier = match[1].replace(/-/g, '_');
+  // Expression régulière pour trouver les entrées /download/
+  // Cherche le pattern: /download/FICHIER ... NOMBRE
+  const downloadPattern = /\/download\/([^\s<>"]+)[\s\S]*?(\d+)\s+(?:views|events|hits|téléchargements|downloads)/gi;
+  
+  let match;
+  let found = 0;
+
+  while ((match = downloadPattern.exec(html)) !== null) {
+    const fichier = match[1];
     const count = parseInt(match[2], 10);
 
-    if (NOUVELLES[fichier]) {
-      stats[NOUVELLES[fichier]].telecharges = count;
-      stats[NOUVELLES[fichier]].dernièreMiseAJour = now.toISOString().split('T')[0];
+    // Chercher la nouvelle correspondante
+    for (const [fichierKey, titre] of Object.entries(NOUVELLES)) {
+      if (fichier.includes(fichierKey.replace('.pdf', '')) || 
+          fichierKey.replace('.pdf', '') === fichier.replace(/%20/g, '_').replace(/-/g, '_')) {
+        stats[titre].telecharges = count;
+        stats[titre].dernièreMiseAJour = now.toISOString().split('T')[0];
+        found++;
+        break;
+      }
     }
   }
 
+  console.log(`✅ ${found} nouvelles trouvées dans GoatCounter`);
   return stats;
 }
 
@@ -112,10 +137,16 @@ function saveStats(stats) {
   fs.writeFileSync(OUTPUT_FILE, JSON.stringify(output, null, 2));
   console.log(`✅ Statistiques sauvegardées dans ${OUTPUT_FILE}`);
   console.log(`   Total: ${output.total} téléchargements`);
+  console.log(`   Nouvelles avec données: ${output.classement.filter(c => c.telecharges > 0).length}`);
   console.log(`   Dernière mise à jour: ${output.dernièreMiseAJour}`);
 }
 
 // Exécuter
+if (!loadNouvelles()) {
+  console.error('❌ Impossible de charger les nouvelles depuis data.json');
+  process.exit(1);
+}
+
 fetchGoatCounter()
   .then(stats => {
     saveStats(stats);
@@ -125,7 +156,7 @@ fetchGoatCounter()
   .catch(error => {
     console.error('❌ Erreur:', error.message);
     
-    // Si ça échoue, on crée un fichier vide
+    // Si ça échoue, on crée un fichier avec les nouvelles (mais sans données GoatCounter)
     console.log('⚠️ Création d\'un fichier vide par défaut...');
     const defaultStats = {};
     Object.keys(NOUVELLES).forEach(fichier => {
@@ -149,6 +180,6 @@ fetchGoatCounter()
     };
     
     fs.writeFileSync(OUTPUT_FILE, JSON.stringify(output, null, 2));
-    console.log('✅ Fichier par défaut créé');
+    console.log(`✅ Fichier par défaut créé avec ${Object.keys(NOUVELLES).length} nouvelles`);
     process.exit(0);
   });
