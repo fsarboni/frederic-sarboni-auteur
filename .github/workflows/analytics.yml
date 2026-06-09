@@ -6,15 +6,19 @@ on:
 jobs:
   update:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
       - run: node script-analytics.js
+        env:
+          GOATCOUNTER_TOKEN: ${{ secrets.GOATCOUNTER_TOKEN }}
       - run: |
           git config user.email "action@github.com"
           git config user.name "GitHub Action"
-          git add analytics/ 2>/dev/null || true
+          git add analytics/
           git commit -m "Update analytics" || true
-          git push || true
+          git push
