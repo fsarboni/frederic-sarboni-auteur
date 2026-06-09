@@ -64,7 +64,7 @@ async function fetchStats() {
   let after = '';
   let page = 0;
   while (true) {
-    const url = '/api/v0/stats/hits?limit=200' + (after ? '&after=' + after : '');
+    const url = '/api/v0/stats/hits?limit=200&events=true' + (after ? '&after=' + after : '');
     const result = await apiGet(url);
     if (!result || !result.hits || result.hits.length === 0) break;
     allHits = allHits.concat(result.hits);
