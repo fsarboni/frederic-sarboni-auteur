@@ -65,7 +65,7 @@ async function fetchStats() {
   let after = '';
   let page = 0;
   while (true) {
-    const url = '/api/v0/stats/hits?limit=200' + (after ? '&after=' + encodeURIComponent(after) : '');
+    const url = '/api/v0/stats/hits?limit=200&start=2020-01-01&end=2030-12-31' + (after ? '&after=' + encodeURIComponent(after) : '');
     console.log('🌐 Appel API:', url);
     const result = await apiGet(url);
     console.log('🔍 Réponse API:', JSON.stringify(result).substring(0, 500));
