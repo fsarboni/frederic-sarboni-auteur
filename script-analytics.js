@@ -46,55 +46,57 @@ function apiGet(urlPath) {
       res.on('data', chunk => { data += chunk; });
       res.on('end', () => {
         try { resolve(JSON.parse(data)); }
-        catch (e) { reject(new Error('Réponse non-JSON : ' + data.substring(0, 200))); }
+        catch (e) { reject(new Error('Non-JSON: ' + data.substring(0, 300))); }
       });
     }).on('error', reject).on('timeout', () => reject(new Error('Timeout'))).end();
   });
 }
 
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
-
-async function fetchCountForPath(fichierName) {
-  // Essayer différentes variantes du nom de fichier
-  const variants = [
-    fichierName,
-    fichierName.replace('.pdf', ''),
-  ];
-
-  for (const variant of variants) {
-    const encoded = encodeURIComponent('download/' + variant);
-    try {
-      const result = await apiGet(`/api/v0/stats/hits?start=2020-01-01&end=2030-12-31&path=${encoded}`);
-      if (result && result.hits && result.hits.length > 0) {
-        const total = result.hits.reduce((sum, h) => sum + (h.count || 0), 0);
-        if (total > 0) return total;
-      }
-    } catch (e) {
-      // continuer
-    }
-    await sleep(300); // respecter le rate limit
-  }
-  return 0;
-}
-
-async function fetchAllStats() {
+async function fetchAllDownloads() {
   const counts = {};
-  const fichiers = Object.keys(NOUVELLES);
-  console.log(`🔍 Interrogation de ${fichiers.length} nouvelles...`);
-
-  for (let i = 0; i < fichiers.length; i++) {
-    const fichier = fichiers[i];
-    const titre = NOUVELLES[fichier];
-    const count = await fetchCountForPath(fichier);
-    if (count > 0) {
-      counts[titre] = count;
-      console.log(`  ✅ ${titre}: ${count}`);
+  
+  // Récupérer toutes les pages avec pagination par offset
+  let offset = 0;
+  let totalEntries = 0;
+  
+  while (true) {
+    const url = `/api/v0/stats/hits?limit=200&start=2025-10-01&end=2026-12-31&offset=${offset}`;
+    console.log(`🌐 Appel: ${url}`);
+    const result = await apiGet(url);
+    
+    if (!result || !result.hits) {
+      console.log('❌ Pas de hits dans la réponse:', JSON.stringify(result).substring(0, 200));
+      break;
     }
-    if (i % 10 === 9) console.log(`  ... ${i + 1}/${fichiers.length}`);
-  }
+    
+    console.log(`📄 Page offset=${offset}: ${result.hits.length} entrées, more=${result.more}`);
+    totalEntries += result.hits.length;
+    
+    // Afficher les 3 premières pour debug
+    result.hits.slice(0, 3).forEach(h => {
+      console.log(`   - path="${h.path}" count=${h.count}`);
+    });
 
+    result.hits.forEach(hit => {
+      if (hit.path && hit.path.includes('download/')) {
+        const fichierPath = hit.path.replace(/.*download\//, '');
+        for (const [fichierKey, titre] of Object.entries(NOUVELLES)) {
+          const keyNorm = fichierKey.replace('.pdf', '').toLowerCase().replace(/_/g, '-');
+          const pathNorm = fichierPath.toLowerCase().replace('.pdf', '').replace(/_/g, '-').replace(/%20/g, '-');
+          if (pathNorm === keyNorm || pathNorm.includes(keyNorm) || keyNorm.includes(pathNorm)) {
+            counts[titre] = (counts[titre] || 0) + (hit.count || 1);
+            break;
+          }
+        }
+      }
+    });
+
+    if (!result.more || result.hits.length === 0) break;
+    offset += result.hits.length;
+    if (offset > 2000) break;
+  }
+  
+  console.log(`📊 Total entrées récupérées: ${totalEntries}`);
   return counts;
 }
 
@@ -135,7 +137,7 @@ async function main() {
   if (!loadNouvelles()) { console.error('❌ Impossible de charger data.json'); process.exit(1); }
   console.log('📊 Récupération historique complet GoatCounter...');
   try {
-    const counts = await fetchAllStats();
+    const counts = await fetchAllDownloads();
     console.log(`✅ ${Object.keys(counts).length} nouvelles avec téléchargements`);
     saveStats(counts);
     console.log('✅ Succès !');
