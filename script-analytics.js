@@ -65,8 +65,8 @@ async function fetchStats() {
   if (result && result.hits) {
     let found = 0;
     result.hits.forEach(hit => {
-      if (hit.path && hit.path.startsWith('/download/')) {
-        const fichierPath = hit.path.replace('/download/', '');
+      if (hit.path && hit.path.includes('download/')) {
+        const fichierPath = hit.path.replace(/.*download\//, '');
         for (const [fichierKey, titre] of Object.entries(NOUVELLES)) {
           const keyNorm = fichierKey.replace('.pdf', '').toLowerCase().replace(/_/g, '-');
           const pathNorm = fichierPath.toLowerCase().replace(/_/g, '-').replace(/%20/g, '-');
