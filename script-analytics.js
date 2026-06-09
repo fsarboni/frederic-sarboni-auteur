@@ -44,6 +44,7 @@ function apiGet(urlPath) {
     };
     https.request(options, (res) => {
       let data = '';
+      console.log('📡 HTTP status:', res.statusCode);
       res.on('data', chunk => { data += chunk; });
       res.on('end', () => {
         try { resolve(JSON.parse(data)); }
@@ -65,6 +66,7 @@ async function fetchStats() {
   let page = 0;
   while (true) {
     const url = '/api/v0/stats/hits?limit=200' + (after ? '&after=' + encodeURIComponent(after) : '');
+    console.log('🌐 Appel API:', url);
     const result = await apiGet(url);
     console.log('🔍 Réponse API:', JSON.stringify(result).substring(0, 500));
     if (!result || !result.hits || result.hits.length === 0) break;
