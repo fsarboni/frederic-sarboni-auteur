@@ -59,27 +59,38 @@ async function fetchStats() {
     stats[titre] = { fichier, telecharges: 0, derniere_date: new Date().toISOString().split('T')[0] };
   });
 
-  // Récupérer les hits pour les chemins /download/
-  const result = await apiGet('/api/v0/stats/hits?limit=200');
-  
-  if (result && result.hits) {
-    let found = 0;
-    result.hits.forEach(hit => {
-      if (hit.path && hit.path.includes('download/')) {
-        const fichierPath = hit.path.replace(/.*download\//, '');
-        for (const [fichierKey, titre] of Object.entries(NOUVELLES)) {
-          const keyNorm = fichierKey.replace('.pdf', '').toLowerCase().replace(/_/g, '-');
-          const pathNorm = fichierPath.toLowerCase().replace(/_/g, '-').replace(/%20/g, '-');
-          if (pathNorm.includes(keyNorm) || keyNorm === pathNorm.replace('.pdf', '')) {
-            stats[titre].telecharges = hit.count || 0;
-            found++;
-            break;
-          }
+  // Récupérer tous les hits avec pagination
+  let allHits = [];
+  let after = '';
+  let page = 0;
+  while (true) {
+    const url = '/api/v0/stats/hits?limit=200' + (after ? '&after=' + after : '');
+    const result = await apiGet(url);
+    if (!result || !result.hits || result.hits.length === 0) break;
+    allHits = allHits.concat(result.hits);
+    if (!result.more) break;
+    after = result.hits[result.hits.length - 1].path;
+    page++;
+    if (page > 20) break; // sécurité
+  }
+  console.log(`📄 ${allHits.length} entrées récupérées depuis GoatCounter`);
+
+  let found = 0;
+  allHits.forEach(hit => {
+    if (hit.path && hit.path.includes('download/')) {
+      const fichierPath = hit.path.replace(/.*download\//, '');
+      for (const [fichierKey, titre] of Object.entries(NOUVELLES)) {
+        const keyNorm = fichierKey.replace('.pdf', '').toLowerCase().replace(/_/g, '-');
+        const pathNorm = fichierPath.toLowerCase().replace('.pdf', '').replace(/_/g, '-').replace(/%20/g, '-');
+        if (pathNorm === keyNorm || pathNorm.includes(keyNorm) || keyNorm.includes(pathNorm)) {
+          stats[titre].telecharges = (stats[titre].telecharges || 0) + (hit.count || 0);
+          found++;
+          break;
         }
       }
-    });
-    console.log(`✅ ${found} nouvelles trouvées dans GoatCounter`);
-  }
+    }
+  });
+  console.log(`✅ ${found} nouvelles trouvées dans GoatCounter`);
 
   return stats;
 }
