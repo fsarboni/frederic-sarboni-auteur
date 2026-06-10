@@ -3,451 +3,198 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Statistiques — Frédéric Sarboni Sanchez</title>
+    <title>📊 Tableau de Bord Analytique - Auto</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap');
-
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        :root {
-            --encre: #1a1a2e;
-            --ardoise: #2d3561;
-            --brume: #f4f6f9;
-            --blanc: #ffffff;
-            --accent: #c84b31;
-            --accent-doux: #f0e8e5;
-            --texte: #3a3a4a;
-            --texte-leger: #7a7a8a;
-            --bordure: #e2e5ed;
-        }
-
         body {
-            font-family: 'Inter', sans-serif;
-            background: var(--brume);
-            color: var(--texte);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
+            padding: 20px;
         }
-
-        /* ── EN-TÊTE ── */
+        .container { max-width: 1400px; margin: 0 auto; }
         header {
-            background: var(--encre);
-            color: var(--blanc);
-            padding: 2.5rem 2rem 2rem;
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 2rem;
             text-align: center;
         }
-
-        header .eyebrow {
-            font-size: 0.75rem;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            color: var(--accent);
-            margin-bottom: 0.6rem;
-            font-weight: 500;
+        header h1 { color: #667eea; margin-bottom: 0.5rem; font-size: 2.5rem; }
+        header p { color: #666; font-size: 1.05rem; }
+        .status {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            color: #2e7d32;
         }
-
-        header h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(1.6rem, 4vw, 2.4rem);
-            font-weight: 700;
-            margin-bottom: 0.4rem;
-        }
-
-        header .subtitle {
-            font-size: 0.9rem;
-            color: rgba(255,255,255,0.55);
-            font-weight: 300;
-        }
-
-        .status-bar {
-            background: var(--ardoise);
-            padding: 0.6rem 2rem;
-            text-align: center;
-            font-size: 0.8rem;
-            color: rgba(255,255,255,0.6);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-        }
-
-        .status-dot {
-            width: 7px;
-            height: 7px;
-            border-radius: 50%;
-            background: #4caf50;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.4; }
-        }
-
-        /* ── CONTENU ── */
-        .container {
-            max-width: 960px;
-            margin: 0 auto;
-            padding: 2rem 1.5rem;
-        }
-
-        /* ── CHIFFRES CLÉS ── */
-        .kpi-grid {
+        .status.loading { background: #fff3cd; border-left-color: #ff9800; color: #856404; }
+        .stats-overview {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
             margin-bottom: 2rem;
         }
-
-        .kpi {
-            background: var(--blanc);
-            border-radius: 10px;
-            padding: 1.4rem 1.2rem;
-            border-top: 3px solid var(--bordure);
-            box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-left: 5px solid #667eea;
+            transition: transform 0.3s;
         }
-
-        .kpi.highlight { border-top-color: var(--accent); }
-
-        .kpi-label {
-            font-size: 0.72rem;
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-            color: var(--texte-leger);
-            font-weight: 600;
-            margin-bottom: 0.5rem;
+        .stat-card:hover { transform: translateY(-5px); }
+        .stat-card.accent1 { border-left-color: #667eea; }
+        .stat-card.accent2 { border-left-color: #764ba2; }
+        .stat-card.accent3 { border-left-color: #f093fb; }
+        .stat-card.accent4 { border-left-color: #4facfe; }
+        .stat-card h3 { color: #666; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem; }
+        .stat-number { font-size: 2.5rem; font-weight: bold; color: #2c3e50; margin-bottom: 0.3rem; }
+        .stat-label { color: #999; font-size: 0.85rem; }
+        .ranking-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
         }
-
-        .kpi-value {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.2rem;
-            font-weight: 700;
-            color: var(--encre);
-            line-height: 1;
-            margin-bottom: 0.3rem;
-        }
-
-        .kpi-sub {
-            font-size: 0.8rem;
-            color: var(--texte-leger);
-        }
-
-        /* ── CLASSEMENT ── */
-        .section {
-            background: var(--blanc);
-            border-radius: 10px;
-            padding: 1.8rem;
-            box-shadow: 0 1px 4px rgba(0,0,0,0.06);
-            margin-bottom: 1.5rem;
-        }
-
-        .section-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.2rem;
-            color: var(--encre);
-            margin-bottom: 1.4rem;
-            padding-bottom: 0.8rem;
-            border-bottom: 1px solid var(--bordure);
-        }
-
+        .ranking-section h2 { color: #667eea; margin-bottom: 1.5rem; font-size: 1.5rem; }
         .ranking-item {
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 1rem;
-            padding: 0.85rem 0;
-            border-bottom: 1px solid var(--bordure);
+            padding: 1.2rem;
+            border-bottom: 1px solid #eee;
+            transition: background 0.3s;
         }
-
+        .ranking-item:hover { background: #f8f9fa; }
         .ranking-item:last-child { border-bottom: none; }
-
-        .rank-num {
-            font-family: 'Playfair Display', serif;
+        .ranking-position { font-size: 1.8rem; font-weight: bold; color: #667eea; width: 50px; text-align: center; }
+        .ranking-title { flex: 1; color: #2c3e50; font-weight: 500; font-size: 1.05rem; }
+        .ranking-count {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 20px;
+            font-weight: bold;
             font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--texte-leger);
-            width: 28px;
-            text-align: center;
-            flex-shrink: 0;
         }
-
-        .rank-num.top { color: var(--accent); }
-
-        .rank-bar-wrap {
-            flex: 1;
-        }
-
-        .rank-titre {
-            font-size: 0.92rem;
-            font-weight: 500;
-            color: var(--texte);
-            margin-bottom: 0.35rem;
-        }
-
-        .rank-bar-bg {
-            height: 5px;
-            background: var(--bordure);
-            border-radius: 3px;
-            overflow: hidden;
-        }
-
-        .rank-bar-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--accent), #e8845a);
-            border-radius: 3px;
-            transition: width 0.8s ease;
-        }
-
-        .rank-count {
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: var(--encre);
-            min-width: 28px;
-            text-align: right;
-            flex-shrink: 0;
-        }
-
-        .rank-zero .rank-titre { color: var(--texte-leger); }
-        .rank-zero .rank-count { color: var(--texte-leger); font-weight: 400; }
-
-        /* ── CHARGEMENT / ERREUR ── */
-        .loading-state {
-            text-align: center;
-            padding: 3rem;
-            color: var(--texte-leger);
-        }
-
-        .spinner {
-            width: 32px;
-            height: 32px;
-            border: 3px solid var(--bordure);
-            border-top-color: var(--accent);
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-            margin: 0 auto 1rem;
-        }
-
-        @keyframes spin { to { transform: rotate(360deg); } }
-
-        .error-state {
-            background: #fff5f5;
-            border: 1px solid #fcd0cc;
-            border-radius: 8px;
+        .insights {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
             padding: 1.5rem;
-            color: #c0392b;
-            text-align: center;
+            border-radius: 12px;
+            margin-bottom: 2rem;
         }
-
-        /* ── PIED ── */
-        footer {
-            text-align: center;
-            padding: 1.5rem;
-            font-size: 0.78rem;
-            color: var(--texte-leger);
-        }
-
-        footer a {
-            color: var(--accent);
-            text-decoration: none;
-        }
-
-        @media (max-width: 600px) {
-            .kpi-grid { grid-template-columns: 1fr 1fr; }
-            .kpi-grid .kpi:last-child { grid-column: span 2; }
-            .kpi-value { font-size: 1.8rem; }
+        .insights h3 { margin-bottom: 1rem; font-size: 1.2rem; }
+        .insights p { line-height: 1.6; opacity: 0.95; }
+        .last-update { font-size: 0.85rem; color: #999; text-align: center; margin-top: 1rem; }
+        .loading { text-align: center; padding: 2rem; color: #666; }
+        @media (max-width: 768px) {
+            header h1 { font-size: 1.8rem; }
+            .stat-number { font-size: 1.8rem; }
         }
     </style>
 </head>
 <body>
-
-<header>
-    <div class="eyebrow">Nouvelles gratuites</div>
-    <h1>Statistiques de téléchargement</h1>
-    <p class="subtitle">Frédéric Sarboni Sanchez — données en temps réel</p>
-</header>
-
-<div class="status-bar">
-    <span class="status-dot"></span>
-    <span id="status-text">Connexion à GoatCounter…</span>
-</div>
-
-<div class="container">
-    <div id="app">
-        <div class="loading-state">
-            <div class="spinner"></div>
-            <p>Chargement des statistiques…</p>
-        </div>
+    <div class="container">
+        <header>
+            <h1>📊 Tableau de Bord Analytique</h1>
+            <p>Vos statistiques se mettent à jour automatiquement chaque jour</p>
+        </header>
+        <div id="status" class="status loading"><p>⏳ Chargement des données...</p></div>
+        <div id="main-content"><div class="loading"><p>⏳ Initialisation...</p></div></div>
     </div>
-</div>
-
-<footer>
-    Données <a href="https://fsarboni.goatcounter.com" target="_blank">GoatCounter</a> —
-    <a href="/frederic-sarboni-auteur/">Retour au site</a>
-</footer>
-
-<script>
-// ── CONFIG ──────────────────────────────────────────────
-const GC_SITE    = 'fsarboni';
-const GC_TOKEN   = '16m901bhtjcdeoen29dhd75yiefukbaf04eq2ena0bevsl7t3';
-const GC_HOST    = `${GC_SITE}.goatcounter.com`;
-const START_DATE = '2025-10-17';
-
-// ── UTILITAIRES ─────────────────────────────────────────
-function today() {
-    return new Date().toISOString().split('T')[0];
-}
-
-function fmtDate(iso) {
-    return new Date(iso).toLocaleDateString('fr-FR', {
-        day: 'numeric', month: 'long', year: 'numeric',
-        hour: '2-digit', minute: '2-digit'
-    });
-}
-
-async function gcGet(path) {
-    const url = `https://${GC_HOST}${path}`;
-    const r = await fetch(url, {
-        headers: { 'Authorization': `Bearer ${GC_TOKEN}` }
-    });
-    if (!r.ok) throw new Error(`HTTP ${r.status}`);
-    return r.json();
-}
-
-// ── RÉCUPÉRATION DES DONNÉES ─────────────────────────────
-async function fetchDownloads() {
-    const counts = {};
-    let afterId = null;
-    let pages = 0;
-
-    while (pages < 50) {
-        let url = `/api/v0/stats/hits?limit=200&start=${START_DATE}&end=${today()}`;
-        if (afterId) url += `&after=${afterId}`;
-
-        const data = await gcGet(url);
-        if (!data.hits || data.hits.length === 0) break;
-
-        data.hits.forEach(hit => {
-            if (hit.path && hit.path.includes('download/')) {
-                const fichier = hit.path.replace(/.*download\//, '');
-                counts[fichier] = (counts[fichier] || 0) + (hit.count || 0);
+    <script>
+        async function loadAnalytics() {
+            try {
+                const response = await fetch('stats.json?t=' + Date.now());
+                if (!response.ok) throw new Error('Données non disponibles');
+                const data = await response.json();
+                displayDashboard(data);
+                updateStatus('✅ Données mises à jour: ' + new Date(data.dernièreMiseAJour).toLocaleString('fr-FR'), 'success');
+            } catch (error) {
+                console.error('Erreur:', error);
+                updateStatus('⚠️ Données en cours de chargement...', 'info');
             }
-        });
+        }
 
-        if (!data.more) break;
-        afterId = data.hits[data.hits.length - 1].path_id;
-        pages++;
-    }
-
-    return counts;
-}
-
-async function fetchNouvellesList() {
-    try {
-        const r = await fetch('/frederic-sarboni-auteur/data.json');
-        const d = await r.json();
-        return d.nouvelles_gratuites || [];
-    } catch(e) {
-        return [];
-    }
-}
-
-// ── CORRESPONDANCE fichier GoatCounter → titre ───────────
-function matchCounts(rawCounts, nouvelles) {
-    const result = {};
-
-    nouvelles.forEach(n => {
-        const fichier = n.fichier.split('/').pop();
-        const keyNorm = fichier.replace('.pdf','').toLowerCase().replace(/_/g,'-');
-        let total = 0;
-
-        Object.entries(rawCounts).forEach(([gcPath, count]) => {
-            const pathNorm = gcPath.toLowerCase().replace('.pdf','').replace(/_/g,'-').replace(/%20/g,'-');
-            if (pathNorm === keyNorm || pathNorm.includes(keyNorm) || keyNorm.includes(pathNorm)) {
-                total += count;
+        function updateStatus(message, type) {
+            const s = document.getElementById('status');
+            s.textContent = message;
+            if (type === 'success') {
+                s.style.background = '#e8f5e9';
+                s.style.borderLeftColor = '#4caf50';
+                s.style.color = '#2e7d32';
+            } else {
+                s.style.background = '#fff3cd';
+                s.style.borderLeftColor = '#ff9800';
+                s.style.color = '#856404';
             }
-        });
+        }
 
-        result[n.titre] = { count: total, fichier };
-    });
+        function displayDashboard(data) {
+            const total = data.total || 0;
+            const classement = data.classement || [];
+            const meilleur = classement.length > 0 ? classement[0] : null;
+            const nombreNouvelles = data.totalNouvelles || classement.length;
 
-    return result;
-}
-
-// ── RENDU ────────────────────────────────────────────────
-function render(stats, updatedAt) {
-    const entries = Object.entries(stats).sort((a,b) => b[1].count - a[1].count);
-    const total   = entries.reduce((s, [,v]) => s + v.count, 0);
-    const withDl  = entries.filter(([,v]) => v.count > 0).length;
-    const best    = entries[0];
-    const maxCount = best ? best[1].count : 1;
-
-    document.getElementById('status-text').textContent =
-        `Mis à jour le ${fmtDate(updatedAt)}`;
-
-    document.getElementById('app').innerHTML = `
-        <div class="kpi-grid">
-            <div class="kpi highlight">
-                <div class="kpi-label">Total téléchargements</div>
-                <div class="kpi-value">${total}</div>
-                <div class="kpi-sub">depuis oct. 2025</div>
-            </div>
-            <div class="kpi">
-                <div class="kpi-label">Nouvelles téléchargées</div>
-                <div class="kpi-value">${withDl}</div>
-                <div class="kpi-sub">sur ${entries.length} disponibles</div>
-            </div>
-            <div class="kpi">
-                <div class="kpi-label">Meilleure nouvelle</div>
-                <div class="kpi-value">${best ? best[1].count : 0}</div>
-                <div class="kpi-sub">${best ? best[0] : '—'}</div>
-            </div>
-        </div>
-
-        <div class="section">
-            <div class="section-title">Classement des nouvelles</div>
-            ${entries.map(([titre, {count}], i) => `
-                <div class="ranking-item ${count === 0 ? 'rank-zero' : ''}">
-                    <div class="rank-num ${i < 3 && count > 0 ? 'top' : ''}">${i+1}</div>
-                    <div class="rank-bar-wrap">
-                        <div class="rank-titre">${titre}</div>
-                        <div class="rank-bar-bg">
-                            <div class="rank-bar-fill" style="width:${maxCount > 0 ? Math.round(count/maxCount*100) : 0}%"></div>
-                        </div>
+            document.getElementById('main-content').innerHTML = `
+                <div class="stats-overview">
+                    <div class="stat-card accent1">
+                        <h3>📥 Total Téléchargements</h3>
+                        <div class="stat-number">${total}</div>
+                        <div class="stat-label">depuis le début</div>
                     </div>
-                    <div class="rank-count">${count}</div>
+                    <div class="stat-card accent2">
+                        <h3>📚 Nouvelles</h3>
+                        <div class="stat-number">${nombreNouvelles}</div>
+                        <div class="stat-label">disponibles</div>
+                    </div>
+                    <div class="stat-card accent3">
+                        <h3>🏆 Meilleure</h3>
+                        <div class="stat-number">${meilleur ? meilleur.telecharges : 0}</div>
+                        <div class="stat-label">${meilleur ? meilleur.titre : 'N/A'}</div>
+                    </div>
+                    <div class="stat-card accent4">
+                        <h3>🔄 Mise à jour</h3>
+                        <div class="stat-number">Auto</div>
+                        <div class="stat-label">chaque jour 8h</div>
+                    </div>
                 </div>
-            `).join('')}
-        </div>
-    `;
-}
+                <div class="ranking-section">
+                    <h2>🏆 Classement des Nouvelles</h2>
+                    ${classement.map((item, i) => `
+                        <div class="ranking-item">
+                            <div class="ranking-position">${i + 1}</div>
+                            <div class="ranking-title">${item.titre}</div>
+                            <div class="ranking-count">${item.telecharges} ⬇️</div>
+                        </div>
+                    `).join('')}
+                    <div class="last-update">
+                        Mise à jour: ${new Date(data.dernièreMiseAJour).toLocaleDateString('fr-FR', {
+                            year: 'numeric', month: 'long', day: 'numeric',
+                            hour: '2-digit', minute: '2-digit'
+                        })}
+                    </div>
+                </div>
+                <div class="insights">
+                    <h3>✨ Fonctionnement Automatisé</h3>
+                    <p>
+                        Ce tableau de bord se met à jour <strong>automatiquement chaque jour à 8h du matin</strong> 
+                        sans aucune intervention manuelle ! 🚀<br><br>
+                        Les données proviennent directement de votre compte GoatCounter. Vous pouvez mesurer 
+                        l'impact de vos campagnes Facebook en comparant les chiffres jour après jour.
+                    </p>
+                </div>
+            `;
+        }
 
-function renderError(msg) {
-    document.getElementById('status-text').textContent = 'Erreur de connexion';
-    document.getElementById('app').innerHTML = `
-        <div class="error-state">
-            <p>⚠️ Impossible de charger les données GoatCounter.</p>
-            <p style="font-size:0.85rem;margin-top:0.5rem;opacity:0.8">${msg}</p>
-        </div>
-    `;
-}
-
-// ── LANCEMENT ────────────────────────────────────────────
-(async () => {
-    try {
-        const [rawCounts, nouvelles] = await Promise.all([
-            fetchDownloads(),
-            fetchNouvellesList()
-        ]);
-
-        if (nouvelles.length === 0) throw new Error('data.json introuvable');
-
-        const stats = matchCounts(rawCounts, nouvelles);
-        render(stats, new Date().toISOString());
-
-    } catch(e) {
-        console.error(e);
-        renderError(e.message);
-    }
-})();
-</script>
-
+        loadAnalytics();
+        setInterval(loadAnalytics, 3600000);
+    </script>
 </body>
 </html>
