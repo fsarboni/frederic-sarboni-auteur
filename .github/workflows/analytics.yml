@@ -3,6 +3,11 @@ on:
   schedule:
     - cron: '0 8 * * *'
   workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - 'analytics/**'
 jobs:
   update:
     runs-on: ubuntu-latest
