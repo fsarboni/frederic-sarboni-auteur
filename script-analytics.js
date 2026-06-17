@@ -45,8 +45,8 @@ function apiGet(urlPath) {
       let data = '';
       res.on('data', chunk => { data += chunk; });
       res.on('end', () => {
-        try { resolve(JSON.parse(data)); }
-        catch (e) { reject(new Error('Non-JSON: ' + data.substring(0, 200))); }
+        try { resolve({ status: res.statusCode, body: JSON.parse(data) }); }
+        catch (e) { resolve({ status: res.statusCode, body: data }); }
       });
     }).on('error', reject).on('timeout', () => reject(new Error('Timeout'))).end();
   });
@@ -54,31 +54,31 @@ function apiGet(urlPath) {
 
 function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 
-async function fetchAllDownloads() {
+function addMonths(dateStr, months) {
+  const d = new Date(dateStr);
+  d.setMonth(d.getMonth() + months);
+  return d.toISOString().split('T')[0];
+}
+
+async function fetchPeriod(start, end) {
   const counts = {};
-  const today = new Date().toISOString().split('T')[0];
-  const startDate = '2025-10-17';
+  let afterId = '';
+  let pages = 0;
 
-  let afterPathId = '';
-  let page = 0;
-  let totalHits = 0;
-
-  while (true) {
-    let url = `/api/v0/stats/hits?limit=200&start=${startDate}&end=${today}`;
-    if (afterPathId) url += `&after=${afterPathId}`;
+  while (pages < 20) {
+    let url = `/api/v0/stats/hits?limit=200&start=${start}&end=${end}`;
+    if (afterId) url += `&after=${afterId}`;
 
     const result = await apiGet(url);
 
-    if (!result || !result.hits || result.hits.length === 0) {
-      console.log('Fin de pagination');
+    if (result.status !== 200) {
+      console.log(`   ⚠️ HTTP ${result.status} pour ${start}→${end}: ${JSON.stringify(result.body).substring(0,150)}`);
       break;
     }
 
-    totalHits += result.hits.length;
-    page++;
-    console.log(`📄 Page ${page}: ${result.hits.length} entrées, more=${result.more}`);
+    if (!result.body.hits || result.body.hits.length === 0) break;
 
-    result.hits.forEach(hit => {
+    result.body.hits.forEach(hit => {
       if (hit.path && hit.path.includes('download/')) {
         const fichierPath = hit.path.replace(/.*download\//, '');
         for (const [fichierKey, titre] of Object.entries(NOUVELLES)) {
@@ -92,18 +92,42 @@ async function fetchAllDownloads() {
       }
     });
 
-    if (!result.more) break;
-
-    // Le path_id du dernier élément pour la pagination
-    const lastHit = result.hits[result.hits.length - 1];
-    afterPathId = lastHit.path_id;
-    await sleep(300);
-
-    if (page > 50) break; // sécurité
+    if (!result.body.more) break;
+    afterId = result.body.hits[result.body.hits.length - 1].path_id;
+    pages++;
+    await sleep(250);
   }
 
-  console.log(`📊 Total: ${totalHits} entrées récupérées en ${page} pages`);
   return counts;
+}
+
+async function fetchAllDownloads() {
+  const totalCounts = {};
+  const startDate = '2025-10-17';
+  const today = new Date().toISOString().split('T')[0];
+
+  let monthStart = startDate;
+  let monthIndex = 0;
+
+  while (monthStart < today) {
+    let monthEnd = addMonths(monthStart, 1);
+    if (monthEnd > today) monthEnd = today;
+
+    console.log(`📅 Période ${monthStart} → ${monthEnd}`);
+    const periodCounts = await fetchPeriod(monthStart, monthEnd);
+
+    Object.entries(periodCounts).forEach(([titre, count]) => {
+      totalCounts[titre] = (totalCounts[titre] || 0) + count;
+    });
+
+    monthIndex++;
+    monthStart = monthEnd;
+    await sleep(300);
+
+    if (monthIndex > 15) break; // sécurité
+  }
+
+  return totalCounts;
 }
 
 function saveStats(counts) {
@@ -141,7 +165,7 @@ function saveStats(counts) {
 async function main() {
   if (!TOKEN) { console.error('❌ GOATCOUNTER_TOKEN non défini'); process.exit(1); }
   if (!loadNouvelles()) { console.error('❌ Impossible de charger data.json'); process.exit(1); }
-  console.log('📊 Récupération historique complet GoatCounter...');
+  console.log('📊 Récupération historique complet GoatCounter (par mois)...');
   try {
     const counts = await fetchAllDownloads();
     console.log(`✅ ${Object.keys(counts).length} nouvelles avec téléchargements`);
