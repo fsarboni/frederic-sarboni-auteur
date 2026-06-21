@@ -1,6 +1,6 @@
 {
-  "dernièreMiseAJour": "2026-06-21T06:01:04.998Z",
-  "total": 25,
+  "dernièreMiseAJour": "2026-06-21T10:59:58.377Z",
+  "total": 27,
   "nouvelles": {
     "Amarres": {
       "fichier": "Amarres.pdf",
@@ -9,7 +9,7 @@
     },
     "Celle qui savait lire": {
       "fichier": "Celle_qui_savait_lire.pdf",
-      "telecharges": 5,
+      "telecharges": 6,
       "derniere_date": "2026-06-21"
     },
     "La Chaîne des sourires": {
@@ -34,7 +34,7 @@
     },
     "Le Costume de Lumière": {
       "fichier": "Le_Costume_de_Lumiere.pdf",
-      "telecharges": 0,
+      "telecharges": 1,
       "derniere_date": "2026-06-21"
     },
     "Le Dernier Rendez-vous": {
@@ -202,7 +202,7 @@
     {
       "position": 1,
       "titre": "Celle qui savait lire",
-      "telecharges": 5,
+      "telecharges": 6,
       "fichier": "Celle_qui_savait_lire.pdf"
     },
     {
@@ -243,51 +243,51 @@
     },
     {
       "position": 8,
+      "titre": "Le Costume de Lumière",
+      "telecharges": 1,
+      "fichier": "Le_Costume_de_Lumiere.pdf"
+    },
+    {
+      "position": 9,
       "titre": "L'Arôme du Huitième Service",
       "telecharges": 1,
       "fichier": "L_Arome_du_Huitieme_Service.pdf"
     },
     {
-      "position": 9,
+      "position": 10,
       "titre": "La Fissure",
       "telecharges": 1,
       "fichier": "La_Fissure.pdf"
     },
     {
-      "position": 10,
+      "position": 11,
       "titre": "Le Gardien des Songes",
       "telecharges": 1,
       "fichier": "Le_Gardien_des_Songes.pdf"
     },
     {
-      "position": 11,
+      "position": 12,
       "titre": "Sur la Portée du Temps",
       "telecharges": 1,
       "fichier": "Sur_la_Portee_du_Temps.pdf"
     },
     {
-      "position": 12,
+      "position": 13,
       "titre": "Les Aiguilles de l'horloge",
       "telecharges": 1,
       "fichier": "Les_Aiguilles_de_l_Horloge.pdf"
     },
     {
-      "position": 13,
+      "position": 14,
       "titre": "La Chaîne des sourires",
       "telecharges": 0,
       "fichier": "La_Cha%C3%AEne_des_sourires.pdf"
     },
     {
-      "position": 14,
+      "position": 15,
       "titre": "Le Club des Jardiniers Fous",
       "telecharges": 0,
       "fichier": "Le_Club_des_Jardiniers_Fous.pdf"
-    },
-    {
-      "position": 15,
-      "titre": "Le Costume de Lumière",
-      "telecharges": 0,
-      "fichier": "Le_Costume_de_Lumiere.pdf"
     },
     {
       "position": 16,
