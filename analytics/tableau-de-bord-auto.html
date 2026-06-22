@@ -63,17 +63,23 @@
         }
         .ranking-section h2 { color: #667eea; margin-bottom: 1.5rem; font-size: 1.5rem; }
         .ranking-item {
+            border-bottom: 1px solid #eee;
+            transition: background 0.3s;
+        }
+        .ranking-item:last-child { border-bottom: none; }
+        .ranking-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 1.2rem;
-            border-bottom: 1px solid #eee;
-            transition: background 0.3s;
+            cursor: pointer;
+            transition: background 0.2s;
         }
-        .ranking-item:hover { background: #f8f9fa; }
-        .ranking-item:last-child { border-bottom: none; }
-        .ranking-position { font-size: 1.8rem; font-weight: bold; color: #667eea; width: 50px; text-align: center; }
+        .ranking-row:hover { background: #f8f9fa; }
+        .ranking-position { font-size: 1.8rem; font-weight: bold; color: #667eea; width: 50px; text-align: center; flex-shrink: 0; }
         .ranking-title { flex: 1; color: #2c3e50; font-weight: 500; font-size: 1.05rem; }
+        .ranking-meta { color: #999; font-size: 0.8rem; margin-top: 0.2rem; }
+        .ranking-right { display: flex; align-items: center; gap: 1rem; }
         .ranking-count {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
@@ -82,6 +88,55 @@
             font-weight: bold;
             font-size: 1.1rem;
         }
+        .ranking-toggle { color: #667eea; font-size: 1.2rem; transition: transform 0.3s; }
+        .ranking-toggle.open { transform: rotate(180deg); }
+
+        /* Panneau historique */
+        .historique-panel {
+            display: none;
+            background: #f8f9ff;
+            border-top: 1px solid #eee;
+            padding: 1.2rem 1.5rem;
+        }
+        .historique-panel.open { display: block; }
+        .historique-titre {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #667eea;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 0.8rem;
+        }
+        .historique-vide {
+            color: #999;
+            font-size: 0.9rem;
+            font-style: italic;
+        }
+        .historique-liste {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+        .historique-ligne {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0.8rem;
+            background: white;
+            border-radius: 6px;
+            border-left: 3px solid #667eea;
+            font-size: 0.9rem;
+        }
+        .historique-date { color: #2c3e50; font-weight: 500; }
+        .historique-count {
+            background: #667eea;
+            color: white;
+            padding: 0.2rem 0.7rem;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
         .insights {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
@@ -109,6 +164,11 @@
         <div id="main-content"><div class="loading"><p>⏳ Initialisation...</p></div></div>
     </div>
     <script>
+        function fmtDate(dateStr) {
+            const d = new Date(dateStr + 'T12:00:00');
+            return d.toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+        }
+
         async function loadAnalytics() {
             try {
                 const response = await fetch('stats.json?t=' + Date.now());
@@ -136,11 +196,66 @@
             }
         }
 
+        function toggleHistorique(id) {
+            const panel = document.getElementById('panel-' + id);
+            const toggle = document.getElementById('toggle-' + id);
+            if (panel.classList.contains('open')) {
+                panel.classList.remove('open');
+                toggle.classList.remove('open');
+            } else {
+                panel.classList.add('open');
+                toggle.classList.add('open');
+            }
+        }
+
+        function buildHistoriqueHTML(historique) {
+            if (!historique || historique.length === 0) {
+                return `<div class="historique-vide">Aucun détail disponible pour cette nouvelle.</div>`;
+            }
+            // Trier du plus récent au plus ancien
+            const sorted = [...historique].sort((a, b) => b.date.localeCompare(a.date));
+            const lignes = sorted.map(h => `
+                <div class="historique-ligne">
+                    <span class="historique-date">${fmtDate(h.date)}</span>
+                    <span class="historique-count">${h.count} ⬇️</span>
+                </div>
+            `).join('');
+            return `<div class="historique-liste">${lignes}</div>`;
+        }
+
         function displayDashboard(data) {
             const total = data.total || 0;
             const classement = data.classement || [];
             const meilleur = classement.length > 0 ? classement[0] : null;
             const nombreNouvelles = data.totalNouvelles || classement.length;
+
+            const rankingHTML = classement.map((item, i) => {
+                const id = 'item-' + i;
+                const derniereDate = item.derniere_date
+                    ? 'Dernier téléchargement : ' + fmtDate(item.derniere_date)
+                    : '';
+                const hasHistory = item.historique && item.historique.length > 0;
+                return `
+                    <div class="ranking-item">
+                        <div class="ranking-row" onclick="toggleHistorique('${id}')">
+                            <div class="ranking-position">${i + 1}</div>
+                            <div class="ranking-title">
+                                ${item.titre}
+                                ${derniereDate ? `<div class="ranking-meta">${derniereDate}</div>` : ''}
+                            </div>
+                            <div class="ranking-right">
+                                <div class="ranking-count">${item.telecharges} ⬇️</div>
+                                ${item.telecharges > 0 ? `<div class="ranking-toggle" id="toggle-${id}">▼</div>` : ''}
+                            </div>
+                        </div>
+                        ${item.telecharges > 0 ? `
+                        <div class="historique-panel" id="panel-${id}">
+                            <div class="historique-titre">📅 Historique des téléchargements</div>
+                            ${buildHistoriqueHTML(item.historique)}
+                        </div>` : ''}
+                    </div>
+                `;
+            }).join('');
 
             document.getElementById('main-content').innerHTML = `
                 <div class="stats-overview">
@@ -166,14 +281,8 @@
                     </div>
                 </div>
                 <div class="ranking-section">
-                    <h2>🏆 Classement des Nouvelles</h2>
-                    ${classement.map((item, i) => `
-                        <div class="ranking-item">
-                            <div class="ranking-position">${i + 1}</div>
-                            <div class="ranking-title">${item.titre}</div>
-                            <div class="ranking-count">${item.telecharges} ⬇️</div>
-                        </div>
-                    `).join('')}
+                    <h2>🏆 Classement des Nouvelles <span style="font-size:0.85rem;font-weight:400;color:#999;">— cliquez pour voir le détail</span></h2>
+                    ${rankingHTML}
                     <div class="last-update">
                         Mise à jour: ${new Date(data.dernièreMiseAJour).toLocaleDateString('fr-FR', {
                             year: 'numeric', month: 'long', day: 'numeric',
