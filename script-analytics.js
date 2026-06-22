@@ -60,8 +60,22 @@ function addMonths(dateStr, months) {
   return d.toISOString().split('T')[0];
 }
 
+function matchTitre(fichierPath) {
+  const pathNorm = fichierPath.toLowerCase().replace('.pdf','').replace(/_/g,'-').replace(/%20/g,'-');
+  for (const [fichierKey, titre] of Object.entries(NOUVELLES)) {
+    const keyNorm = fichierKey.replace('.pdf','').toLowerCase().replace(/_/g,'-');
+    if (pathNorm === keyNorm || pathNorm.includes(keyNorm) || keyNorm.includes(pathNorm)) {
+      return titre;
+    }
+  }
+  return null;
+}
+
 async function fetchPeriod(start, end) {
+  // counts : { titre -> total }
+  // history : { titre -> { 'YYYY-MM-DD' -> count } }
   const counts = {};
+  const history = {};
   let afterId = '';
   let pages = 0;
 
@@ -72,23 +86,31 @@ async function fetchPeriod(start, end) {
     const result = await apiGet(url);
 
     if (result.status !== 200) {
-      console.log(`   ⚠️ HTTP ${result.status} pour ${start}→${end}: ${JSON.stringify(result.body).substring(0,150)}`);
+      console.log(`   ⚠️ HTTP ${result.status} pour ${start}→${end}`);
       break;
     }
-
     if (!result.body.hits || result.body.hits.length === 0) break;
 
     result.body.hits.forEach(hit => {
-      if (hit.path && hit.path.includes('download/')) {
-        const fichierPath = hit.path.replace(/.*download\//, '');
-        for (const [fichierKey, titre] of Object.entries(NOUVELLES)) {
-          const keyNorm = fichierKey.replace('.pdf', '').toLowerCase().replace(/_/g, '-');
-          const pathNorm = fichierPath.toLowerCase().replace('.pdf', '').replace(/_/g, '-').replace(/%20/g, '-');
-          if (pathNorm === keyNorm || pathNorm.includes(keyNorm) || keyNorm.includes(pathNorm)) {
-            counts[titre] = (counts[titre] || 0) + (hit.count || 0);
-            break;
+      if (!hit.path || !hit.path.includes('download/')) return;
+      const fichierPath = hit.path.replace(/.*download\//, '');
+      const titre = matchTitre(fichierPath);
+      if (!titre) return;
+
+      // total
+      counts[titre] = (counts[titre] || 0) + (hit.count || 0);
+
+      // détail journalier depuis hit.stats
+      if (hit.stats && Array.isArray(hit.stats)) {
+        if (!history[titre]) history[titre] = {};
+        hit.stats.forEach(s => {
+          if (!s.day) return;
+          const day = s.day.split('T')[0];
+          const dayCount = s.daily || 0;
+          if (dayCount > 0) {
+            history[titre][day] = (history[titre][day] || 0) + dayCount;
           }
-        }
+        });
       }
     });
 
@@ -98,11 +120,12 @@ async function fetchPeriod(start, end) {
     await sleep(250);
   }
 
-  return counts;
+  return { counts, history };
 }
 
 async function fetchAllDownloads() {
   const totalCounts = {};
+  const totalHistory = {};
   const startDate = '2025-10-17';
   const today = new Date().toISOString().split('T')[0];
 
@@ -114,29 +137,45 @@ async function fetchAllDownloads() {
     if (monthEnd > today) monthEnd = today;
 
     console.log(`📅 Période ${monthStart} → ${monthEnd}`);
-    const periodCounts = await fetchPeriod(monthStart, monthEnd);
+    const { counts, history } = await fetchPeriod(monthStart, monthEnd);
 
-    Object.entries(periodCounts).forEach(([titre, count]) => {
+    Object.entries(counts).forEach(([titre, count]) => {
       totalCounts[titre] = (totalCounts[titre] || 0) + count;
+    });
+
+    Object.entries(history).forEach(([titre, days]) => {
+      if (!totalHistory[titre]) totalHistory[titre] = {};
+      Object.entries(days).forEach(([day, count]) => {
+        totalHistory[titre][day] = (totalHistory[titre][day] || 0) + count;
+      });
     });
 
     monthIndex++;
     monthStart = monthEnd;
     await sleep(300);
-
-    if (monthIndex > 15) break; // sécurité
+    if (monthIndex > 15) break;
   }
 
-  return totalCounts;
+  return { totalCounts, totalHistory };
 }
 
-function saveStats(counts) {
+function saveStats(counts, history) {
   const stats = {};
   Object.entries(NOUVELLES).forEach(([fichier, titre]) => {
+    // Construire la liste triée des jours avec téléchargements
+    const joursBruts = history[titre] || {};
+    const jours = Object.entries(joursBruts)
+      .filter(([, c]) => c > 0)
+      .sort((a, b) => a[0].localeCompare(b[0]))
+      .map(([day, count]) => ({ date: day, count }));
+
+    const dernierJour = jours.length > 0 ? jours[jours.length - 1].date : null;
+
     stats[titre] = {
       fichier,
       telecharges: counts[titre] || 0,
-      derniere_date: new Date().toISOString().split('T')[0]
+      derniere_date: dernierJour || new Date().toISOString().split('T')[0],
+      historique: jours
     };
   });
 
@@ -153,7 +192,9 @@ function saveStats(counts) {
         position: index + 1,
         titre,
         telecharges: data.telecharges,
-        fichier: data.fichier
+        fichier: data.fichier,
+        derniere_date: data.derniere_date,
+        historique: data.historique
       })),
     totalNouvelles: Object.keys(stats).length
   };
@@ -167,10 +208,10 @@ async function main() {
   if (!loadNouvelles()) { console.error('❌ Impossible de charger data.json'); process.exit(1); }
   console.log('📊 Récupération historique complet GoatCounter (par mois)...');
   try {
-    const counts = await fetchAllDownloads();
-    console.log(`✅ ${Object.keys(counts).length} nouvelles avec téléchargements`);
-    Object.entries(counts).sort((a,b) => b[1]-a[1]).forEach(([t, c]) => console.log(`   ${c} - ${t}`));
-    saveStats(counts);
+    const { totalCounts, totalHistory } = await fetchAllDownloads();
+    console.log(`✅ ${Object.keys(totalCounts).length} nouvelles avec téléchargements`);
+    Object.entries(totalCounts).sort((a,b) => b[1]-a[1]).forEach(([t, c]) => console.log(`   ${c} - ${t}`));
+    saveStats(totalCounts, totalHistory);
     console.log('✅ Succès !');
   } catch (e) {
     console.error('❌ Erreur:', e.message);
