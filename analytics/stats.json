@@ -1,21 +1,25 @@
 {
-  "dernièreMiseAJour": "2026-07-15T06:01:19.418Z",
-  "total": 18,
+  "dernièreMiseAJour": "2026-07-15T09:50:16.284Z",
+  "total": 29,
   "nouvelles": {
     "Amarres": {
       "fichier": "Amarres.pdf",
-      "telecharges": 1,
-      "derniere_date": "2025-12-17",
+      "telecharges": 3,
+      "derniere_date": "2026-05-17",
       "historique": [
         {
           "date": "2025-12-17",
           "count": 1
+        },
+        {
+          "date": "2026-05-17",
+          "count": 2
         }
       ]
     },
     "Celle qui savait lire": {
       "fichier": "Celle_qui_savait_lire.pdf",
-      "telecharges": 3,
+      "telecharges": 6,
       "derniere_date": "2026-06-19",
       "historique": [
         {
@@ -24,6 +28,14 @@
         },
         {
           "date": "2026-02-17",
+          "count": 1
+        },
+        {
+          "date": "2026-05-17",
+          "count": 2
+        },
+        {
+          "date": "2026-06-04",
           "count": 1
         },
         {
@@ -40,22 +52,30 @@
     },
     "Le Café des Carmélites": {
       "fichier": "Le_Cafe_des_Carmelites.pdf",
-      "telecharges": 1,
-      "derniere_date": "2026-05-16",
+      "telecharges": 2,
+      "derniere_date": "2026-05-17",
       "historique": [
         {
           "date": "2026-05-16",
+          "count": 1
+        },
+        {
+          "date": "2026-05-17",
           "count": 1
         }
       ]
     },
     "Le Choix du Pianiste": {
       "fichier": "Le_Choix_du_Pianiste.pdf",
-      "telecharges": 1,
-      "derniere_date": "2026-05-16",
+      "telecharges": 2,
+      "derniere_date": "2026-06-04",
       "historique": [
         {
           "date": "2026-05-16",
+          "count": 1
+        },
+        {
+          "date": "2026-06-04",
           "count": 1
         }
       ]
@@ -79,8 +99,8 @@
     },
     "Le Dernier Rendez-vous": {
       "fichier": "Le_Dernier_Rendez-vous.pdf",
-      "telecharges": 3,
-      "derniere_date": "2026-05-16",
+      "telecharges": 4,
+      "derniere_date": "2026-05-17",
       "historique": [
         {
           "date": "2026-02-17",
@@ -92,6 +112,10 @@
         },
         {
           "date": "2026-05-16",
+          "count": 1
+        },
+        {
+          "date": "2026-05-17",
           "count": 1
         }
       ]
@@ -119,9 +143,18 @@
     },
     "L'Autre Traversée": {
       "fichier": "L_Autre_Traversee.pdf",
-      "telecharges": 0,
-      "derniere_date": "2026-07-15",
-      "historique": []
+      "telecharges": 2,
+      "derniere_date": "2026-06-09",
+      "historique": [
+        {
+          "date": "2026-06-01",
+          "count": 1
+        },
+        {
+          "date": "2026-06-09",
+          "count": 1
+        }
+      ]
     },
     "L'Ennui à l'ère numérique": {
       "fichier": "L_Ennui_a_l_ere_numerique.pdf",
@@ -274,9 +307,14 @@
     },
     "Les Aiguilles de l'horloge": {
       "fichier": "Les_Aiguilles_de_l_Horloge.pdf",
-      "telecharges": 0,
-      "derniere_date": "2026-07-15",
-      "historique": []
+      "telecharges": 1,
+      "derniere_date": "2026-06-08",
+      "historique": [
+        {
+          "date": "2026-06-08",
+          "count": 1
+        }
+      ]
     },
     "Silence radio": {
       "fichier": "Silence_Radio.pdf",
@@ -325,7 +363,7 @@
     {
       "position": 1,
       "titre": "Celle qui savait lire",
-      "telecharges": 3,
+      "telecharges": 6,
       "fichier": "Celle_qui_savait_lire.pdf",
       "derniere_date": "2026-06-19",
       "historique": [
@@ -338,6 +376,14 @@
           "count": 1
         },
         {
+          "date": "2026-05-17",
+          "count": 2
+        },
+        {
+          "date": "2026-06-04",
+          "count": 1
+        },
+        {
           "date": "2026-06-19",
           "count": 1
         }
@@ -346,9 +392,9 @@
     {
       "position": 2,
       "titre": "Le Dernier Rendez-vous",
-      "telecharges": 3,
+      "telecharges": 4,
       "fichier": "Le_Dernier_Rendez-vous.pdf",
-      "derniere_date": "2026-05-16",
+      "derniere_date": "2026-05-17",
       "historique": [
         {
           "date": "2026-02-17",
@@ -361,11 +407,66 @@
         {
           "date": "2026-05-16",
           "count": 1
+        },
+        {
+          "date": "2026-05-17",
+          "count": 1
         }
       ]
     },
     {
       "position": 3,
+      "titre": "Amarres",
+      "telecharges": 3,
+      "fichier": "Amarres.pdf",
+      "derniere_date": "2026-05-17",
+      "historique": [
+        {
+          "date": "2025-12-17",
+          "count": 1
+        },
+        {
+          "date": "2026-05-17",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "position": 4,
+      "titre": "Le Café des Carmélites",
+      "telecharges": 2,
+      "fichier": "Le_Cafe_des_Carmelites.pdf",
+      "derniere_date": "2026-05-17",
+      "historique": [
+        {
+          "date": "2026-05-16",
+          "count": 1
+        },
+        {
+          "date": "2026-05-17",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "position": 5,
+      "titre": "Le Choix du Pianiste",
+      "telecharges": 2,
+      "fichier": "Le_Choix_du_Pianiste.pdf",
+      "derniere_date": "2026-06-04",
+      "historique": [
+        {
+          "date": "2026-05-16",
+          "count": 1
+        },
+        {
+          "date": "2026-06-04",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "position": 6,
       "titre": "L'Arôme du Huitième Service",
       "telecharges": 2,
       "fichier": "L_Arome_du_Huitieme_Service.pdf",
@@ -382,7 +483,24 @@
       ]
     },
     {
-      "position": 4,
+      "position": 7,
+      "titre": "L'Autre Traversée",
+      "telecharges": 2,
+      "fichier": "L_Autre_Traversee.pdf",
+      "derniere_date": "2026-06-09",
+      "historique": [
+        {
+          "date": "2026-06-01",
+          "count": 1
+        },
+        {
+          "date": "2026-06-09",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "position": 8,
       "titre": "Les Sentiers de Rosée",
       "telecharges": 2,
       "fichier": "Les_Sentiers_de_Rosee.pdf",
@@ -399,46 +517,7 @@
       ]
     },
     {
-      "position": 5,
-      "titre": "Amarres",
-      "telecharges": 1,
-      "fichier": "Amarres.pdf",
-      "derniere_date": "2025-12-17",
-      "historique": [
-        {
-          "date": "2025-12-17",
-          "count": 1
-        }
-      ]
-    },
-    {
-      "position": 6,
-      "titre": "Le Café des Carmélites",
-      "telecharges": 1,
-      "fichier": "Le_Cafe_des_Carmelites.pdf",
-      "derniere_date": "2026-05-16",
-      "historique": [
-        {
-          "date": "2026-05-16",
-          "count": 1
-        }
-      ]
-    },
-    {
-      "position": 7,
-      "titre": "Le Choix du Pianiste",
-      "telecharges": 1,
-      "fichier": "Le_Choix_du_Pianiste.pdf",
-      "derniere_date": "2026-05-16",
-      "historique": [
-        {
-          "date": "2026-05-16",
-          "count": 1
-        }
-      ]
-    },
-    {
-      "position": 8,
+      "position": 9,
       "titre": "Le Costume de Lumière",
       "telecharges": 1,
       "fichier": "Le_Costume_de_Lumiere.pdf",
@@ -451,7 +530,7 @@
       ]
     },
     {
-      "position": 9,
+      "position": 10,
       "titre": "L'Éveil des Abysses",
       "telecharges": 1,
       "fichier": "L_Eveil_des_Abysses.pdf",
@@ -464,7 +543,7 @@
       ]
     },
     {
-      "position": 10,
+      "position": 11,
       "titre": "La Fissure",
       "telecharges": 1,
       "fichier": "La_Fissure.pdf",
@@ -477,7 +556,7 @@
       ]
     },
     {
-      "position": 11,
+      "position": 12,
       "titre": "Le Gardien des Songes",
       "telecharges": 1,
       "fichier": "Le_Gardien_des_Songes.pdf",
@@ -490,7 +569,7 @@
       ]
     },
     {
-      "position": 12,
+      "position": 13,
       "titre": "Sur la Portée du Temps",
       "telecharges": 1,
       "fichier": "Sur_la_Portee_du_Temps.pdf",
@@ -503,7 +582,20 @@
       ]
     },
     {
-      "position": 13,
+      "position": 14,
+      "titre": "Les Aiguilles de l'horloge",
+      "telecharges": 1,
+      "fichier": "Les_Aiguilles_de_l_Horloge.pdf",
+      "derniere_date": "2026-06-08",
+      "historique": [
+        {
+          "date": "2026-06-08",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "position": 15,
       "titre": "La Chaîne des sourires",
       "telecharges": 0,
       "fichier": "La_Cha%C3%AEne_des_sourires.pdf",
@@ -511,7 +603,7 @@
       "historique": []
     },
     {
-      "position": 14,
+      "position": 16,
       "titre": "Le Club des Jardiniers Fous",
       "telecharges": 0,
       "fichier": "Le_Club_des_Jardiniers_Fous.pdf",
@@ -519,7 +611,7 @@
       "historique": []
     },
     {
-      "position": 15,
+      "position": 17,
       "titre": "L'Acier et le Rêve",
       "telecharges": 0,
       "fichier": "L_Acier_et_le_Reve.pdf",
@@ -527,15 +619,7 @@
       "historique": []
     },
     {
-      "position": 16,
-      "titre": "L'Autre Traversée",
-      "telecharges": 0,
-      "fichier": "L_Autre_Traversee.pdf",
-      "derniere_date": "2026-07-15",
-      "historique": []
-    },
-    {
-      "position": 17,
+      "position": 18,
       "titre": "L'Ennui à l'ère numérique",
       "telecharges": 0,
       "fichier": "L_Ennui_a_l_ere_numerique.pdf",
@@ -543,7 +627,7 @@
       "historique": []
     },
     {
-      "position": 18,
+      "position": 19,
       "titre": "Le Bouton de nacre",
       "telecharges": 0,
       "fichier": "Le_Bouton_de_nacre.pdf",
@@ -551,7 +635,7 @@
       "historique": []
     },
     {
-      "position": 19,
+      "position": 20,
       "titre": "Les Grains d'Elena",
       "telecharges": 0,
       "fichier": "Les_Grains_d%27Elena.pdf",
@@ -559,7 +643,7 @@
       "historique": []
     },
     {
-      "position": 20,
+      "position": 21,
       "titre": "Les Murmures de la Marca",
       "telecharges": 0,
       "fichier": "Les_Murmures_de_la_Marca.pdf",
@@ -567,7 +651,7 @@
       "historique": []
     },
     {
-      "position": 21,
+      "position": 22,
       "titre": "L'Ombre Bleue",
       "telecharges": 0,
       "fichier": "L_Ombre_Bleue.pdf",
@@ -575,7 +659,7 @@
       "historique": []
     },
     {
-      "position": 22,
+      "position": 23,
       "titre": "Les Oranais ont la Parole",
       "telecharges": 0,
       "fichier": "Les_Oranais_ont_la_Parole.pdf",
@@ -583,7 +667,7 @@
       "historique": []
     },
     {
-      "position": 23,
+      "position": 24,
       "titre": "Le Papillon de Nuit",
       "telecharges": 0,
       "fichier": "Le_Papillon_de_Nuit.pdf",
@@ -591,7 +675,7 @@
       "historique": []
     },
     {
-      "position": 24,
+      "position": 25,
       "titre": "La Place aux Souvenirs",
       "telecharges": 0,
       "fichier": "La_Place_aux_Souvenirs.pdf",
@@ -599,7 +683,7 @@
       "historique": []
     },
     {
-      "position": 25,
+      "position": 26,
       "titre": "Les Règles de la Survie",
       "telecharges": 0,
       "fichier": "Les_Regles_de_la_Survie.pdf",
@@ -607,7 +691,7 @@
       "historique": []
     },
     {
-      "position": 26,
+      "position": 27,
       "titre": "Sarah & Antoine — Pour toujours",
       "telecharges": 0,
       "fichier": "Sarah_%26_Antoine%E2%80%94Pour_toujours.pdf",
@@ -615,7 +699,7 @@
       "historique": []
     },
     {
-      "position": 27,
+      "position": 28,
       "titre": "Les Secrets de Saint-Laon",
       "telecharges": 0,
       "fichier": "Les_Secrets_de_Saint-Laon.pdf",
@@ -623,7 +707,7 @@
       "historique": []
     },
     {
-      "position": 28,
+      "position": 29,
       "titre": "Le Terminus",
       "telecharges": 0,
       "fichier": "Le_Terminus.pdf",
@@ -631,7 +715,7 @@
       "historique": []
     },
     {
-      "position": 29,
+      "position": 30,
       "titre": "Tic-tac",
       "telecharges": 0,
       "fichier": "Tic-tac_L_heure_du_passeur.pdf",
@@ -639,7 +723,7 @@
       "historique": []
     },
     {
-      "position": 30,
+      "position": 31,
       "titre": "La Transplantée du Cœur",
       "telecharges": 0,
       "fichier": "La_Transplantee_du_Coeur.pdf",
@@ -647,18 +731,10 @@
       "historique": []
     },
     {
-      "position": 31,
+      "position": 32,
       "titre": "La Rose des Ténèbres",
       "telecharges": 0,
       "fichier": "La_Rose_des_Tenebres.pdf",
-      "derniere_date": "2026-07-15",
-      "historique": []
-    },
-    {
-      "position": 32,
-      "titre": "Les Aiguilles de l'horloge",
-      "telecharges": 0,
-      "fichier": "Les_Aiguilles_de_l_Horloge.pdf",
       "derniere_date": "2026-07-15",
       "historique": []
     },
