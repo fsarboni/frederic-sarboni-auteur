@@ -1,6 +1,6 @@
 {
-  "dernièreMiseAJour": "2026-08-09T06:00:50.342Z",
-  "total": 34,
+  "dernièreMiseAJour": "2026-08-09T08:30:00.402Z",
+  "total": 35,
   "nouvelles": {
     "Amarres": {
       "fichier": "Amarres.pdf",
@@ -19,9 +19,13 @@
     },
     "Celle qui savait lire": {
       "fichier": "Celle_qui_savait_lire.pdf",
-      "telecharges": 6,
+      "telecharges": 7,
       "derniere_date": "2026-07-21",
       "historique": [
+        {
+          "date": "2025-12-16",
+          "count": 1
+        },
         {
           "date": "2026-02-17",
           "count": 1
@@ -385,10 +389,14 @@
     {
       "position": 1,
       "titre": "Celle qui savait lire",
-      "telecharges": 6,
+      "telecharges": 7,
       "fichier": "Celle_qui_savait_lire.pdf",
       "derniere_date": "2026-07-21",
       "historique": [
+        {
+          "date": "2025-12-16",
+          "count": 1
+        },
         {
           "date": "2026-02-17",
           "count": 1
