@@ -1,6 +1,6 @@
 {
-  "dernièreMiseAJour": "2026-09-13T12:56:13.083Z",
-  "total": 44,
+  "dernièreMiseAJour": "2026-09-14T06:01:14.751Z",
+  "total": 45,
   "nouvelles": {
     "Amarres": {
       "fichier": "Amarres.pdf",
@@ -161,7 +161,7 @@
     "L'Acier et le Rêve": {
       "fichier": "L_Acier_et_le_Reve.pdf",
       "telecharges": 0,
-      "derniere_date": "2026-09-13",
+      "derniere_date": "2026-09-14",
       "historique": []
     },
     "L'Arôme du Huitième Service": {
@@ -201,7 +201,7 @@
     "L'Ennui à l'ère numérique": {
       "fichier": "L_Ennui_a_l_ere_numerique.pdf",
       "telecharges": 0,
-      "derniere_date": "2026-09-13",
+      "derniere_date": "2026-09-14",
       "historique": []
     },
     "L'Éveil des Abysses": {
@@ -251,7 +251,7 @@
     "Les Grains d'Elena": {
       "fichier": "Les_Grains_d%27Elena.pdf",
       "telecharges": 0,
-      "derniere_date": "2026-09-13",
+      "derniere_date": "2026-09-14",
       "historique": []
     },
     "Les Murmures de la Marca": {
@@ -268,37 +268,42 @@
     "L'Ombre Bleue": {
       "fichier": "L_Ombre_Bleue.pdf",
       "telecharges": 0,
-      "derniere_date": "2026-09-13",
+      "derniere_date": "2026-09-14",
       "historique": []
     },
     "Les Oranais ont la Parole": {
       "fichier": "Les_Oranais_ont_la_Parole.pdf",
       "telecharges": 0,
-      "derniere_date": "2026-09-13",
+      "derniere_date": "2026-09-14",
       "historique": []
     },
     "Le Papillon de Nuit": {
       "fichier": "Le_Papillon_de_Nuit.pdf",
-      "telecharges": 0,
+      "telecharges": 1,
       "derniere_date": "2026-09-13",
-      "historique": []
+      "historique": [
+        {
+          "date": "2026-09-13",
+          "count": 1
+        }
+      ]
     },
     "La Place aux Souvenirs": {
       "fichier": "La_Place_aux_Souvenirs.pdf",
       "telecharges": 0,
-      "derniere_date": "2026-09-13",
+      "derniere_date": "2026-09-14",
       "historique": []
     },
     "Les Règles de la Survie": {
       "fichier": "Les_Regles_de_la_Survie.pdf",
       "telecharges": 0,
-      "derniere_date": "2026-09-13",
+      "derniere_date": "2026-09-14",
       "historique": []
     },
     "Sarah & Antoine — Pour toujours": {
       "fichier": "Sarah_%26_Antoine%E2%80%94Pour_toujours.pdf",
       "telecharges": 0,
-      "derniere_date": "2026-09-13",
+      "derniere_date": "2026-09-14",
       "historique": []
     },
     "Les Secrets de Saint-Laon": {
@@ -352,19 +357,19 @@
     "Tic-tac": {
       "fichier": "Tic-tac_L_heure_du_passeur.pdf",
       "telecharges": 0,
-      "derniere_date": "2026-09-13",
+      "derniere_date": "2026-09-14",
       "historique": []
     },
     "La Transplantée du Cœur": {
       "fichier": "La_Transplantee_du_Coeur.pdf",
       "telecharges": 0,
-      "derniere_date": "2026-09-13",
+      "derniere_date": "2026-09-14",
       "historique": []
     },
     "La Rose des Ténèbres": {
       "fichier": "La_Rose_des_Tenebres.pdf",
       "telecharges": 0,
-      "derniere_date": "2026-09-13",
+      "derniere_date": "2026-09-14",
       "historique": []
     },
     "Les Aiguilles de l'horloge": {
@@ -385,43 +390,43 @@
     "Silence radio": {
       "fichier": "Silence_Radio.pdf",
       "telecharges": 0,
-      "derniere_date": "2026-09-13",
+      "derniere_date": "2026-09-14",
       "historique": []
     },
     "La Pierre et le Silence": {
       "fichier": "La_Pierre_et_le_Silence.pdf",
       "telecharges": 0,
-      "derniere_date": "2026-09-13",
+      "derniere_date": "2026-09-14",
       "historique": []
     },
     "Ce que les Korrigans laissent derrière eux": {
       "fichier": "Ce_que_les_Korrigans_laissent_derriere_eux.pdf",
       "telecharges": 0,
-      "derniere_date": "2026-09-13",
+      "derniere_date": "2026-09-14",
       "historique": []
     },
     "Le Cahier des absents": {
       "fichier": "Le_Cahier_des_Absents.pdf",
       "telecharges": 0,
-      "derniere_date": "2026-09-13",
+      "derniere_date": "2026-09-14",
       "historique": []
     },
     "Les Pigeons Mécaniques": {
       "fichier": "Les_Pigeons_Mecaniques.pdf",
       "telecharges": 0,
-      "derniere_date": "2026-09-13",
+      "derniere_date": "2026-09-14",
       "historique": []
     },
     "Le Retour des Goélands": {
       "fichier": "Le_Retour_des_Goelands.pdf",
       "telecharges": 0,
-      "derniere_date": "2026-09-13",
+      "derniere_date": "2026-09-14",
       "historique": []
     },
     "La Nuit du Grand Phare": {
       "fichier": "La_Nuit_du_Grand_Phare.pdf",
       "telecharges": 0,
-      "derniere_date": "2026-09-13",
+      "derniere_date": "2026-09-14",
       "historique": []
     }
   },
@@ -737,6 +742,19 @@
     },
     {
       "position": 18,
+      "titre": "Le Papillon de Nuit",
+      "telecharges": 1,
+      "fichier": "Le_Papillon_de_Nuit.pdf",
+      "derniere_date": "2026-09-13",
+      "historique": [
+        {
+          "date": "2026-09-13",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "position": 19,
       "titre": "Les Secrets de Saint-Laon",
       "telecharges": 1,
       "fichier": "Les_Secrets_de_Saint-Laon.pdf",
@@ -749,7 +767,7 @@
       ]
     },
     {
-      "position": 19,
+      "position": 20,
       "titre": "Sur la Portée du Temps",
       "telecharges": 1,
       "fichier": "Sur_la_Portee_du_Temps.pdf",
@@ -762,7 +780,7 @@
       ]
     },
     {
-      "position": 20,
+      "position": 21,
       "titre": "Le Terminus",
       "telecharges": 1,
       "fichier": "Le_Terminus.pdf",
@@ -775,51 +793,43 @@
       ]
     },
     {
-      "position": 21,
+      "position": 22,
       "titre": "L'Acier et le Rêve",
       "telecharges": 0,
       "fichier": "L_Acier_et_le_Reve.pdf",
-      "derniere_date": "2026-09-13",
-      "historique": []
-    },
-    {
-      "position": 22,
-      "titre": "L'Ennui à l'ère numérique",
-      "telecharges": 0,
-      "fichier": "L_Ennui_a_l_ere_numerique.pdf",
-      "derniere_date": "2026-09-13",
+      "derniere_date": "2026-09-14",
       "historique": []
     },
     {
       "position": 23,
-      "titre": "Les Grains d'Elena",
+      "titre": "L'Ennui à l'ère numérique",
       "telecharges": 0,
-      "fichier": "Les_Grains_d%27Elena.pdf",
-      "derniere_date": "2026-09-13",
+      "fichier": "L_Ennui_a_l_ere_numerique.pdf",
+      "derniere_date": "2026-09-14",
       "historique": []
     },
     {
       "position": 24,
-      "titre": "L'Ombre Bleue",
+      "titre": "Les Grains d'Elena",
       "telecharges": 0,
-      "fichier": "L_Ombre_Bleue.pdf",
-      "derniere_date": "2026-09-13",
+      "fichier": "Les_Grains_d%27Elena.pdf",
+      "derniere_date": "2026-09-14",
       "historique": []
     },
     {
       "position": 25,
-      "titre": "Les Oranais ont la Parole",
+      "titre": "L'Ombre Bleue",
       "telecharges": 0,
-      "fichier": "Les_Oranais_ont_la_Parole.pdf",
-      "derniere_date": "2026-09-13",
+      "fichier": "L_Ombre_Bleue.pdf",
+      "derniere_date": "2026-09-14",
       "historique": []
     },
     {
       "position": 26,
-      "titre": "Le Papillon de Nuit",
+      "titre": "Les Oranais ont la Parole",
       "telecharges": 0,
-      "fichier": "Le_Papillon_de_Nuit.pdf",
-      "derniere_date": "2026-09-13",
+      "fichier": "Les_Oranais_ont_la_Parole.pdf",
+      "derniere_date": "2026-09-14",
       "historique": []
     },
     {
@@ -827,7 +837,7 @@
       "titre": "La Place aux Souvenirs",
       "telecharges": 0,
       "fichier": "La_Place_aux_Souvenirs.pdf",
-      "derniere_date": "2026-09-13",
+      "derniere_date": "2026-09-14",
       "historique": []
     },
     {
@@ -835,7 +845,7 @@
       "titre": "Les Règles de la Survie",
       "telecharges": 0,
       "fichier": "Les_Regles_de_la_Survie.pdf",
-      "derniere_date": "2026-09-13",
+      "derniere_date": "2026-09-14",
       "historique": []
     },
     {
@@ -843,7 +853,7 @@
       "titre": "Sarah & Antoine — Pour toujours",
       "telecharges": 0,
       "fichier": "Sarah_%26_Antoine%E2%80%94Pour_toujours.pdf",
-      "derniere_date": "2026-09-13",
+      "derniere_date": "2026-09-14",
       "historique": []
     },
     {
@@ -851,7 +861,7 @@
       "titre": "Tic-tac",
       "telecharges": 0,
       "fichier": "Tic-tac_L_heure_du_passeur.pdf",
-      "derniere_date": "2026-09-13",
+      "derniere_date": "2026-09-14",
       "historique": []
     },
     {
@@ -859,7 +869,7 @@
       "titre": "La Transplantée du Cœur",
       "telecharges": 0,
       "fichier": "La_Transplantee_du_Coeur.pdf",
-      "derniere_date": "2026-09-13",
+      "derniere_date": "2026-09-14",
       "historique": []
     },
     {
@@ -867,7 +877,7 @@
       "titre": "La Rose des Ténèbres",
       "telecharges": 0,
       "fichier": "La_Rose_des_Tenebres.pdf",
-      "derniere_date": "2026-09-13",
+      "derniere_date": "2026-09-14",
       "historique": []
     },
     {
@@ -875,7 +885,7 @@
       "titre": "Silence radio",
       "telecharges": 0,
       "fichier": "Silence_Radio.pdf",
-      "derniere_date": "2026-09-13",
+      "derniere_date": "2026-09-14",
       "historique": []
     },
     {
@@ -883,7 +893,7 @@
       "titre": "La Pierre et le Silence",
       "telecharges": 0,
       "fichier": "La_Pierre_et_le_Silence.pdf",
-      "derniere_date": "2026-09-13",
+      "derniere_date": "2026-09-14",
       "historique": []
     },
     {
@@ -891,7 +901,7 @@
       "titre": "Ce que les Korrigans laissent derrière eux",
       "telecharges": 0,
       "fichier": "Ce_que_les_Korrigans_laissent_derriere_eux.pdf",
-      "derniere_date": "2026-09-13",
+      "derniere_date": "2026-09-14",
       "historique": []
     },
     {
@@ -899,7 +909,7 @@
       "titre": "Le Cahier des absents",
       "telecharges": 0,
       "fichier": "Le_Cahier_des_Absents.pdf",
-      "derniere_date": "2026-09-13",
+      "derniere_date": "2026-09-14",
       "historique": []
     },
     {
@@ -907,7 +917,7 @@
       "titre": "Les Pigeons Mécaniques",
       "telecharges": 0,
       "fichier": "Les_Pigeons_Mecaniques.pdf",
-      "derniere_date": "2026-09-13",
+      "derniere_date": "2026-09-14",
       "historique": []
     },
     {
@@ -915,7 +925,7 @@
       "titre": "Le Retour des Goélands",
       "telecharges": 0,
       "fichier": "Le_Retour_des_Goelands.pdf",
-      "derniere_date": "2026-09-13",
+      "derniere_date": "2026-09-14",
       "historique": []
     },
     {
@@ -923,7 +933,7 @@
       "titre": "La Nuit du Grand Phare",
       "telecharges": 0,
       "fichier": "La_Nuit_du_Grand_Phare.pdf",
-      "derniere_date": "2026-09-13",
+      "derniere_date": "2026-09-14",
       "historique": []
     }
   ],
