@@ -1,12 +1,16 @@
 {
-  "dernièreMiseAJour": "2026-10-02T06:01:07.614Z",
-  "total": 52,
+  "dernièreMiseAJour": "2026-10-02T14:18:06.067Z",
+  "total": 55,
   "nouvelles": {
     "Amarres": {
       "fichier": "Amarres.pdf",
-      "telecharges": 4,
+      "telecharges": 5,
       "derniere_date": "2026-10-01",
       "historique": [
+        {
+          "date": "2025-12-17",
+          "count": 1
+        },
         {
           "date": "2026-05-17",
           "count": 2
@@ -251,9 +255,14 @@
     },
     "Le Gardien des Songes": {
       "fichier": "Le_Gardien_des_Songes.pdf",
-      "telecharges": 0,
-      "derniere_date": "2026-10-02",
-      "historique": []
+      "telecharges": 1,
+      "derniere_date": "2025-12-18",
+      "historique": [
+        {
+          "date": "2025-12-18",
+          "count": 1
+        }
+      ]
     },
     "Les Grains d'Elena": {
       "fichier": "Les_Grains_d%27Elena.pdf",
@@ -326,9 +335,13 @@
     },
     "Les Sentiers de Rosée": {
       "fichier": "Les_Sentiers_de_Rosee.pdf",
-      "telecharges": 1,
+      "telecharges": 2,
       "derniere_date": "2026-02-17",
       "historique": [
+        {
+          "date": "2025-12-18",
+          "count": 1
+        },
         {
           "date": "2026-02-17",
           "count": 1
@@ -515,6 +528,27 @@
     },
     {
       "position": 3,
+      "titre": "Amarres",
+      "telecharges": 5,
+      "fichier": "Amarres.pdf",
+      "derniere_date": "2026-10-01",
+      "historique": [
+        {
+          "date": "2025-12-17",
+          "count": 1
+        },
+        {
+          "date": "2026-05-17",
+          "count": 2
+        },
+        {
+          "date": "2026-10-01",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "position": 4,
       "titre": "Le Café des Carmélites",
       "telecharges": 5,
       "fichier": "Le_Cafe_des_Carmelites.pdf",
@@ -539,23 +573,6 @@
         {
           "date": "2026-09-09",
           "count": 1
-        }
-      ]
-    },
-    {
-      "position": 4,
-      "titre": "Amarres",
-      "telecharges": 4,
-      "fichier": "Amarres.pdf",
-      "derniere_date": "2026-10-01",
-      "historique": [
-        {
-          "date": "2026-05-17",
-          "count": 2
-        },
-        {
-          "date": "2026-10-01",
-          "count": 2
         }
       ]
     },
@@ -663,6 +680,23 @@
     },
     {
       "position": 11,
+      "titre": "Les Sentiers de Rosée",
+      "telecharges": 2,
+      "fichier": "Les_Sentiers_de_Rosee.pdf",
+      "derniere_date": "2026-02-17",
+      "historique": [
+        {
+          "date": "2025-12-18",
+          "count": 1
+        },
+        {
+          "date": "2026-02-17",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "position": 12,
       "titre": "Les Aiguilles de l'horloge",
       "telecharges": 2,
       "fichier": "Les_Aiguilles_de_l_Horloge.pdf",
@@ -679,7 +713,7 @@
       ]
     },
     {
-      "position": 12,
+      "position": 13,
       "titre": "Le Costume de Lumière",
       "telecharges": 1,
       "fichier": "Le_Costume_de_Lumiere.pdf",
@@ -692,7 +726,7 @@
       ]
     },
     {
-      "position": 13,
+      "position": 14,
       "titre": "L'Éveil des Abysses",
       "telecharges": 1,
       "fichier": "L_Eveil_des_Abysses.pdf",
@@ -705,7 +739,7 @@
       ]
     },
     {
-      "position": 14,
+      "position": 15,
       "titre": "La Fissure",
       "telecharges": 1,
       "fichier": "La_Fissure.pdf",
@@ -718,7 +752,7 @@
       ]
     },
     {
-      "position": 15,
+      "position": 16,
       "titre": "Le Bouton de nacre",
       "telecharges": 1,
       "fichier": "Le_Bouton_de_nacre.pdf",
@@ -731,7 +765,20 @@
       ]
     },
     {
-      "position": 16,
+      "position": 17,
+      "titre": "Le Gardien des Songes",
+      "telecharges": 1,
+      "fichier": "Le_Gardien_des_Songes.pdf",
+      "derniere_date": "2025-12-18",
+      "historique": [
+        {
+          "date": "2025-12-18",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "position": 18,
       "titre": "Les Murmures de la Marca",
       "telecharges": 1,
       "fichier": "Les_Murmures_de_la_Marca.pdf",
@@ -744,7 +791,7 @@
       ]
     },
     {
-      "position": 17,
+      "position": 19,
       "titre": "Le Papillon de Nuit",
       "telecharges": 1,
       "fichier": "Le_Papillon_de_Nuit.pdf",
@@ -757,7 +804,7 @@
       ]
     },
     {
-      "position": 18,
+      "position": 20,
       "titre": "Les Secrets de Saint-Laon",
       "telecharges": 1,
       "fichier": "Les_Secrets_de_Saint-Laon.pdf",
@@ -770,20 +817,7 @@
       ]
     },
     {
-      "position": 19,
-      "titre": "Les Sentiers de Rosée",
-      "telecharges": 1,
-      "fichier": "Les_Sentiers_de_Rosee.pdf",
-      "derniere_date": "2026-02-17",
-      "historique": [
-        {
-          "date": "2026-02-17",
-          "count": 1
-        }
-      ]
-    },
-    {
-      "position": 20,
+      "position": 21,
       "titre": "Sur la Portée du Temps",
       "telecharges": 1,
       "fichier": "Sur_la_Portee_du_Temps.pdf",
@@ -796,7 +830,7 @@
       ]
     },
     {
-      "position": 21,
+      "position": 22,
       "titre": "Le Terminus",
       "telecharges": 1,
       "fichier": "Le_Terminus.pdf",
@@ -809,7 +843,7 @@
       ]
     },
     {
-      "position": 22,
+      "position": 23,
       "titre": "L'Acier et le Rêve",
       "telecharges": 0,
       "fichier": "L_Acier_et_le_Reve.pdf",
@@ -817,18 +851,10 @@
       "historique": []
     },
     {
-      "position": 23,
+      "position": 24,
       "titre": "L'Ennui à l'ère numérique",
       "telecharges": 0,
       "fichier": "L_Ennui_a_l_ere_numerique.pdf",
-      "derniere_date": "2026-10-02",
-      "historique": []
-    },
-    {
-      "position": 24,
-      "titre": "Le Gardien des Songes",
-      "telecharges": 0,
-      "fichier": "Le_Gardien_des_Songes.pdf",
       "derniere_date": "2026-10-02",
       "historique": []
     },
