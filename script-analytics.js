@@ -8,6 +8,10 @@ const DATA_FILE = path.join(process.cwd(), 'data.json');
 const OUTPUT_FILE = path.join(process.cwd(), 'analytics', 'stats.json');
 const TOKEN = process.env.GOATCOUNTER_TOKEN;
 
+// Nombre d'essais par appel GoatCounter, et attente entre deux essais (ms)
+const MAX_ESSAIS = 5;
+const ATTENTES = [3000, 8000, 15000, 30000];
+
 let NOUVELLES = {};
 
 function loadNouvelles() {
@@ -29,7 +33,10 @@ function loadNouvelles() {
   return false;
 }
 
-function apiGet(urlPath) {
+function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+// Un seul appel, sans relance
+function apiGetOnce(urlPath) {
   return new Promise((resolve, reject) => {
     const options = {
       hostname: 'fsarboni.goatcounter.com',
@@ -39,20 +46,44 @@ function apiGet(urlPath) {
         'Authorization': 'Bearer ' + TOKEN,
         'Content-Type': 'application/json'
       },
-      timeout: 15000
+      timeout: 30000
     };
-    https.request(options, (res) => {
+    const req = https.request(options, (res) => {
       let data = '';
       res.on('data', chunk => { data += chunk; });
       res.on('end', () => {
         try { resolve({ status: res.statusCode, body: JSON.parse(data) }); }
         catch (e) { resolve({ status: res.statusCode, body: data }); }
       });
-    }).on('error', reject).on('timeout', () => reject(new Error('Timeout'))).end();
+    });
+    req.on('error', reject);
+    req.on('timeout', () => { req.destroy(new Error('Timeout')); });
+    req.end();
   });
 }
 
-function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+// Appel avec relances : coupure réseau, lenteur, limite de débit (429) ou panne serveur (5xx)
+async function apiGet(urlPath) {
+  let derniereErreur = null;
+  for (let essai = 1; essai <= MAX_ESSAIS; essai++) {
+    try {
+      const result = await apiGetOnce(urlPath);
+      if (result.status === 429 || result.status >= 500) {
+        derniereErreur = new Error(`HTTP ${result.status}`);
+      } else {
+        return result;
+      }
+    } catch (e) {
+      derniereErreur = e;
+    }
+    if (essai < MAX_ESSAIS) {
+      const attente = ATTENTES[essai - 1];
+      console.log(`   ↻ ${derniereErreur.message} — nouvel essai dans ${attente / 1000} s (${essai + 1}/${MAX_ESSAIS})`);
+      await sleep(attente);
+    }
+  }
+  throw new Error(`GoatCounter injoignable après ${MAX_ESSAIS} essais (${derniereErreur.message})`);
+}
 
 function addMonths(dateStr, months) {
   const d = new Date(dateStr);
@@ -85,9 +116,10 @@ async function fetchPeriod(start, end) {
 
     const result = await apiGet(url);
 
+    // Une réponse anormale ne doit pas produire des chiffres incomplets :
+    // on s'arrête sans toucher à stats.json
     if (result.status !== 200) {
-      console.log(`   ⚠️ HTTP ${result.status} pour ${start}→${end}`);
-      break;
+      throw new Error(`HTTP ${result.status} pour ${start}→${end}`);
     }
     if (!result.body.hits || result.body.hits.length === 0) break;
 
@@ -117,7 +149,7 @@ async function fetchPeriod(start, end) {
     if (!result.body.more) break;
     afterId = result.body.hits[result.body.hits.length - 1].path_id;
     pages++;
-    await sleep(250);
+    await sleep(1000);
   }
 
   return { counts, history };
@@ -152,8 +184,9 @@ async function fetchAllDownloads() {
 
     monthIndex++;
     monthStart = monthEnd;
-    await sleep(300);
-    if (monthIndex > 15) break;
+    await sleep(1500);
+    // Garde-fou : 10 ans d'historique
+    if (monthIndex > 120) break;
   }
 
   return { totalCounts, totalHistory };
