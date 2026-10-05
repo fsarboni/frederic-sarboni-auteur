@@ -8,16 +8,24 @@ on:
       - main
     paths-ignore:
       - 'analytics/**'
+
+# Une seule mise à jour à la fois : si deux déclenchements tombent ensemble,
+# le second attend la fin du premier au lieu de se télescoper avec lui
+concurrency:
+  group: analytics-update
+  cancel-in-progress: false
+
 jobs:
   update:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
         with:
-          node-version: '20'
+          node-version: '24'
       - run: node script-analytics.js
         env:
           GOATCOUNTER_TOKEN: ${{ secrets.GOATCOUNTER_TOKEN }}
@@ -26,4 +34,5 @@ jobs:
           git config user.name "GitHub Action"
           git add analytics/
           git commit -m "Update analytics" || true
+          git pull --rebase origin main
           git push
