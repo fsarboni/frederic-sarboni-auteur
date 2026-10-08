@@ -68,8 +68,10 @@ async function apiGet(urlPath) {
   for (let essai = 1; essai <= MAX_ESSAIS; essai++) {
     try {
       const result = await apiGetOnce(urlPath);
-      if (result.status === 429 || result.status >= 500) {
-        derniereErreur = new Error(`HTTP ${result.status}`);
+      // 404 persistant : on rend la réponse, fetchPeriod sautera ce mois
+      if (result.status === 404 && essai === MAX_ESSAIS) return result;
+      if (result.status === 404 || result.status === 429 || result.status >= 500) {
+        derniereErreur = new Error(`HTTP ${result.status}${detail(result.body)}`);
       } else {
         return result;
       }
@@ -83,6 +85,15 @@ async function apiGet(urlPath) {
     }
   }
   throw new Error(`GoatCounter injoignable après ${MAX_ESSAIS} essais (${derniereErreur.message})`);
+}
+
+// Message d'erreur renvoyé par GoatCounter, pour comprendre ce qui coince
+function detail(body) {
+  if (!body) return '';
+  if (typeof body === 'string') return ' — ' + body.slice(0, 200).replace(/\s+/g, ' ');
+  if (body.error) return ' — ' + body.error;
+  if (body.errors) return ' — ' + JSON.stringify(body.errors).slice(0, 200);
+  return '';
 }
 
 function addMonths(dateStr, months) {
@@ -116,10 +127,11 @@ async function fetchPeriod(start, end) {
 
     const result = await apiGet(url);
 
-    // Une réponse anormale ne doit pas produire des chiffres incomplets :
-    // on s'arrête sans toucher à stats.json
+    // Mois refusé par GoatCounter : on le saute et on le signale.
+    // Le garde-fou de saveStats empêche ensuite d'enregistrer des chiffres en baisse.
     if (result.status !== 200) {
-      throw new Error(`HTTP ${result.status} pour ${start}→${end}`);
+      console.log(`   ⚠️ Mois ignoré : HTTP ${result.status}${detail(result.body)}`);
+      return { counts, history, ignore: true };
     }
     if (!result.body.hits || result.body.hits.length === 0) break;
 
@@ -163,13 +175,15 @@ async function fetchAllDownloads() {
 
   let monthStart = startDate;
   let monthIndex = 0;
+  let moisIgnores = 0;
 
   while (monthStart < today) {
     let monthEnd = addMonths(monthStart, 1);
     if (monthEnd > today) monthEnd = today;
 
     console.log(`📅 Période ${monthStart} → ${monthEnd}`);
-    const { counts, history } = await fetchPeriod(monthStart, monthEnd);
+    const { counts, history, ignore } = await fetchPeriod(monthStart, monthEnd);
+    if (ignore) moisIgnores++;
 
     Object.entries(counts).forEach(([titre, count]) => {
       totalCounts[titre] = (totalCounts[titre] || 0) + count;
@@ -189,7 +203,16 @@ async function fetchAllDownloads() {
     if (monthIndex > 120) break;
   }
 
+  if (moisIgnores > 0) console.log(`⚠️ ${moisIgnores} mois ignoré(s) sur ${monthIndex}`);
+  if (moisIgnores === monthIndex) throw new Error('GoatCounter a refusé toutes les périodes');
   return { totalCounts, totalHistory };
+}
+
+// Les téléchargements cumulés ne peuvent pas baisser.
+// Si le nouveau total est inférieur à l'ancien, des données manquent : on garde l'ancien fichier.
+function totalPrecedent() {
+  try { return JSON.parse(fs.readFileSync(OUTPUT_FILE, 'utf8')).total || 0; }
+  catch (e) { return 0; }
 }
 
 function saveStats(counts, history) {
@@ -231,6 +254,12 @@ function saveStats(counts, history) {
       })),
     totalNouvelles: Object.keys(stats).length
   };
+
+  const ancien = totalPrecedent();
+  if (output.total < ancien) {
+    console.log(`⚠️ Total incomplet (${output.total} au lieu d'au moins ${ancien}) — stats.json conservé tel quel`);
+    return;
+  }
 
   fs.writeFileSync(OUTPUT_FILE, JSON.stringify(output, null, 2));
   console.log(`✅ Sauvegardé — Total: ${output.total} téléchargements, ${output.totalNouvelles} nouvelles`);
