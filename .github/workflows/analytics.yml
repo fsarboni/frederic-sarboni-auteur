@@ -21,6 +21,7 @@ jobs:
     timeout-minutes: 20
     permissions:
       contents: write
+      pages: write
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-node@v5
@@ -36,3 +37,11 @@ jobs:
           git commit -m "Update analytics" || true
           git pull --rebase origin main
           git push
+
+      # Les envois faits par le robot GitHub ne relancent pas la publication du site.
+      # On la demande explicitement, sinon le tableau de bord garde l'ancien stats.json.
+      - name: Publier le site
+        continue-on-error: true
+        run: gh api -X POST repos/${{ github.repository }}/pages/builds
+        env:
+          GH_TOKEN: ${{ github.token }}
