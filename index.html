@@ -23,6 +23,9 @@
         .about-content-wrapper { display: flex; gap: 2rem; align-items: flex-start; }
         .author-photo { flex-shrink: 0; width: 200px; height: 200px; border-radius: 50%; object-fit: cover; border: 4px solid #3498db; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
         .about-text { flex: 1; }
+        .serie-titre { color: #2c3e50; font-size: 1.4rem; margin: 2.2rem 0 0 0; padding-left: 0.8rem; border-left: 5px solid #3498db; }
+        .serie-titre:first-child { margin-top: 0.5rem; }
+        .serie-compte { color: #7f8c8d; font-size: 0.95rem; font-weight: normal; margin-left: 0.4rem; }
         .books-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 1.5rem; }
         .book-card { background: #f8f9fa; border-radius: 10px; padding: 1.5rem; border-left: 4px solid #3498db; transition: transform 0.3s; display: flex; flex-direction: column; }
         .book-image { width: 100%; max-width: 200px; height: 250px; object-fit: cover; border-radius: 8px; margin: 0 auto 1rem auto; border: 2px solid #ddd; }
@@ -191,7 +194,7 @@
 
     <section id="livres" class="section" style="display:none;">
         <h2>Mes Livres</h2>
-        <div class="books-grid" id="books-container"></div>
+        <div id="books-container"></div>
     </section>
 
     <section id="actualites" class="section" style="display:none;">
@@ -272,16 +275,26 @@ async function loadData() {
         document.getElementById('author-photo').src = data.auteur.photo;
         document.getElementById('author-bio').textContent = data.auteur.bio;
 
-        // Livres
-        document.getElementById('books-container').innerHTML = data.livres.map(l => `
+        // Livres — regroupés par série, dans l'ordre de data.json
+        const carteLivre = l => `
             <div class="book-card">
-                <img src="${l.image}" alt="${l.titre}" class="book-image">
+                <img src="${l.image}" alt="${l.titre}" class="book-image" onerror="this.style.display='none'">
                 <div class="book-content">
                     <h3>${l.titre}</h3>
                     <div class="date">${l.annee}</div>
                     <p>${l.description}</p>
                 </div>
-            </div>`).join('');
+            </div>`;
+        const groupes = [];
+        data.livres.forEach(l => {
+            const nom = l.serie || 'Autres ouvrages';
+            let g = groupes.find(x => x.nom === nom);
+            if (!g) { g = { nom, livres: [] }; groupes.push(g); }
+            g.livres.push(l);
+        });
+        document.getElementById('books-container').innerHTML = groupes.map(g => `
+            <h3 class="serie-titre">${g.nom}<span class="serie-compte">(${g.livres.length})</span></h3>
+            <div class="books-grid">${g.livres.map(carteLivre).join('')}</div>`).join('');
 
         // Actualités
         document.getElementById('news-container').innerHTML = data.actualites.map(a => `

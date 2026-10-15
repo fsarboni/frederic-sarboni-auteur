@@ -408,6 +408,10 @@
                         <input type="text" value="${livre.titre}" onchange="updateBook(${index}, 'titre', this.value)">
                     </div>
                     <div class="form-group">
+                        <label>Série (les livres d'une même série sont regroupés sur le site)</label>
+                        <input type="text" value="${livre.serie || ''}" onchange="updateBook(${index}, 'serie', this.value)">
+                    </div>
+                    <div class="form-group">
                         <label>Année</label>
                         <input type="text" value="${livre.annee}" onchange="updateBook(${index}, 'annee', this.value)">
                     </div>
@@ -455,6 +459,7 @@
         function addBook() {
             data.livres.push({
                 id: Date.now(),
+                serie: "",
                 titre: "Nouveau livre",
                 annee: new Date().getFullYear().toString(),
                 image: "images/nouveau-livre.jpg",
