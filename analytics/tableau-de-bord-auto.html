@@ -34,7 +34,7 @@
         .status.loading { background: #fff3cd; border-left-color: #ff9800; color: #856404; }
         .stats-overview {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
             gap: 1.5rem;
             margin-bottom: 2rem;
         }
@@ -51,6 +51,8 @@
         .stat-card.accent2 { border-left-color: #764ba2; }
         .stat-card.accent3 { border-left-color: #f093fb; }
         .stat-card.accent4 { border-left-color: #4facfe; }
+        .stat-card.accent5 { border-left-color: #f5a623; }
+        .ranking-salon { color: #c4841d; }
         .stat-card h3 { color: #666; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem; }
         .stat-number { font-size: 2.5rem; font-weight: bold; color: #2c3e50; margin-bottom: 0.3rem; }
         .stat-label { color: #999; font-size: 0.85rem; }
@@ -228,6 +230,9 @@
             const classement = data.classement || [];
             const meilleur = classement.length > 0 ? classement[0] : null;
             const nombreNouvelles = data.totalNouvelles || classement.length;
+            const nouvelles = data.nouvelles || {};
+            const salonTotal = data.dont_salon || 0;
+            const salonPart = total > 0 ? Math.round(salonTotal * 100 / total) : 0;
 
             const rankingHTML = classement.map((item, i) => {
                 const id = 'item-' + i;
@@ -235,13 +240,14 @@
                     ? 'Dernier téléchargement : ' + fmtDate(item.derniere_date)
                     : '';
                 const hasHistory = item.historique && item.historique.length > 0;
+                const salon = (nouvelles[item.titre] && nouvelles[item.titre].dont_salon) || 0;
                 return `
                     <div class="ranking-item">
                         <div class="ranking-row" onclick="toggleHistorique('${id}')">
                             <div class="ranking-position">${i + 1}</div>
                             <div class="ranking-title">
                                 ${item.titre}
-                                ${derniereDate ? `<div class="ranking-meta">${derniereDate}</div>` : ''}
+                                ${derniereDate ? `<div class="ranking-meta">${derniereDate}${salon > 0 ? ` · <span class="ranking-salon">dont ${salon} via salon</span>` : ''}</div>` : ''}
                             </div>
                             <div class="ranking-right">
                                 <div class="ranking-count">${item.telecharges} ⬇️</div>
@@ -263,6 +269,11 @@
                         <h3>📥 Total Téléchargements</h3>
                         <div class="stat-number">${total}</div>
                         <div class="stat-label">depuis le début</div>
+                    </div>
+                    <div class="stat-card accent5">
+                        <h3>🎪 Via les salons</h3>
+                        <div class="stat-number">${salonTotal}</div>
+                        <div class="stat-label">${salonPart} % du total (QR code)</div>
                     </div>
                     <div class="stat-card accent2">
                         <h3>📚 Nouvelles</h3>
