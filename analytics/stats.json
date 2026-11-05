@@ -1,5 +1,5 @@
 {
-  "dernièreMiseAJour": "2026-11-05T07:01:26.629Z",
+  "dernièreMiseAJour": "2026-11-05T10:28:38.677Z",
   "total": 60,
   "nouvelles": {
     "Amarres": {
@@ -462,6 +462,12 @@
     },
     "La Nuit du Grand Phare": {
       "fichier": "La_Nuit_du_Grand_Phare.pdf",
+      "telecharges": 0,
+      "derniere_date": "2026-11-05",
+      "historique": []
+    },
+    "Et pourtant, le monde": {
+      "fichier": "Et_pourtant_le_monde.pdf",
       "telecharges": 0,
       "derniere_date": "2026-11-05",
       "historique": []
@@ -1009,7 +1015,15 @@
       "fichier": "La_Nuit_du_Grand_Phare.pdf",
       "derniere_date": "2026-11-05",
       "historique": []
+    },
+    {
+      "position": 40,
+      "titre": "Et pourtant, le monde",
+      "telecharges": 0,
+      "fichier": "Et_pourtant_le_monde.pdf",
+      "derniere_date": "2026-11-05",
+      "historique": []
     }
   ],
-  "totalNouvelles": 39
+  "totalNouvelles": 40
 }
