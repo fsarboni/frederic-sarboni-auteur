@@ -118,6 +118,7 @@ async function fetchPeriod(start, end) {
   // history : { titre -> { 'YYYY-MM-DD' -> count } }
   const counts = {};
   const history = {};
+  const salon = {};
   let afterId = '';
   let pages = 0;
 
@@ -131,7 +132,7 @@ async function fetchPeriod(start, end) {
     // Le garde-fou de saveStats empêche ensuite d'enregistrer des chiffres en baisse.
     if (result.status !== 200) {
       console.log(`   ⚠️ Mois ignoré : HTTP ${result.status}${detail(result.body)}`);
-      return { counts, history, ignore: true };
+      return { counts, history, salon, ignore: true };
     }
     if (!result.body.hits || result.body.hits.length === 0) break;
 
@@ -140,6 +141,14 @@ async function fetchPeriod(start, end) {
       const fichierPath = hit.path.replace(/.*download\//, '');
       const titre = matchTitre(fichierPath);
       if (!titre) return;
+
+      // La page salon envoie deux événements par téléchargement :
+      // /download/… (déjà compté) et /salon/download/… (pour savoir d'où il vient).
+      // Ce second événement n'entre pas dans le total, il est compté à part.
+      if (hit.path.includes('salon/download/')) {
+        salon[titre] = (salon[titre] || 0) + (hit.count || 0);
+        return;
+      }
 
       // total
       counts[titre] = (counts[titre] || 0) + (hit.count || 0);
@@ -164,12 +173,13 @@ async function fetchPeriod(start, end) {
     await sleep(1000);
   }
 
-  return { counts, history };
+  return { counts, history, salon };
 }
 
 async function fetchAllDownloads() {
   const totalCounts = {};
   const totalHistory = {};
+  const totalSalon = {};
   const startDate = '2025-10-17';
   const today = new Date().toISOString().split('T')[0];
   // GoatCounter lit une date seule comme minuit : pour inclure les téléchargements
@@ -187,8 +197,12 @@ async function fetchAllDownloads() {
     if (monthEnd >= today) monthEnd = demain;
 
     console.log(`📅 Période ${monthStart} → ${monthEnd}`);
-    const { counts, history, ignore } = await fetchPeriod(monthStart, monthEnd);
+    const { counts, history, salon, ignore } = await fetchPeriod(monthStart, monthEnd);
     if (ignore) moisIgnores++;
+
+    Object.entries(salon).forEach(([titre, count]) => {
+      totalSalon[titre] = (totalSalon[titre] || 0) + count;
+    });
 
     Object.entries(counts).forEach(([titre, count]) => {
       totalCounts[titre] = (totalCounts[titre] || 0) + count;
@@ -210,17 +224,21 @@ async function fetchAllDownloads() {
 
   if (moisIgnores > 0) console.log(`⚠️ ${moisIgnores} mois ignoré(s) sur ${monthIndex}`);
   if (moisIgnores === monthIndex) throw new Error('GoatCounter a refusé toutes les périodes');
-  return { totalCounts, totalHistory };
+  return { totalCounts, totalHistory, totalSalon };
 }
 
 // Les téléchargements cumulés ne peuvent pas baisser.
 // Si le nouveau total est inférieur à l'ancien, des données manquent : on garde l'ancien fichier.
-function totalPrecedent() {
-  try { return JSON.parse(fs.readFileSync(OUTPUT_FILE, 'utf8')).total || 0; }
-  catch (e) { return 0; }
+// Version du mode de calcul. Quand elle change (ex. : fin du double comptage salon),
+// le total peut légitimement baisser une fois : le garde-fou est alors levé pour ce passage.
+const METHODE = 2;
+
+function precedent() {
+  try { return JSON.parse(fs.readFileSync(OUTPUT_FILE, 'utf8')); }
+  catch (e) { return {}; }
 }
 
-function saveStats(counts, history) {
+function saveStats(counts, history, salonCounts) {
   const stats = {};
   Object.entries(NOUVELLES).forEach(([fichier, titre]) => {
     // Construire la liste triée des jours avec téléchargements
@@ -235,6 +253,7 @@ function saveStats(counts, history) {
     stats[titre] = {
       fichier,
       telecharges: counts[titre] || 0,
+      dont_salon: salonCounts[titre] || 0,
       derniere_date: dernierJour || new Date().toISOString().split('T')[0],
       historique: jours
     };
@@ -245,7 +264,9 @@ function saveStats(counts, history) {
 
   const output = {
     dernièreMiseAJour: new Date().toISOString(),
+    methode: METHODE,
     total: Object.values(stats).reduce((sum, s) => sum + s.telecharges, 0),
+    dont_salon: Object.values(stats).reduce((sum, s) => sum + s.dont_salon, 0),
     nouvelles: stats,
     classement: Object.entries(stats)
       .sort((a, b) => b[1].telecharges - a[1].telecharges)
@@ -260,9 +281,16 @@ function saveStats(counts, history) {
     totalNouvelles: Object.keys(stats).length
   };
 
-  const ancien = totalPrecedent();
-  if (output.total < ancien) {
-    console.log(`⚠️ Total incomplet (${output.total} au lieu d'au moins ${ancien}) — stats.json conservé tel quel`);
+  const prec = precedent();
+  const ancien = prec.total || 0;
+  // Avec l'ancien mode, chaque téléchargement salon comptait double :
+  // le total ne peut donc baisser que du nombre de téléchargements salon retirés.
+  const plancher = prec.methode === METHODE ? ancien : ancien - output.dont_salon;
+  if (prec.methode !== METHODE && output.total >= plancher) {
+    console.log(`ℹ️ Nouveau mode de calcul : total ${ancien} → ${output.total} (${output.dont_salon} doublon(s) salon retiré(s))`);
+  }
+  if (output.total < plancher) {
+    console.log(`⚠️ Total incomplet (${output.total} au lieu d'au moins ${plancher}) — stats.json conservé tel quel`);
     return;
   }
 
@@ -275,10 +303,12 @@ async function main() {
   if (!loadNouvelles()) { console.error('❌ Impossible de charger data.json'); process.exit(1); }
   console.log('📊 Récupération historique complet GoatCounter (par mois)...');
   try {
-    const { totalCounts, totalHistory } = await fetchAllDownloads();
+    const { totalCounts, totalHistory, totalSalon } = await fetchAllDownloads();
     console.log(`✅ ${Object.keys(totalCounts).length} nouvelles avec téléchargements`);
     Object.entries(totalCounts).sort((a,b) => b[1]-a[1]).forEach(([t, c]) => console.log(`   ${c} - ${t}`));
-    saveStats(totalCounts, totalHistory);
+    const nbSalon = Object.values(totalSalon).reduce((a, b) => a + b, 0);
+    console.log(`🏷️ Dont ${nbSalon} téléchargement(s) depuis la page salon`);
+    saveStats(totalCounts, totalHistory, totalSalon);
     console.log('✅ Succès !');
   } catch (e) {
     console.error('❌ Erreur:', e.message);
