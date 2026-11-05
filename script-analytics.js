@@ -172,6 +172,11 @@ async function fetchAllDownloads() {
   const totalHistory = {};
   const startDate = '2025-10-17';
   const today = new Date().toISOString().split('T')[0];
+  // GoatCounter lit une date seule comme minuit : pour inclure les téléchargements
+  // du jour, la dernière période se termine demain
+  const demain = addMonths(today, 0).replace(/.*/, d => {
+    const x = new Date(d); x.setDate(x.getDate() + 1); return x.toISOString().split('T')[0];
+  });
 
   let monthStart = startDate;
   let monthIndex = 0;
@@ -179,7 +184,7 @@ async function fetchAllDownloads() {
 
   while (monthStart < today) {
     let monthEnd = addMonths(monthStart, 1);
-    if (monthEnd > today) monthEnd = today;
+    if (monthEnd >= today) monthEnd = demain;
 
     console.log(`📅 Période ${monthStart} → ${monthEnd}`);
     const { counts, history, ignore } = await fetchPeriod(monthStart, monthEnd);
