@@ -466,6 +466,14 @@
       "genre": "Aventure",
       "description": "À deux heures du matin, la vieille radio d'Yves Kerambrun, ancien gardien du Créac'h retraité à Ouessant, capte un SOS sur une fréquence morte depuis 1943. Un homme, une voie d'eau, un mousse de seize ans au large de la pointe de Pern. Kerambrun répond et note tout — parce que c'est ce qu'il a toujours fait.",
       "fichier": "nouvelles/La_Nuit_du_Grand_Phare.pdf"
+    },
+    {
+      "id": 40,
+      "titre": "Et pourtant, le monde",
+      "sous_titre": "Méditation sur la lande de Guissény",
+      "genre": "Prose poétique",
+      "description": "Un homme revient à Guissény, sur une lande que plus personne ne fréquente. Il laisse son vélo là où la route s’arrête, passe devant un abreuvoir renversé, s’allonge dans la bruyère. Le vent tombe. C’est alors la lande qui prend la parole.",
+      "fichier": "nouvelles/Et_pourtant_le_monde.pdf"
     }
   ],
   "actualites": [
