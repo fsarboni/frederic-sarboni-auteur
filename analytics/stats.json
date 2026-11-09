@@ -1,8 +1,8 @@
 {
-  "dernièreMiseAJour": "2026-11-09T07:01:33.102Z",
+  "dernièreMiseAJour": "2026-11-09T17:58:38.860Z",
   "methode": 2,
-  "total": 56,
-  "dont_salon": 5,
+  "total": 58,
+  "dont_salon": 7,
   "nouvelles": {
     "Amarres": {
       "fichier": "Amarres.pdf",
@@ -303,9 +303,9 @@
     },
     "Les Murmures de la Marca": {
       "fichier": "Les_Murmures_de_la_Marca.pdf",
-      "telecharges": 2,
-      "dont_salon": 0,
-      "derniere_date": "2026-10-10",
+      "telecharges": 3,
+      "dont_salon": 1,
+      "derniere_date": "2026-11-09",
       "historique": [
         {
           "date": "2026-09-09",
@@ -313,6 +313,10 @@
         },
         {
           "date": "2026-10-10",
+          "count": 1
+        },
+        {
+          "date": "2026-11-09",
           "count": 1
         }
       ]
@@ -495,10 +499,15 @@
     },
     "Le Retour des Goélands": {
       "fichier": "Le_Retour_des_Goelands.pdf",
-      "telecharges": 0,
-      "dont_salon": 0,
+      "telecharges": 1,
+      "dont_salon": 1,
       "derniere_date": "2026-11-09",
-      "historique": []
+      "historique": [
+        {
+          "date": "2026-11-09",
+          "count": 1
+        }
+      ]
     },
     "La Nuit du Grand Phare": {
       "fichier": "La_Nuit_du_Grand_Phare.pdf",
@@ -697,6 +706,27 @@
     },
     {
       "position": 7,
+      "titre": "Les Murmures de la Marca",
+      "telecharges": 3,
+      "fichier": "Les_Murmures_de_la_Marca.pdf",
+      "derniere_date": "2026-11-09",
+      "historique": [
+        {
+          "date": "2026-09-09",
+          "count": 1
+        },
+        {
+          "date": "2026-10-10",
+          "count": 1
+        },
+        {
+          "date": "2026-11-09",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "position": 8,
       "titre": "La Chaîne des sourires",
       "telecharges": 2,
       "fichier": "La_Cha%C3%AEne_des_sourires.pdf",
@@ -713,7 +743,7 @@
       ]
     },
     {
-      "position": 8,
+      "position": 9,
       "titre": "Le Choix du Pianiste",
       "telecharges": 2,
       "fichier": "Le_Choix_du_Pianiste.pdf",
@@ -730,7 +760,7 @@
       ]
     },
     {
-      "position": 9,
+      "position": 10,
       "titre": "L'Autre Traversée",
       "telecharges": 2,
       "fichier": "L_Autre_Traversee.pdf",
@@ -742,23 +772,6 @@
         },
         {
           "date": "2026-06-09",
-          "count": 1
-        }
-      ]
-    },
-    {
-      "position": 10,
-      "titre": "Les Murmures de la Marca",
-      "telecharges": 2,
-      "fichier": "Les_Murmures_de_la_Marca.pdf",
-      "derniere_date": "2026-10-10",
-      "historique": [
-        {
-          "date": "2026-09-09",
-          "count": 1
-        },
-        {
-          "date": "2026-10-10",
           "count": 1
         }
       ]
@@ -929,6 +942,19 @@
     },
     {
       "position": 23,
+      "titre": "Le Retour des Goélands",
+      "telecharges": 1,
+      "fichier": "Le_Retour_des_Goelands.pdf",
+      "derniere_date": "2026-11-09",
+      "historique": [
+        {
+          "date": "2026-11-09",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "position": 24,
       "titre": "Et pourtant, le monde",
       "telecharges": 1,
       "fichier": "Et_pourtant_le_monde.pdf",
@@ -941,7 +967,7 @@
       ]
     },
     {
-      "position": 24,
+      "position": 25,
       "titre": "L'Acier et le Rêve",
       "telecharges": 0,
       "fichier": "L_Acier_et_le_Reve.pdf",
@@ -949,7 +975,7 @@
       "historique": []
     },
     {
-      "position": 25,
+      "position": 26,
       "titre": "L'Ennui à l'ère numérique",
       "telecharges": 0,
       "fichier": "L_Ennui_a_l_ere_numerique.pdf",
@@ -957,7 +983,7 @@
       "historique": []
     },
     {
-      "position": 26,
+      "position": 27,
       "titre": "Les Grains d'Elena",
       "telecharges": 0,
       "fichier": "Les_Grains_d%27Elena.pdf",
@@ -965,7 +991,7 @@
       "historique": []
     },
     {
-      "position": 27,
+      "position": 28,
       "titre": "L'Ombre Bleue",
       "telecharges": 0,
       "fichier": "L_Ombre_Bleue.pdf",
@@ -973,7 +999,7 @@
       "historique": []
     },
     {
-      "position": 28,
+      "position": 29,
       "titre": "Les Oranais ont la Parole",
       "telecharges": 0,
       "fichier": "Les_Oranais_ont_la_Parole.pdf",
@@ -981,7 +1007,7 @@
       "historique": []
     },
     {
-      "position": 29,
+      "position": 30,
       "titre": "La Place aux Souvenirs",
       "telecharges": 0,
       "fichier": "La_Place_aux_Souvenirs.pdf",
@@ -989,7 +1015,7 @@
       "historique": []
     },
     {
-      "position": 30,
+      "position": 31,
       "titre": "Les Règles de la Survie",
       "telecharges": 0,
       "fichier": "Les_Regles_de_la_Survie.pdf",
@@ -997,7 +1023,7 @@
       "historique": []
     },
     {
-      "position": 31,
+      "position": 32,
       "titre": "Sarah & Antoine — Pour toujours",
       "telecharges": 0,
       "fichier": "Sarah_%26_Antoine%E2%80%94Pour_toujours.pdf",
@@ -1005,7 +1031,7 @@
       "historique": []
     },
     {
-      "position": 32,
+      "position": 33,
       "titre": "Tic-tac",
       "telecharges": 0,
       "fichier": "Tic-tac_L_heure_du_passeur.pdf",
@@ -1013,7 +1039,7 @@
       "historique": []
     },
     {
-      "position": 33,
+      "position": 34,
       "titre": "La Transplantée du Cœur",
       "telecharges": 0,
       "fichier": "La_Transplantee_du_Coeur.pdf",
@@ -1021,7 +1047,7 @@
       "historique": []
     },
     {
-      "position": 34,
+      "position": 35,
       "titre": "La Rose des Ténèbres",
       "telecharges": 0,
       "fichier": "La_Rose_des_Tenebres.pdf",
@@ -1029,7 +1055,7 @@
       "historique": []
     },
     {
-      "position": 35,
+      "position": 36,
       "titre": "Silence radio",
       "telecharges": 0,
       "fichier": "Silence_Radio.pdf",
@@ -1037,7 +1063,7 @@
       "historique": []
     },
     {
-      "position": 36,
+      "position": 37,
       "titre": "La Pierre et le Silence",
       "telecharges": 0,
       "fichier": "La_Pierre_et_le_Silence.pdf",
@@ -1045,7 +1071,7 @@
       "historique": []
     },
     {
-      "position": 37,
+      "position": 38,
       "titre": "Ce que les Korrigans laissent derrière eux",
       "telecharges": 0,
       "fichier": "Ce_que_les_Korrigans_laissent_derriere_eux.pdf",
@@ -1053,18 +1079,10 @@
       "historique": []
     },
     {
-      "position": 38,
+      "position": 39,
       "titre": "Le Cahier des absents",
       "telecharges": 0,
       "fichier": "Le_Cahier_des_Absents.pdf",
-      "derniere_date": "2026-11-09",
-      "historique": []
-    },
-    {
-      "position": 39,
-      "titre": "Le Retour des Goélands",
-      "telecharges": 0,
-      "fichier": "Le_Retour_des_Goelands.pdf",
       "derniere_date": "2026-11-09",
       "historique": []
     },
