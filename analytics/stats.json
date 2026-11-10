@@ -1,8 +1,8 @@
 {
-  "dernièreMiseAJour": "2026-11-10T07:01:28.073Z",
+  "dernièreMiseAJour": "2026-11-10T15:56:25.862Z",
   "methode": 2,
-  "total": 58,
-  "dont_salon": 7,
+  "total": 61,
+  "dont_salon": 10,
   "nouvelles": {
     "Amarres": {
       "fichier": "Amarres.pdf",
@@ -90,9 +90,9 @@
     },
     "Le Café des Carmélites": {
       "fichier": "Le_Cafe_des_Carmelites.pdf",
-      "telecharges": 5,
-      "dont_salon": 0,
-      "derniere_date": "2026-09-09",
+      "telecharges": 6,
+      "dont_salon": 1,
+      "derniere_date": "2026-11-10",
       "historique": [
         {
           "date": "2026-05-16",
@@ -112,6 +112,10 @@
         },
         {
           "date": "2026-09-09",
+          "count": 1
+        },
+        {
+          "date": "2026-11-10",
           "count": 1
         }
       ]
@@ -272,12 +276,16 @@
     },
     "Le Bouton de nacre": {
       "fichier": "Le_Bouton_de_nacre.pdf",
-      "telecharges": 1,
-      "dont_salon": 0,
-      "derniere_date": "2026-09-09",
+      "telecharges": 2,
+      "dont_salon": 1,
+      "derniere_date": "2026-11-10",
       "historique": [
         {
           "date": "2026-09-09",
+          "count": 1
+        },
+        {
+          "date": "2026-11-10",
           "count": 1
         }
       ]
@@ -410,12 +418,16 @@
     },
     "Le Terminus": {
       "fichier": "Le_Terminus.pdf",
-      "telecharges": 1,
-      "dont_salon": 0,
-      "derniere_date": "2026-09-09",
+      "telecharges": 2,
+      "dont_salon": 1,
+      "derniere_date": "2026-11-10",
       "historique": [
         {
           "date": "2026-09-09",
+          "count": 1
+        },
+        {
+          "date": "2026-11-10",
           "count": 1
         }
       ]
@@ -577,6 +589,39 @@
     },
     {
       "position": 2,
+      "titre": "Le Café des Carmélites",
+      "telecharges": 6,
+      "fichier": "Le_Cafe_des_Carmelites.pdf",
+      "derniere_date": "2026-11-10",
+      "historique": [
+        {
+          "date": "2026-05-16",
+          "count": 1
+        },
+        {
+          "date": "2026-05-17",
+          "count": 1
+        },
+        {
+          "date": "2026-07-21",
+          "count": 1
+        },
+        {
+          "date": "2026-08-29",
+          "count": 1
+        },
+        {
+          "date": "2026-09-09",
+          "count": 1
+        },
+        {
+          "date": "2026-11-10",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "position": 3,
       "titre": "Le Dernier Rendez-vous",
       "telecharges": 6,
       "fichier": "Le_Dernier_Rendez-vous.pdf",
@@ -609,7 +654,7 @@
       ]
     },
     {
-      "position": 3,
+      "position": 4,
       "titre": "Amarres",
       "telecharges": 5,
       "fichier": "Amarres.pdf",
@@ -629,35 +674,6 @@
         },
         {
           "date": "2026-10-10",
-          "count": 1
-        }
-      ]
-    },
-    {
-      "position": 4,
-      "titre": "Le Café des Carmélites",
-      "telecharges": 5,
-      "fichier": "Le_Cafe_des_Carmelites.pdf",
-      "derniere_date": "2026-09-09",
-      "historique": [
-        {
-          "date": "2026-05-16",
-          "count": 1
-        },
-        {
-          "date": "2026-05-17",
-          "count": 1
-        },
-        {
-          "date": "2026-07-21",
-          "count": 1
-        },
-        {
-          "date": "2026-08-29",
-          "count": 1
-        },
-        {
-          "date": "2026-09-09",
           "count": 1
         }
       ]
@@ -778,6 +794,23 @@
     },
     {
       "position": 11,
+      "titre": "Le Bouton de nacre",
+      "telecharges": 2,
+      "fichier": "Le_Bouton_de_nacre.pdf",
+      "derniere_date": "2026-11-10",
+      "historique": [
+        {
+          "date": "2026-09-09",
+          "count": 1
+        },
+        {
+          "date": "2026-11-10",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "position": 12,
       "titre": "Les Sentiers de Rosée",
       "telecharges": 2,
       "fichier": "Les_Sentiers_de_Rosee.pdf",
@@ -794,7 +827,24 @@
       ]
     },
     {
-      "position": 12,
+      "position": 13,
+      "titre": "Le Terminus",
+      "telecharges": 2,
+      "fichier": "Le_Terminus.pdf",
+      "derniere_date": "2026-11-10",
+      "historique": [
+        {
+          "date": "2026-09-09",
+          "count": 1
+        },
+        {
+          "date": "2026-11-10",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "position": 14,
       "titre": "Les Aiguilles de l'horloge",
       "telecharges": 2,
       "fichier": "Les_Aiguilles_de_l_Horloge.pdf",
@@ -811,7 +861,7 @@
       ]
     },
     {
-      "position": 13,
+      "position": 15,
       "titre": "Les Pigeons Mécaniques",
       "telecharges": 2,
       "fichier": "Les_Pigeons_Mecaniques.pdf",
@@ -824,7 +874,7 @@
       ]
     },
     {
-      "position": 14,
+      "position": 16,
       "titre": "Le Costume de Lumière",
       "telecharges": 1,
       "fichier": "Le_Costume_de_Lumiere.pdf",
@@ -837,7 +887,7 @@
       ]
     },
     {
-      "position": 15,
+      "position": 17,
       "titre": "L'Éveil des Abysses",
       "telecharges": 1,
       "fichier": "L_Eveil_des_Abysses.pdf",
@@ -850,7 +900,7 @@
       ]
     },
     {
-      "position": 16,
+      "position": 18,
       "titre": "La Fissure",
       "telecharges": 1,
       "fichier": "La_Fissure.pdf",
@@ -863,20 +913,7 @@
       ]
     },
     {
-      "position": 17,
-      "titre": "Le Bouton de nacre",
-      "telecharges": 1,
-      "fichier": "Le_Bouton_de_nacre.pdf",
-      "derniere_date": "2026-09-09",
-      "historique": [
-        {
-          "date": "2026-09-09",
-          "count": 1
-        }
-      ]
-    },
-    {
-      "position": 18,
+      "position": 19,
       "titre": "Le Gardien des Songes",
       "telecharges": 1,
       "fichier": "Le_Gardien_des_Songes.pdf",
@@ -889,7 +926,7 @@
       ]
     },
     {
-      "position": 19,
+      "position": 20,
       "titre": "Le Papillon de Nuit",
       "telecharges": 1,
       "fichier": "Le_Papillon_de_Nuit.pdf",
@@ -902,7 +939,7 @@
       ]
     },
     {
-      "position": 20,
+      "position": 21,
       "titre": "Les Secrets de Saint-Laon",
       "telecharges": 1,
       "fichier": "Les_Secrets_de_Saint-Laon.pdf",
@@ -915,7 +952,7 @@
       ]
     },
     {
-      "position": 21,
+      "position": 22,
       "titre": "Sur la Portée du Temps",
       "telecharges": 1,
       "fichier": "Sur_la_Portee_du_Temps.pdf",
@@ -923,19 +960,6 @@
       "historique": [
         {
           "date": "2026-05-16",
-          "count": 1
-        }
-      ]
-    },
-    {
-      "position": 22,
-      "titre": "Le Terminus",
-      "telecharges": 1,
-      "fichier": "Le_Terminus.pdf",
-      "derniere_date": "2026-09-09",
-      "historique": [
-        {
-          "date": "2026-09-09",
           "count": 1
         }
       ]
