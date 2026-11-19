@@ -119,6 +119,8 @@ async function fetchPeriod(start, end) {
   const counts = {};
   const history = {};
   const salon = {};
+  const salonJours = {};   // téléchargements via la page salon, jour par jour
+  const visites = {};      // visites de la page salon (QR code flashé), jour par jour
   let afterId = '';
   let pages = 0;
 
@@ -132,11 +134,16 @@ async function fetchPeriod(start, end) {
     // Le garde-fou de saveStats empêche ensuite d'enregistrer des chiffres en baisse.
     if (result.status !== 200) {
       console.log(`   ⚠️ Mois ignoré : HTTP ${result.status}${detail(result.body)}`);
-      return { counts, history, salon, ignore: true };
+      return { counts, history, salon, salonJours, visites, ignore: true };
     }
     if (!result.body.hits || result.body.hits.length === 0) break;
 
     result.body.hits.forEach(hit => {
+      // Visites de la page salon (QR code), hors événements de téléchargement
+      if (hit.path && !hit.event && /\/salon(\.html)?\/?$/.test(hit.path)) {
+        ajouterJours(visites, hit.stats);
+        return;
+      }
       if (!hit.path || !hit.path.includes('download/')) return;
       const fichierPath = hit.path.replace(/.*download\//, '');
       const titre = matchTitre(fichierPath);
@@ -147,6 +154,7 @@ async function fetchPeriod(start, end) {
       // Ce second événement n'entre pas dans le total, il est compté à part.
       if (hit.path.includes('salon/download/')) {
         salon[titre] = (salon[titre] || 0) + (hit.count || 0);
+        ajouterJours(salonJours, hit.stats);
         return;
       }
 
@@ -173,13 +181,24 @@ async function fetchPeriod(start, end) {
     await sleep(1000);
   }
 
-  return { counts, history, salon };
+  return { counts, history, salon, salonJours, visites };
+}
+
+function ajouterJours(cible, stats) {
+  if (!stats || !Array.isArray(stats)) return;
+  stats.forEach(s => {
+    if (!s.day || !s.daily) return;
+    const day = s.day.split('T')[0];
+    cible[day] = (cible[day] || 0) + s.daily;
+  });
 }
 
 async function fetchAllDownloads() {
   const totalCounts = {};
   const totalHistory = {};
   const totalSalon = {};
+  const totalSalonJours = {};
+  const totalVisites = {};
   const startDate = '2025-10-17';
   const today = new Date().toISOString().split('T')[0];
   // GoatCounter lit une date seule comme minuit : pour inclure les téléchargements
@@ -197,8 +216,10 @@ async function fetchAllDownloads() {
     if (monthEnd >= today) monthEnd = demain;
 
     console.log(`📅 Période ${monthStart} → ${monthEnd}`);
-    const { counts, history, salon, ignore } = await fetchPeriod(monthStart, monthEnd);
+    const { counts, history, salon, salonJours, visites, ignore } = await fetchPeriod(monthStart, monthEnd);
     if (ignore) moisIgnores++;
+    Object.entries(salonJours).forEach(([d, c]) => { totalSalonJours[d] = (totalSalonJours[d] || 0) + c; });
+    Object.entries(visites).forEach(([d, c]) => { totalVisites[d] = (totalVisites[d] || 0) + c; });
 
     Object.entries(salon).forEach(([titre, count]) => {
       totalSalon[titre] = (totalSalon[titre] || 0) + count;
@@ -224,7 +245,7 @@ async function fetchAllDownloads() {
 
   if (moisIgnores > 0) console.log(`⚠️ ${moisIgnores} mois ignoré(s) sur ${monthIndex}`);
   if (moisIgnores === monthIndex) throw new Error('GoatCounter a refusé toutes les périodes');
-  return { totalCounts, totalHistory, totalSalon };
+  return { totalCounts, totalHistory, totalSalon, totalSalonJours, totalVisites };
 }
 
 // Les téléchargements cumulés ne peuvent pas baisser.
@@ -238,7 +259,7 @@ function precedent() {
   catch (e) { return {}; }
 }
 
-function saveStats(counts, history, salonCounts) {
+function saveStats(counts, history, salonCounts, salonJours = {}, visites = {}) {
   const stats = {};
   Object.entries(NOUVELLES).forEach(([fichier, titre]) => {
     // Construire la liste triée des jours avec téléchargements
@@ -268,6 +289,13 @@ function saveStats(counts, history, salonCounts) {
     total: Object.values(stats).reduce((sum, s) => sum + s.telecharges, 0),
     dont_salon: Object.values(stats).reduce((sum, s) => sum + s.dont_salon, 0),
     nouvelles: stats,
+    // Page salon : visites (QR code flashé) et téléchargements, jour par jour
+    page_salon: {
+      visites: Object.values(visites).reduce((a, b) => a + b, 0),
+      jours: [...new Set([...Object.keys(visites), ...Object.keys(salonJours)])]
+        .sort()
+        .map(date => ({ date, visites: visites[date] || 0, telechargements: salonJours[date] || 0 }))
+    },
     classement: Object.entries(stats)
       .sort((a, b) => b[1].telecharges - a[1].telecharges)
       .map(([titre, data], index) => ({
@@ -303,12 +331,13 @@ async function main() {
   if (!loadNouvelles()) { console.error('❌ Impossible de charger data.json'); process.exit(1); }
   console.log('📊 Récupération historique complet GoatCounter (par mois)...');
   try {
-    const { totalCounts, totalHistory, totalSalon } = await fetchAllDownloads();
+    const { totalCounts, totalHistory, totalSalon, totalSalonJours, totalVisites } = await fetchAllDownloads();
     console.log(`✅ ${Object.keys(totalCounts).length} nouvelles avec téléchargements`);
     Object.entries(totalCounts).sort((a,b) => b[1]-a[1]).forEach(([t, c]) => console.log(`   ${c} - ${t}`));
     const nbSalon = Object.values(totalSalon).reduce((a, b) => a + b, 0);
     console.log(`🏷️ Dont ${nbSalon} téléchargement(s) depuis la page salon`);
-    saveStats(totalCounts, totalHistory, totalSalon);
+    console.log(`📱 Page salon : ${Object.values(totalVisites).reduce((a, b) => a + b, 0)} visite(s)`);
+    saveStats(totalCounts, totalHistory, totalSalon, totalSalonJours, totalVisites);
     console.log('✅ Succès !');
   } catch (e) {
     console.error('❌ Erreur:', e.message);

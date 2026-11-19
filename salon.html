@@ -49,6 +49,29 @@
     border-radius: 0 6px 6px 0; font-size: 0.95rem;
   }
 
+  .du-jour {
+    margin: 28px 0 34px; padding: 24px 22px 24px;
+    background: var(--blanc); border-radius: 10px;
+    border: 2px solid var(--or);
+    box-shadow: 0 4px 14px rgba(29,36,51,0.10);
+    text-align: center;
+  }
+  .du-jour[hidden] { display: none; }
+  .du-jour .bandeau {
+    display: inline-block; margin-bottom: 14px;
+    background: var(--or); color: var(--blanc);
+    font-size: 0.78rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
+    padding: 4px 14px; border-radius: 20px;
+  }
+  .du-jour h2 { font-size: 1.55rem; font-weight: 600; line-height: 1.25; margin: 4px 0 4px; }
+  .du-jour .description { text-align: left; margin: 14px 0 20px; }
+  .du-jour .telecharger { font-size: 1.15rem; padding: 15px 30px; }
+  .du-jour .fait { display: block; margin: 10px 0 0; }
+  .toutes {
+    font-size: 1.15rem; font-weight: 600; font-style: italic;
+    margin: 0 0 12px; color: var(--encre);
+  }
+
   .filtres { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
   .filtre {
     font-family: inherit; font-size: 0.88rem; cursor: pointer;
@@ -100,6 +123,9 @@
   <p class="mot">Que vous soyez reparti avec un livre ou les mains vides, voici de quoi lire ce soir.</p>
   <p class="mot">Ci-dessous, mes <strong>nouvelles gratuites</strong> : polar, fantastique, drame, imaginaire… Sans inscription, sans adresse mail à laisser.</p>
 
+  <section class="du-jour" id="du-jour" hidden></section>
+
+  <h2 class="toutes">Ou choisissez parmi toutes les autres</h2>
   <div class="consigne">
     Choisissez un genre si vous le souhaitez, puis appuyez sur <strong>Télécharger</strong> : la nouvelle s’ouvre en PDF, lisible directement sur votre téléphone.
   </div>
@@ -133,6 +159,7 @@ async function charger() {
     }
     construireFiltres();
     afficher();
+    afficherDuJour();
     verifierFichiers();
   } catch (e) {
     liste.innerHTML = '<p class="erreur">Le chargement a échoué. <a href="./#nouvelles">Voir les nouvelles sur le site</a></p>';
@@ -186,7 +213,28 @@ async function verifierFichiers() {
     nouvelles = nouvelles.filter(n => !manquants.has(n.fichier));
     construireFiltres();
     afficher();
+    afficherDuJour();
   }
+}
+
+// La nouvelle du jour : tirée au sort, mais la même pour tous les visiteurs d'une même journée
+// (heure de Paris). Elle change à minuit.
+function afficherDuJour() {
+  const zone = document.getElementById('du-jour');
+  if (!nouvelles.length) { zone.hidden = true; return; }
+  const jour = new Date().toLocaleDateString('fr-CA', { timeZone: 'Europe/Paris' });
+  let h = 2166136261;
+  for (const c of jour) { h ^= c.charCodeAt(0); h = Math.imul(h, 16777619); }
+  const n = nouvelles[(h >>> 0) % nouvelles.length];
+  zone.innerHTML = `
+    <span class="bandeau">La nouvelle du jour</span>
+    <div class="genre">${echapper(n.genre)}</div>
+    <h2>${echapper(n.titre)}</h2>
+    ${n.sous_titre ? `<div class="sous-titre">${echapper(n.sous_titre)}</div>` : ''}
+    <div class="description">${echapper(n.description)}</div>
+    <a class="telecharger" href="${echapper(n.fichier)}" target="_blank" rel="noopener"
+       data-titre="${echapper(n.titre)}" onclick="compter(this)">Lire maintenant</a>`;
+  zone.hidden = false;
 }
 function masquerManquants() {
   document.querySelectorAll('.carte').forEach(c => {

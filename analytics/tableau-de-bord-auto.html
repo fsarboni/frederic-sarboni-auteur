@@ -225,6 +225,23 @@
             return `<div class="historique-liste">${lignes}</div>`;
         }
 
+        // Page salon : combien ont flashé le QR code, combien ont téléchargé, jour par jour
+        function salonHTML(ps) {
+            if (!ps || !ps.jours) return '';
+            const jours = [...ps.jours].sort((a, b) => b.date.localeCompare(a.date));
+            const lignes = jours.length ? jours.map(j => `
+                <div class="historique-ligne">
+                    <span class="historique-date">${fmtDate(j.date)}</span>
+                    <span class="historique-count">${j.visites} 📱 · ${j.telechargements} ⬇️</span>
+                </div>`).join('') : '<div class="historique-vide">Aucune visite enregistrée pour l\'instant.</div>';
+            return `
+                <div class="ranking-section">
+                    <h2>🎪 Page salon (QR code) <span style="font-size:0.85rem;font-weight:400;color:#999;">— ${ps.visites} visite(s) au total</span></h2>
+                    <p style="color:#666;margin-bottom:0.8rem;">📱 = personnes qui ont ouvert la page · ⬇️ = nouvelles téléchargées depuis cette page</p>
+                    <div class="historique-liste">${lignes}</div>
+                </div>`;
+        }
+
         function displayDashboard(data) {
             const total = data.total || 0;
             const classement = data.classement || [];
@@ -291,6 +308,7 @@
                         <div class="stat-label">chaque jour 8h</div>
                     </div>
                 </div>
+                ${salonHTML(data.page_salon)}
                 <div class="ranking-section">
                     <h2>🏆 Classement des Nouvelles <span style="font-size:0.85rem;font-weight:400;color:#999;">— cliquez pour voir le détail</span></h2>
                     ${rankingHTML}
