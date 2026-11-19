@@ -1,5 +1,5 @@
 {
-  "dernièreMiseAJour": "2026-11-19T07:01:35.796Z",
+  "dernièreMiseAJour": "2026-11-19T10:01:58.515Z",
   "methode": 2,
   "total": 61,
   "dont_salon": 10,
@@ -540,6 +540,41 @@
         }
       ]
     }
+  },
+  "page_salon": {
+    "visites": 15,
+    "jours": [
+      {
+        "date": "2026-10-01",
+        "visites": 4,
+        "telechargements": 4
+      },
+      {
+        "date": "2026-10-02",
+        "visites": 1,
+        "telechargements": 1
+      },
+      {
+        "date": "2026-11-07",
+        "visites": 2,
+        "telechargements": 0
+      },
+      {
+        "date": "2026-11-09",
+        "visites": 1,
+        "telechargements": 2
+      },
+      {
+        "date": "2026-11-10",
+        "visites": 1,
+        "telechargements": 3
+      },
+      {
+        "date": "2026-11-15",
+        "visites": 6,
+        "telechargements": 0
+      }
+    ]
   },
   "classement": [
     {
