@@ -1,7 +1,7 @@
 {
-  "dernièreMiseAJour": "2026-11-24T07:01:33.787Z",
+  "dernièreMiseAJour": "2026-11-24T19:12:27.737Z",
   "methode": 2,
-  "total": 62,
+  "total": 63,
   "dont_salon": 11,
   "nouvelles": {
     "Amarres": {
@@ -331,10 +331,15 @@
     },
     "L'Ombre Bleue": {
       "fichier": "L_Ombre_Bleue.pdf",
-      "telecharges": 0,
+      "telecharges": 1,
       "dont_salon": 0,
       "derniere_date": "2026-11-24",
-      "historique": []
+      "historique": [
+        {
+          "date": "2026-11-24",
+          "count": 1
+        }
+      ]
     },
     "Les Oranais ont la Parole": {
       "fichier": "Les_Oranais_ont_la_Parole.pdf",
@@ -993,6 +998,19 @@
     },
     {
       "position": 21,
+      "titre": "L'Ombre Bleue",
+      "telecharges": 1,
+      "fichier": "L_Ombre_Bleue.pdf",
+      "derniere_date": "2026-11-24",
+      "historique": [
+        {
+          "date": "2026-11-24",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "position": 22,
       "titre": "Les Secrets de Saint-Laon",
       "telecharges": 1,
       "fichier": "Les_Secrets_de_Saint-Laon.pdf",
@@ -1005,7 +1023,7 @@
       ]
     },
     {
-      "position": 22,
+      "position": 23,
       "titre": "Sur la Portée du Temps",
       "telecharges": 1,
       "fichier": "Sur_la_Portee_du_Temps.pdf",
@@ -1018,7 +1036,7 @@
       ]
     },
     {
-      "position": 23,
+      "position": 24,
       "titre": "Le Retour des Goélands",
       "telecharges": 1,
       "fichier": "Le_Retour_des_Goelands.pdf",
@@ -1031,7 +1049,7 @@
       ]
     },
     {
-      "position": 24,
+      "position": 25,
       "titre": "Et pourtant, le monde",
       "telecharges": 1,
       "fichier": "Et_pourtant_le_monde.pdf",
@@ -1044,7 +1062,7 @@
       ]
     },
     {
-      "position": 25,
+      "position": 26,
       "titre": "L'Acier et le Rêve",
       "telecharges": 0,
       "fichier": "L_Acier_et_le_Reve.pdf",
@@ -1052,7 +1070,7 @@
       "historique": []
     },
     {
-      "position": 26,
+      "position": 27,
       "titre": "L'Ennui à l'ère numérique",
       "telecharges": 0,
       "fichier": "L_Ennui_a_l_ere_numerique.pdf",
@@ -1060,18 +1078,10 @@
       "historique": []
     },
     {
-      "position": 27,
+      "position": 28,
       "titre": "Les Grains d'Elena",
       "telecharges": 0,
       "fichier": "Les_Grains_d%27Elena.pdf",
-      "derniere_date": "2026-11-24",
-      "historique": []
-    },
-    {
-      "position": 28,
-      "titre": "L'Ombre Bleue",
-      "telecharges": 0,
-      "fichier": "L_Ombre_Bleue.pdf",
       "derniere_date": "2026-11-24",
       "historique": []
     },
