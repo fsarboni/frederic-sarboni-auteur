@@ -1,8 +1,8 @@
 {
-  "dernièreMiseAJour": "2026-11-25T07:01:30.757Z",
+  "dernièreMiseAJour": "2026-11-25T18:16:35.553Z",
   "methode": 2,
-  "total": 63,
-  "dont_salon": 11,
+  "total": 64,
+  "dont_salon": 12,
   "nouvelles": {
     "Amarres": {
       "fichier": "Amarres.pdf",
@@ -373,10 +373,15 @@
     },
     "Les Règles de la Survie": {
       "fichier": "Les_Regles_de_la_Survie.pdf",
-      "telecharges": 0,
-      "dont_salon": 0,
+      "telecharges": 1,
+      "dont_salon": 1,
       "derniere_date": "2026-11-25",
-      "historique": []
+      "historique": [
+        {
+          "date": "2026-11-25",
+          "count": 1
+        }
+      ]
     },
     "Sarah & Antoine — Pour toujours": {
       "fichier": "Sarah_%26_Antoine%E2%80%94Pour_toujours.pdf",
@@ -551,7 +556,7 @@
     }
   },
   "page_salon": {
-    "visites": 30,
+    "visites": 31,
     "jours": [
       {
         "date": "2026-10-01",
@@ -597,6 +602,11 @@
         "date": "2026-11-24",
         "visites": 1,
         "telechargements": 0
+      },
+      {
+        "date": "2026-11-25",
+        "visites": 1,
+        "telechargements": 1
       }
     ]
   },
@@ -1016,6 +1026,19 @@
     },
     {
       "position": 22,
+      "titre": "Les Règles de la Survie",
+      "telecharges": 1,
+      "fichier": "Les_Regles_de_la_Survie.pdf",
+      "derniere_date": "2026-11-25",
+      "historique": [
+        {
+          "date": "2026-11-25",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "position": 23,
       "titre": "Les Secrets de Saint-Laon",
       "telecharges": 1,
       "fichier": "Les_Secrets_de_Saint-Laon.pdf",
@@ -1028,7 +1051,7 @@
       ]
     },
     {
-      "position": 23,
+      "position": 24,
       "titre": "Sur la Portée du Temps",
       "telecharges": 1,
       "fichier": "Sur_la_Portee_du_Temps.pdf",
@@ -1041,7 +1064,7 @@
       ]
     },
     {
-      "position": 24,
+      "position": 25,
       "titre": "Le Retour des Goélands",
       "telecharges": 1,
       "fichier": "Le_Retour_des_Goelands.pdf",
@@ -1054,7 +1077,7 @@
       ]
     },
     {
-      "position": 25,
+      "position": 26,
       "titre": "Et pourtant, le monde",
       "telecharges": 1,
       "fichier": "Et_pourtant_le_monde.pdf",
@@ -1067,7 +1090,7 @@
       ]
     },
     {
-      "position": 26,
+      "position": 27,
       "titre": "L'Acier et le Rêve",
       "telecharges": 0,
       "fichier": "L_Acier_et_le_Reve.pdf",
@@ -1075,7 +1098,7 @@
       "historique": []
     },
     {
-      "position": 27,
+      "position": 28,
       "titre": "L'Ennui à l'ère numérique",
       "telecharges": 0,
       "fichier": "L_Ennui_a_l_ere_numerique.pdf",
@@ -1083,7 +1106,7 @@
       "historique": []
     },
     {
-      "position": 28,
+      "position": 29,
       "titre": "Les Grains d'Elena",
       "telecharges": 0,
       "fichier": "Les_Grains_d%27Elena.pdf",
@@ -1091,7 +1114,7 @@
       "historique": []
     },
     {
-      "position": 29,
+      "position": 30,
       "titre": "Les Oranais ont la Parole",
       "telecharges": 0,
       "fichier": "Les_Oranais_ont_la_Parole.pdf",
@@ -1099,18 +1122,10 @@
       "historique": []
     },
     {
-      "position": 30,
+      "position": 31,
       "titre": "La Place aux Souvenirs",
       "telecharges": 0,
       "fichier": "La_Place_aux_Souvenirs.pdf",
-      "derniere_date": "2026-11-25",
-      "historique": []
-    },
-    {
-      "position": 31,
-      "titre": "Les Règles de la Survie",
-      "telecharges": 0,
-      "fichier": "Les_Regles_de_la_Survie.pdf",
       "derniere_date": "2026-11-25",
       "historique": []
     },
