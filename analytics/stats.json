@@ -1,5 +1,5 @@
 {
-  "dernièreMiseAJour": "2026-11-26T07:01:33.167Z",
+  "dernièreMiseAJour": "2026-11-26T17:58:27.193Z",
   "methode": 2,
   "total": 64,
   "dont_salon": 12,
@@ -556,7 +556,7 @@
     }
   },
   "page_salon": {
-    "visites": 31,
+    "visites": 32,
     "jours": [
       {
         "date": "2026-10-01",
@@ -607,6 +607,11 @@
         "date": "2026-11-25",
         "visites": 1,
         "telechargements": 1
+      },
+      {
+        "date": "2026-11-26",
+        "visites": 1,
+        "telechargements": 0
       }
     ]
   },
